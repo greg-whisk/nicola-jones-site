@@ -1,0 +1,317 @@
+import { motion } from 'motion/react';
+import { Link } from 'react-router';
+import { ArrowRight, Star, ShoppingBag, Palette, Briefcase } from 'lucide-react';
+import { BlobShape } from '../components/BlobShape';
+import { PillButton } from '../components/PillButton';
+import { WavyDivider } from '../components/WavyDivider';
+import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+
+export function HomePage() {
+  const pathways = [
+    {
+      title: 'Buy Something Fun',
+      description: 'Prints, tote bags, and original art pieces for your walls and your life.',
+      link: '/shop',
+      color: '#E8846F',
+      bgColor: '#FDF0ED',
+      icon: ShoppingBag,
+      rotation: -3,
+      image: 'https://images.unsplash.com/photo-1648994605536-10633d3e0886?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbGx1c3RyYXRlZCUyMHRvdGUlMjBiYWclMjBjYW52YXMlMjBkZXNpZ258ZW58MXx8fHwxNzc0NTA3MTE5fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    },
+    {
+      title: 'Commission Nicola',
+      description: 'Murals, books, brands, and bespoke illustrations made just for you.',
+      link: '/commissions',
+      color: '#5D9B9B',
+      bgColor: '#EDF5F5',
+      icon: Palette,
+      rotation: 2,
+      image: 'https://images.unsplash.com/photo-1759936263498-325015569a1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMHdhbGwlMjBtdXJhbCUyMHVyYmFuJTIwYXJ0fGVufDF8fHx8MTc3NDUwNzExOHww&ixlib=rb-4.1.0&q=80&w=1080',
+    },
+    {
+      title: 'Browse the Portfolio',
+      description: 'Dive into a world of bold, playful, characterful work.',
+      link: '/portfolio',
+      color: '#D8767D',
+      bgColor: '#F9EDEE',
+      icon: Briefcase,
+      rotation: -2,
+      image: 'https://images.unsplash.com/photo-1769053012127-b05ba10350d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aGltc2ljYWwlMjBjYXJ0b29uJTIwY2hhcmFjdGVyJTIwYXJ0JTIwcGFpbnRpbmd8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080',
+    }
+  ];
+
+  const featuredWork = [
+    { id: 1, image: 'https://images.unsplash.com/photo-1758426637884-8d27c12b2741?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXJnZSUyMGJ1aWxkaW5nJTIwbXVyYWwlMjBzdHJlZXQlMjBwYWludGluZ3xlbnwxfHx8fDE3NzQ1MDcxMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'High Street Mural', category: 'Murals' },
+    { id: 2, image: 'https://images.unsplash.com/photo-1649750291589-8812197b698c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMGJvb2slMjBpbGx1c3RyYXRpb24lMjBjb2xvcmZ1bHxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'The Curious Cat', category: 'Books' },
+    { id: 3, image: 'https://images.unsplash.com/photo-1737617009800-5d570a8552ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0aGVhdHJlJTIwc3RhZ2UlMjBzZXQlMjBjb2xvcmZ1bCUyMGRlc2lnbnxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Midsummer Night Set', category: 'Theatre' },
+    { id: 4, image: 'https://images.unsplash.com/photo-1571473569215-d86aa5a582c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib2xkJTIwZ3JhcGhpYyUyMHBvc3RlciUyMGlsbHVzdHJhdGlvbiUyMHByaW50fGVufDF8fHx8MTc3NDUwNzEyMXww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Brand Identity Work', category: 'Illustration' },
+    { id: 5, image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmNvbG9yJTIwcGFpbnRpbmclMjBjb2xvcmZ1bCUyMGFic3RyYWN0JTIwYXJ0fGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Watercolour Originals', category: 'Illustration' },
+  ];
+
+  return (
+    <div className="overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center">
+        {/* Floating decorative blobs */}
+        <BlobShape color="#E8846F" className="absolute top-20 right-0 w-[500px] h-[500px] opacity-[0.07]" variant={1} />
+        <BlobShape color="#5D9B9B" className="absolute bottom-0 left-0 w-[400px] h-[400px] opacity-[0.07]" variant={3} />
+
+        <div className="max-w-[1440px] mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20 lg:py-0">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.p
+              className="text-[#E8846F] font-['Fredoka'] text-lg mb-4 uppercase tracking-wider"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              Illustrator & Mural Artist
+            </motion.p>
+            <h1 className="font-['Fredoka'] text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-[#4A3428] mb-6">
+              Bold illustration.<br />
+              Big walls.<br />
+              Tiny tote bags.<br />
+              <span className="text-[#E8846F]">Everything in between.</span>
+            </h1>
+            <p className="text-xl text-[#6B7554] mb-8 leading-relaxed max-w-xl">
+              Playful, characterful illustration for books, brands, buildings, and everything that needs a splash of personality. Based in Hastings, working everywhere.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link to="/portfolio">
+                <PillButton variant="primary">
+                  See the work <ArrowRight className="inline ml-2 w-5 h-5" />
+                </PillButton>
+              </Link>
+              <Link to="/shop">
+                <PillButton variant="accent">
+                  Visit the shop
+                </PillButton>
+              </Link>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            {/* Blob backgrounds */}
+            <BlobShape color="#E8846F" className="absolute -top-16 -right-16 w-80 h-80 opacity-20" variant={1} />
+            <BlobShape color="#5D9B9B" className="absolute -bottom-8 -left-8 w-56 h-56 opacity-20" variant={2} />
+
+            {/* Main illustration image */}
+            <div className="relative z-10 transform rotate-2 hover:rotate-0 transition-transform duration-500">
+              <ImageWithFallback
+                src="https://images.unsplash.com/photo-1769053012127-b05ba10350d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aGltc2ljYWwlMjBjYXJ0b29uJTIwY2hhcmFjdGVyJTIwYXJ0JTIwcGFpbnRpbmd8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080"
+                alt="Bold illustration work"
+                className="w-full h-auto rounded-3xl shadow-2xl"
+              />
+            </div>
+
+            {/* Breakout character element - overlaps nav area */}
+            <motion.div
+              className="absolute -top-12 right-12 z-20 hidden lg:block"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <svg viewBox="0 0 60 60" className="w-16 h-16 drop-shadow-lg">
+                <circle cx="30" cy="30" r="28" fill="#D8767D" />
+                <circle cx="22" cy="24" r="4" fill="#4A3428" />
+                <circle cx="38" cy="24" r="4" fill="#4A3428" />
+                <path d="M20 38 Q30 46 40 38" stroke="#4A3428" strokeWidth="3" fill="none" strokeLinecap="round" />
+                <circle cx="23" cy="23" r="1.5" fill="#FAF8F5" />
+                <circle cx="39" cy="23" r="1.5" fill="#FAF8F5" />
+              </svg>
+            </motion.div>
+
+            {/* Paint splash overlapping */}
+            <motion.div
+              className="absolute -bottom-6 -left-6 w-20 h-20 z-20"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.8, type: "spring" }}
+            >
+              <BlobShape color="#5D9B9B" className="w-full h-full" variant={3} />
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      <WavyDivider color="#F5EFE8" />
+
+      {/* Pathway Cards */}
+      <section className="bg-[#F5EFE8] py-20">
+        <div className="max-w-[1440px] mx-auto px-6">
+          <motion.h2
+            className="font-['Fredoka'] text-4xl lg:text-5xl text-center mb-16 text-[#4A3428]"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Where would you like to go?
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            {pathways.map((pathway, index) => (
+              <motion.div
+                key={pathway.title}
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: index === 1 ? -20 : 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+              >
+                <Link to={pathway.link}>
+                  <motion.div
+                    className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden group h-full"
+                    style={{ transform: `rotate(${pathway.rotation}deg)` }}
+                    whileHover={{ rotate: 0, scale: 1.03 }}
+                  >
+                    {/* Blob decoration */}
+                    <BlobShape
+                      color={pathway.color}
+                      className="absolute -top-10 -right-10 w-40 h-40 opacity-15 group-hover:opacity-25 transition-opacity"
+                      variant={(index % 3 + 1) as 1 | 2 | 3}
+                    />
+
+                    {/* Image preview */}
+                    <div className="relative w-full aspect-[4/3] mb-6 rounded-2xl overflow-hidden">
+                      <ImageWithFallback
+                        src={pathway.image}
+                        alt={pathway.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div
+                        className="absolute inset-0 opacity-10"
+                        style={{ backgroundColor: pathway.color }}
+                      />
+                    </div>
+
+                    <div
+                      className="w-14 h-14 rounded-full flex items-center justify-center mb-4"
+                      style={{ backgroundColor: pathway.color }}
+                    >
+                      <pathway.icon className="w-7 h-7 text-white" />
+                    </div>
+
+                    <h3 className="font-['Fredoka'] text-2xl mb-3 text-[#4A3428]">
+                      {pathway.title}
+                    </h3>
+                    <p className="text-[#6B7554] mb-6">
+                      {pathway.description}
+                    </p>
+
+                    <span className="inline-flex items-center text-[#4A3428] group-hover:text-[#E8846F] transition-colors">
+                      Explore <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                    </span>
+                  </motion.div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <WavyDivider color="#FAF8F5" flip />
+
+      {/* Featured Work Strip */}
+      <section className="py-20">
+        <div className="max-w-[1440px] mx-auto px-6">
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="font-['Fredoka'] text-4xl text-[#4A3428]">Featured Work</h2>
+            <Link to="/portfolio">
+              <PillButton variant="outline">View all</PillButton>
+            </Link>
+          </div>
+
+          <div className="flex gap-6 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory scrollbar-hide">
+            {featuredWork.map((work, index) => (
+              <motion.div
+                key={work.id}
+                className="relative group cursor-pointer flex-shrink-0 w-[280px] snap-start"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -10 }}
+              >
+                <div className="relative overflow-hidden rounded-3xl aspect-[3/4]">
+                  <ImageWithFallback
+                    src={work.image}
+                    alt={work.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#4A3428]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                    <span className="text-[#E8846F] text-sm mb-1">{work.category}</span>
+                    <h3 className="font-['Fredoka'] text-xl text-white">{work.title}</h3>
+                  </div>
+                </div>
+
+                {/* Organic blob mask accent */}
+                {index % 2 === 0 && (
+                  <div className="absolute -top-4 -right-4 z-10">
+                    <BlobShape
+                      color={index === 0 ? '#E8846F' : '#5D9B9B'}
+                      className="w-16 h-16 opacity-40"
+                      variant={((index % 3) + 1) as 1 | 2 | 3}
+                    />
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonial */}
+      <section className="bg-[#F5EFE8] py-20 relative overflow-hidden">
+        <BlobShape color="#D8767D" className="absolute top-10 left-10 w-48 h-48 opacity-10" variant={3} />
+        <BlobShape color="#5D9B9B" className="absolute bottom-10 right-10 w-36 h-36 opacity-10" variant={1} />
+
+        <div className="max-w-[900px] mx-auto px-6 text-center relative z-10">
+          {/* Illustrated speech bubble / stars */}
+          <motion.div
+            className="flex justify-center gap-2 mb-6"
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+          >
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-6 h-6 text-[#E8846F] fill-current" />
+            ))}
+          </motion.div>
+
+          <motion.blockquote
+            className="text-2xl lg:text-3xl text-[#4A3428] mb-6 leading-relaxed"
+            style={{ fontFamily: "'Fredoka', sans-serif" }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            "Nicola transformed our entire office building with a mural that makes everyone smile. Her characters are so full of life, and the process was an absolute joy from start to finish."
+          </motion.blockquote>
+          <cite className="font-['Fredoka'] text-lg text-[#6B7554] not-italic">
+            — Sarah Chen, Creative Director at Bloom Studio
+          </cite>
+
+          {/* Character reacting */}
+          <motion.div
+            className="absolute -right-4 bottom-0 hidden lg:block"
+            animate={{ rotate: [0, 5, -5, 0] }}
+            transition={{ duration: 4, repeat: Infinity }}
+          >
+            <svg viewBox="0 0 50 50" className="w-14 h-14">
+              <circle cx="25" cy="25" r="23" fill="#5D9B9B" />
+              <circle cx="18" cy="20" r="3" fill="#FAF8F5" />
+              <circle cx="32" cy="20" r="3" fill="#FAF8F5" />
+              <ellipse cx="25" cy="32" rx="6" ry="4" fill="#FAF8F5" />
+            </svg>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}
