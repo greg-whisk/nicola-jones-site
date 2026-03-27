@@ -7,6 +7,13 @@ import { client, urlFor } from '../../lib/sanity';
 
 const categories = ['All', 'Illustration', 'Murals', 'Books', 'Theatre & Events'];
 
+const categoryMap: Record<string, string> = {
+  illustration: 'Illustration',
+  murals: 'Murals',
+  books: 'Books',
+  'theatre-events': 'Theatre & Events',
+};
+
 interface PortfolioItem {
   id: string | number;
   category: string;
@@ -63,7 +70,7 @@ export function PortfolioPage() {
             data.map((item, idx) => ({
               id: item._id,
               title: item.title,
-              category: item.category || '',
+              category: categoryMap[item.category] || item.category || '',
               image: item.mainImage
                 ? urlFor(item.mainImage).width(800).url()
                 : fallbackItems[idx % fallbackItems.length].image,
