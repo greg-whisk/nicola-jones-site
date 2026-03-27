@@ -66,16 +66,16 @@ export function PortfolioPage() {
       )
       .then((data) => {
         if (data && data.length > 0) {
-          setPortfolioItems(
-            data.map((item, idx) => ({
-              id: item._id,
-              title: item.title,
-              category: categoryMap[item.category] || item.category || '',
-              image: item.mainImage
-                ? urlFor(item.mainImage).width(800).url()
-                : fallbackItems[idx % fallbackItems.length].image,
-            }))
-          );
+          const sanityItems = data.map((item, idx) => ({
+            id: item._id,
+            title: item.title,
+            category: categoryMap[item.category] || item.category || '',
+            image: item.mainImage
+              ? urlFor(item.mainImage).width(800).url()
+              : fallbackItems[idx % fallbackItems.length].image,
+          }));
+          const remainingFallbacks = fallbackItems.slice(sanityItems.length);
+          setPortfolioItems([...sanityItems, ...remainingFallbacks]);
 
           const featured = data.find((p) => p.featured);
           if (featured) {
