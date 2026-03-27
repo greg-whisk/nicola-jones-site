@@ -70,7 +70,7 @@ export function AboutPage() {
           );
         }
       })
-      .catch(() => {});
+      .catch(console.error);
   }, []);
 
   return (

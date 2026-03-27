@@ -82,7 +82,7 @@ export function CommissionsPage() {
           );
         }
       })
-      .catch(() => {});
+      .catch(console.error);
   }, []);
 
   return (

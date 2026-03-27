@@ -92,7 +92,7 @@ export function ShopPage() {
           }
         }
       })
-      .catch(() => {});
+      .catch(console.error);
   }, []);
 
   const filteredProducts = selectedCategory === 'All'

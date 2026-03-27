@@ -93,14 +93,14 @@ export function HomePage() {
           );
         }
       })
-      .catch(() => {});
+      .catch(console.error);
 
     client
       .fetch<Testimonial | null>(`*[_type == "testimonial"][0]{ quote, author, role }`)
       .then((data) => {
         if (data && data.quote) setTestimonial(data);
       })
-      .catch(() => {});
+      .catch(console.error);
   }, []);
 
   return (

@@ -89,7 +89,7 @@ export function PortfolioPage() {
           }
         }
       })
-      .catch(() => {});
+      .catch(console.error);
 
     client
       .fetch<any>(
@@ -108,7 +108,7 @@ export function PortfolioPage() {
           });
         }
       })
-      .catch(() => {});
+      .catch(console.error);
   }, []);
 
   const filteredItems = selectedCategory === 'All'

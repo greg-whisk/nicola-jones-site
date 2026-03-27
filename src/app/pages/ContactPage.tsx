@@ -48,7 +48,7 @@ export function ContactPage() {
           });
         }
       })
-      .catch(() => {});
+      .catch(console.error);
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
