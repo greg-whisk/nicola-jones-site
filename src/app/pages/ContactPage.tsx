@@ -1,8 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Mail, MapPin, Instagram, Twitter } from 'lucide-react';
 import { BlobShape } from '../components/BlobShape';
 import { PillButton } from '../components/PillButton';
+import { client } from '../../lib/sanity';
+
+interface SocialLink {
+  platform: string;
+  url: string;
+}
+
+interface SiteSettings {
+  contactEmail: string;
+  socialLinks: SocialLink[];
+}
+
+const fallbackSettings: SiteSettings = {
+  contactEmail: 'hello@nicolajones.art',
+  socialLinks: [],
+};
+
+const socialIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  instagram: Instagram,
+  twitter: Twitter,
+  x: Twitter,
+};
 
 export function ContactPage() {
   const [formData, setFormData] = useState({
@@ -11,10 +33,26 @@ export function ContactPage() {
     projectType: '',
     message: ''
   });
+  const [settings, setSettings] = useState<SiteSettings>(fallbackSettings);
+
+  useEffect(() => {
+    client
+      .fetch<SiteSettings | null>(
+        `*[_type == "siteSettings"][0]{ contactEmail, socialLinks }`
+      )
+      .then((data) => {
+        if (data) {
+          setSettings({
+            contactEmail: data.contactEmail || fallbackSettings.contactEmail,
+            socialLinks: data.socialLinks || [],
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
     console.log('Form submitted:', formData);
     alert('Thanks for reaching out! I\'ll get back to you soon. 🎨');
   };
@@ -25,6 +63,9 @@ export function ContactPage() {
       [e.target.name]: e.target.value
     });
   };
+
+  // Fallback social buttons when no Sanity social links
+  const hasSocialLinks = settings.socialLinks && settings.socialLinks.length > 0;
 
   return (
     <div className="py-20 min-h-screen">
@@ -51,14 +92,14 @@ export function ContactPage() {
             className="relative"
           >
             {/* Waving character */}
-            <motion.div 
+            <motion.div
               className="mb-12 relative"
               animate={{ rotate: [0, 10, -10, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
             >
-              <BlobShape 
-                color="#E8846F" 
-                className="w-32 h-32 opacity-30" 
+              <BlobShape
+                color="#E8846F"
+                className="w-32 h-32 opacity-30"
                 variant={1}
               />
               <div className="absolute inset-0 flex items-center justify-center text-6xl">
@@ -73,11 +114,11 @@ export function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-['Fredoka'] text-xl text-[#4A3428] mb-2">Email</h3>
-                  <a 
-                    href="mailto:hello@nicolajones.art" 
+                  <a
+                    href={`mailto:${settings.contactEmail}`}
                     className="text-[#6B7554] hover:text-[#E8846F] transition-colors text-lg"
                   >
-                    hello@nicolajones.art
+                    {settings.contactEmail}
                   </a>
                 </div>
               </div>
@@ -99,24 +140,50 @@ export function ContactPage() {
               <div className="pt-6">
                 <h3 className="font-['Fredoka'] text-xl text-[#4A3428] mb-4">Follow Along</h3>
                 <div className="flex gap-3">
-                  <a 
-                    href="#" 
-                    className="w-12 h-12 bg-[#D8767D] rounded-full flex items-center justify-center hover:bg-[#E8846F] transition-colors"
-                  >
-                    <Instagram className="w-6 h-6 text-white" />
-                  </a>
-                  <a 
-                    href="#" 
-                    className="w-12 h-12 bg-[#D8767D] rounded-full flex items-center justify-center hover:bg-[#E8846F] transition-colors"
-                  >
-                    <Twitter className="w-6 h-6 text-white" />
-                  </a>
+                  {hasSocialLinks ? (
+                    settings.socialLinks.map((link) => {
+                      const platform = link.platform?.toLowerCase() || '';
+                      const Icon = socialIconMap[platform];
+                      return (
+                        <a
+                          key={link.platform}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-12 h-12 bg-[#D8767D] rounded-full flex items-center justify-center hover:bg-[#E8846F] transition-colors"
+                        >
+                          {Icon ? (
+                            <Icon className="w-6 h-6 text-white" />
+                          ) : (
+                            <span className="text-white text-xs font-bold uppercase">
+                              {platform.slice(0, 2)}
+                            </span>
+                          )}
+                        </a>
+                      );
+                    })
+                  ) : (
+                    <>
+                      <a
+                        href="#"
+                        className="w-12 h-12 bg-[#D8767D] rounded-full flex items-center justify-center hover:bg-[#E8846F] transition-colors"
+                      >
+                        <Instagram className="w-6 h-6 text-white" />
+                      </a>
+                      <a
+                        href="#"
+                        className="w-12 h-12 bg-[#D8767D] rounded-full flex items-center justify-center hover:bg-[#E8846F] transition-colors"
+                      >
+                        <Twitter className="w-6 h-6 text-white" />
+                      </a>
+                    </>
+                  )}
                 </div>
               </div>
 
               {/* Decorative elements */}
               <div className="pt-8 space-y-4">
-                <motion.div 
+                <motion.div
                   className="inline-block"
                   animate={{ x: [0, 10, 0] }}
                   transition={{ duration: 3, repeat: Infinity }}
@@ -129,9 +196,9 @@ export function ContactPage() {
             </div>
 
             {/* Scattered illustration elements */}
-            <BlobShape 
-              color="#5D9B9B" 
-              className="absolute -bottom-10 -right-10 w-24 h-24 opacity-10" 
+            <BlobShape
+              color="#5D9B9B"
+              className="absolute -bottom-10 -right-10 w-24 h-24 opacity-10"
               variant={2}
             />
           </motion.div>
@@ -225,16 +292,16 @@ export function ContactPage() {
             <div className="absolute -bottom-6 -left-6 w-12 h-12 bg-[#5D9B9B] rounded-full flex items-center justify-center text-xl z-0">
               ✨
             </div>
-            <BlobShape 
-              color="#D8767D" 
-              className="absolute top-1/2 -right-20 w-32 h-32 opacity-10" 
+            <BlobShape
+              color="#D8767D"
+              className="absolute top-1/2 -right-20 w-32 h-32 opacity-10"
               variant={3}
             />
           </motion.div>
         </div>
 
         {/* Bottom decorative note */}
-        <motion.div 
+        <motion.div
           className="mt-20 text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

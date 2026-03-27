@@ -1,17 +1,78 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { BlobShape } from '../components/BlobShape';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { client, urlFor } from '../../lib/sanity';
 
-const processSteps = [
+interface ProcessStep {
+  number: string;
+  title: string;
+  description: string;
+  icon: string;
+}
+
+const fallbackProcessSteps: ProcessStep[] = [
   { number: '01', title: 'Brief', description: 'We chat about your vision, needs, timeline, and budget. I ask loads of questions and probably doodle while we talk.', icon: '💬' },
   { number: '02', title: 'Sketches', description: "I send you rough concepts and sketches. We refine together until the idea feels just right — playful, bold, and uniquely you.", icon: '✏️' },
   { number: '03', title: 'Final Art', description: 'The magic happens! I create the final artwork with bold lines, warm colours, and all the character you deserve.', icon: '🎨' },
   { number: '04', title: 'Delivery', description: 'You receive high-res files, print-ready artwork, or (for murals) a freshly painted wall that makes people smile.', icon: '✨' },
 ];
 
+const stepIcons = ['💬', '✏️', '🎨', '✨'];
+
+const fallbackBio = [
+  "I'm an illustrator and mural artist based in Hastings, UK, who likes drawing things really, really big. When I'm not painting murals on the sides of buildings, I'm illustrating books, designing for brands, or filling tote bags with my characters.",
+  "My work is all about bold lines, warm colours, and characters with personality. I believe illustration should make you smile — whether it's a tiny drawing in a book or a massive mural on the side of a building.",
+  "I've illustrated children's books that have been read at bedtime in dozens of languages, painted murals that locals use as meeting points, and created brand characters that feel like old friends. Each project is a chance to bring a little more whimsy into the world.",
+  "When I'm not drawing, you'll find me walking along the seafront (sketching gulls), drinking far too much coffee, or convincing my cat that yes, she really does need to get off my sketchbook.",
+];
+
+const fallbackPhoto = 'https://images.unsplash.com/photo-1752649935691-ac99478aaa56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGFydGlzdCUyMHBhaW50aW5nJTIwc3R1ZGlvJTIwY3JlYXRpdmV8ZW58MXx8fHwxNzc0NTA3MTE4fDA&ixlib=rb-4.1.0&q=80&w=1080';
+
 const clients = ['Penguin Books', 'National Theatre', 'Hastings Council', 'Bloom Coffee Co.', 'The Guardian', 'Brighton Festival'];
 
+function blocksToLines(blocks: any[]): string[] {
+  if (!Array.isArray(blocks)) return [];
+  return blocks
+    .filter((b: any) => b._type === 'block')
+    .map((b: any) => (b.children || []).map((c: any) => c.text || '').join(''))
+    .filter((text: string) => text.trim().length > 0);
+}
+
 export function AboutPage() {
+  const [bio, setBio] = useState<string[]>(fallbackBio);
+  const [photo, setPhoto] = useState<string>(fallbackPhoto);
+  const [processSteps, setProcessSteps] = useState<ProcessStep[]>(fallbackProcessSteps);
+
+  useEffect(() => {
+    client
+      .fetch<any>(`*[_type == "aboutContent"][0]{ bio, photo, processSteps }`)
+      .then((data) => {
+        if (!data) return;
+
+        if (data.bio) {
+          const lines = blocksToLines(data.bio);
+          if (lines.length > 0) setBio(lines);
+        }
+
+        if (data.photo) {
+          setPhoto(urlFor(data.photo).width(900).url());
+        }
+
+        if (data.processSteps && data.processSteps.length > 0) {
+          setProcessSteps(
+            data.processSteps.map((step: any, idx: number) => ({
+              number: String(step.stepNumber ?? idx + 1).padStart(2, '0'),
+              title: step.title || `Step ${idx + 1}`,
+              description: step.description || '',
+              icon: stepIcons[idx % stepIcons.length],
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="py-20 overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-6">
@@ -27,7 +88,7 @@ export function AboutPage() {
             <div className="relative">
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
                 <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1752649935691-ac99478aaa56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGFydGlzdCUyMHBhaW50aW5nJTIwc3R1ZGlvJTIwY3JlYXRpdmV8ZW58MXx8fHwxNzc0NTA3MTE4fDA&ixlib=rb-4.1.0&q=80&w=1080"
+                  src={photo}
                   alt="Nicola Jones in her studio"
                   className="w-full h-auto"
                 />
@@ -93,18 +154,9 @@ export function AboutPage() {
             </h1>
 
             <div className="space-y-4 text-lg text-[#6B7554] leading-relaxed">
-              <p>
-                I'm an illustrator and mural artist based in Hastings, UK, who likes drawing things really, really big. When I'm not painting murals on the sides of buildings, I'm illustrating books, designing for brands, or filling tote bags with my characters.
-              </p>
-              <p>
-                My work is all about <span className="text-[#E8846F] font-['Fredoka']">bold lines, warm colours, and characters with personality</span>. I believe illustration should make you smile — whether it's a tiny drawing in a book or a massive mural on the side of a building.
-              </p>
-              <p>
-                I've illustrated children's books that have been read at bedtime in dozens of languages, painted murals that locals use as meeting points, and created brand characters that feel like old friends. Each project is a chance to bring a little more whimsy into the world.
-              </p>
-              <p>
-                When I'm not drawing, you'll find me walking along the seafront (sketching gulls), drinking far too much coffee, or convincing my cat that yes, she really does need to get off my sketchbook.
-              </p>
+              {bio.map((paragraph, idx) => (
+                <p key={idx}>{paragraph}</p>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -176,9 +228,9 @@ export function AboutPage() {
           </h3>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center">
-            {clients.map((client, index) => (
+            {clients.map((clientName, index) => (
               <motion.div
-                key={client}
+                key={clientName}
                 className="text-center"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -186,7 +238,7 @@ export function AboutPage() {
                 transition={{ duration: 0.5, delay: index * 0.08 }}
               >
                 <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow h-20 flex items-center justify-center">
-                  <span className="text-[#6B7554] font-['Nunito'] text-sm text-center opacity-60">{client}</span>
+                  <span className="text-[#6B7554] font-['Nunito'] text-sm text-center opacity-60">{clientName}</span>
                 </div>
               </motion.div>
             ))}

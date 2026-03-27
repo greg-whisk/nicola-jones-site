@@ -1,12 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Masonry from 'react-responsive-masonry';
 import { BlobShape } from '../components/BlobShape';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { client, urlFor } from '../../lib/sanity';
 
 const categories = ['All', 'Illustration', 'Murals', 'Books', 'Theatre & Events'];
 
-const portfolioItems = [
+interface PortfolioItem {
+  id: string | number;
+  category: string;
+  image: string;
+  title: string;
+}
+
+interface FeaturedProject {
+  title: string;
+  description: string;
+  image: string;
+}
+
+const fallbackItems: PortfolioItem[] = [
   { id: 1, category: 'Murals', image: 'https://images.unsplash.com/photo-1758426637884-8d27c12b2741?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXJnZSUyMGJ1aWxkaW5nJTIwbXVyYWwlMjBzdHJlZXQlMjBwYWludGluZ3xlbnwxfHx8fDE3NzQ1MDcxMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'High Street Mural' },
   { id: 2, category: 'Books', image: 'https://images.unsplash.com/photo-1649750291589-8812197b698c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMGJvb2slMjBpbGx1c3RyYXRpb24lMjBjb2xvcmZ1bHxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'The Curious Cat' },
   { id: 3, category: 'Theatre & Events', image: 'https://images.unsplash.com/photo-1737617009800-5d570a8552ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0aGVhdHJlJTIwc3RhZ2UlMjBzZXQlMjBjb2xvcmZ1bCUyMGRlc2lnbnxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Midsummer Night Set' },
@@ -17,8 +31,78 @@ const portfolioItems = [
   { id: 8, category: 'Illustration', image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmNvbG9yJTIwcGFpbnRpbmclMjBjb2xvcmZ1bCUyMGFic3RyYWN0JTIwYXJ0fGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Watercolour Originals' },
 ];
 
+const fallbackFeatured: FeaturedProject = {
+  title: 'Hastings Seafront Mural',
+  description: 'A 40-foot celebration of coastal life featuring cheeky seagulls, dancing fish, and local characters. This project brought the community together and now serves as a beloved landmark.',
+  image: 'https://images.unsplash.com/photo-1758426637884-8d27c12b2741?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXJnZSUyMGJ1aWxkaW5nJTIwbXVyYWwlMjBzdHJlZXQlMjBwYWludGluZ3xlbnwxfHx8fDE3NzQ1MDcxMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+};
+
+function blocksToText(blocks: any[]): string {
+  if (!Array.isArray(blocks)) return '';
+  return blocks
+    .filter((b: any) => b._type === 'block')
+    .map((b: any) => (b.children || []).map((c: any) => c.text || '').join(''))
+    .join(' ');
+}
+
 export function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [portfolioItems, setPortfolioItems] = useState<PortfolioItem[]>(fallbackItems);
+  const [featuredProject, setFeaturedProject] = useState<FeaturedProject>(fallbackFeatured);
+
+  useEffect(() => {
+    client
+      .fetch<any[]>(
+        `*[_type == "portfolioProject"] | order(_createdAt desc) {
+          _id, title, category, mainImage, featured
+        }`
+      )
+      .then((data) => {
+        if (data && data.length > 0) {
+          setPortfolioItems(
+            data.map((item, idx) => ({
+              id: item._id,
+              title: item.title,
+              category: item.category || '',
+              image: item.mainImage
+                ? urlFor(item.mainImage).width(800).url()
+                : fallbackItems[idx % fallbackItems.length].image,
+            }))
+          );
+
+          const featured = data.find((p) => p.featured);
+          if (featured) {
+            setFeaturedProject({
+              title: featured.title,
+              description: '',
+              image: featured.mainImage
+                ? urlFor(featured.mainImage).width(1200).url()
+                : fallbackFeatured.image,
+            });
+          }
+        }
+      })
+      .catch(() => {});
+
+    client
+      .fetch<any>(
+        `*[_type == "portfolioProject" && featured == true][0]{
+          title, mainImage, description
+        }`
+      )
+      .then((data) => {
+        if (data && data.title) {
+          setFeaturedProject({
+            title: data.title,
+            description: data.description ? blocksToText(data.description) : fallbackFeatured.description,
+            image: data.mainImage
+              ? urlFor(data.mainImage).width(1200).url()
+              : fallbackFeatured.image,
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const filteredItems = selectedCategory === 'All'
     ? portfolioItems
@@ -95,19 +179,21 @@ export function PortfolioPage() {
                 Featured Project
               </span>
               <h2 className="font-['Fredoka'] text-3xl lg:text-4xl text-white mb-4">
-                Hastings Seafront Mural
+                {featuredProject.title}
               </h2>
-              <p className="text-white/90 text-lg leading-relaxed mb-6">
-                A 40-foot celebration of coastal life featuring cheeky seagulls, dancing fish, and local characters. This project brought the community together and now serves as a beloved landmark.
-              </p>
+              {featuredProject.description && (
+                <p className="text-white/90 text-lg leading-relaxed mb-6">
+                  {featuredProject.description}
+                </p>
+              )}
               <button className="bg-white text-[#5D9B9B] px-8 py-3 rounded-full hover:bg-[#F5EFE8] transition-colors font-['Nunito']">
                 View Case Study
               </button>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1758426637884-8d27c12b2741?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXJnZSUyMGJ1aWxkaW5nJTIwbXVyYWwlMjBzdHJlZXQlMjBwYWludGluZ3xlbnwxfHx8fDE3NzQ1MDcxMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Hastings Seafront Mural"
+                src={featuredProject.image}
+                alt={featuredProject.title}
                 className="w-full h-full object-cover"
               />
             </div>

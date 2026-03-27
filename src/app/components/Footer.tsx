@@ -1,10 +1,55 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { Instagram, Mail, Twitter } from 'lucide-react';
 import { motion } from 'motion/react';
+import { client } from '../../lib/sanity';
+
+interface SocialLink {
+  platform: string;
+  url: string;
+}
+
+interface SiteSettings {
+  contactEmail: string;
+  socialLinks: SocialLink[];
+  footerText: string;
+}
+
+const fallbackSettings: SiteSettings = {
+  contactEmail: 'hello@nicolajones.art',
+  socialLinks: [],
+  footerText: '',
+};
+
+const socialIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  instagram: Instagram,
+  twitter: Twitter,
+  x: Twitter,
+  email: Mail,
+};
 
 export function Footer() {
   const [email, setEmail] = useState('');
+  const [settings, setSettings] = useState<SiteSettings>(fallbackSettings);
+
+  useEffect(() => {
+    client
+      .fetch<SiteSettings | null>(
+        `*[_type == "siteSettings"][0]{ contactEmail, socialLinks, footerText }`
+      )
+      .then((data) => {
+        if (data) {
+          setSettings({
+            contactEmail: data.contactEmail || fallbackSettings.contactEmail,
+            socialLinks: data.socialLinks || [],
+            footerText: data.footerText || '',
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const hasSocialLinks = settings.socialLinks && settings.socialLinks.length > 0;
 
   return (
     <footer className="relative bg-[#2B2726] text-[#FAF8F5] pt-20 pb-12 overflow-hidden">
@@ -49,19 +94,48 @@ export function Footer() {
             <h4 className="font-['Fredoka'] mb-4">Say Hello</h4>
             <div className="space-y-3">
               <p className="text-[#D4A99C] text-sm">Hastings, UK</p>
-              <a href="mailto:hello@nicolajones.art" className="text-[#D4A99C] hover:text-[#E8846F] transition-colors text-sm block">
-                hello@nicolajones.art
+              <a
+                href={`mailto:${settings.contactEmail}`}
+                className="text-[#D4A99C] hover:text-[#E8846F] transition-colors text-sm block"
+              >
+                {settings.contactEmail}
               </a>
               <div className="flex gap-3 pt-2">
-                <a href="#" className="w-8 h-8 bg-[#E8846F] rounded-full flex items-center justify-center hover:bg-[#5D9B9B] transition-colors">
-                  <Instagram className="w-4 h-4" />
-                </a>
-                <a href="#" className="w-8 h-8 bg-[#E8846F] rounded-full flex items-center justify-center hover:bg-[#5D9B9B] transition-colors">
-                  <Twitter className="w-4 h-4" />
-                </a>
-                <a href="#" className="w-8 h-8 bg-[#E8846F] rounded-full flex items-center justify-center hover:bg-[#5D9B9B] transition-colors">
-                  <Mail className="w-4 h-4" />
-                </a>
+                {hasSocialLinks ? (
+                  settings.socialLinks.map((link) => {
+                    const platform = link.platform?.toLowerCase() || '';
+                    const Icon = socialIconMap[platform];
+                    return (
+                      <a
+                        key={link.platform}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 bg-[#E8846F] rounded-full flex items-center justify-center hover:bg-[#5D9B9B] transition-colors"
+                      >
+                        {Icon ? (
+                          <Icon className="w-4 h-4" />
+                        ) : (
+                          <span className="text-white text-xs font-bold uppercase">
+                            {platform.slice(0, 2)}
+                          </span>
+                        )}
+                      </a>
+                    );
+                  })
+                ) : (
+                  <>
+                    <a href="#" className="w-8 h-8 bg-[#E8846F] rounded-full flex items-center justify-center hover:bg-[#5D9B9B] transition-colors">
+                      <Instagram className="w-4 h-4" />
+                    </a>
+                    <a href="#" className="w-8 h-8 bg-[#E8846F] rounded-full flex items-center justify-center hover:bg-[#5D9B9B] transition-colors">
+                      <Twitter className="w-4 h-4" />
+                    </a>
+                    <a href="#" className="w-8 h-8 bg-[#E8846F] rounded-full flex items-center justify-center hover:bg-[#5D9B9B] transition-colors">
+                      <Mail className="w-4 h-4" />
+                    </a>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -91,7 +165,9 @@ export function Footer() {
         </div>
 
         <div className="border-t border-[#4A3428] pt-8 text-center text-sm text-[#D4A99C]">
-          © 2026 Nicola Jones. All rights reserved. Illustrations are bold and so are you for reading this.
+          {settings.footerText
+            ? settings.footerText
+            : '© 2026 Nicola Jones. All rights reserved. Illustrations are bold and so are you for reading this.'}
         </div>
       </div>
     </footer>

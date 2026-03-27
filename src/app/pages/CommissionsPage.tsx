@@ -1,9 +1,11 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
 import { Building2, Palette, BookOpen, Theater, Heart, ArrowRight } from 'lucide-react';
 import { BlobShape } from '../components/BlobShape';
 import { PillButton } from '../components/PillButton';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { client, urlFor } from '../../lib/sanity';
 
 const services = [
   { icon: Building2, title: 'Building Murals', description: 'Large-scale exterior and interior murals that transform spaces and tell stories', color: '#E8846F' },
@@ -13,14 +15,21 @@ const services = [
   { icon: Heart, title: 'Personal Commissions', description: 'One-of-a-kind pieces for your home, gifts, or special occasions', color: '#E8846F' },
 ];
 
-const caseStudies = [
+interface CaseStudy {
+  id: string | number;
+  title: string;
+  client: string;
+  description: string;
+  image: string;
+}
+
+const fallbackCaseStudies: CaseStudy[] = [
   {
     id: 1,
     title: 'Bloom Coffee Brand Identity',
     client: 'Bloom Coffee Co.',
     description: 'A complete illustration system featuring quirky coffee characters, hand-drawn patterns, and packaging designs that helped this local roaster stand out on shelves and online.',
     image: 'https://images.unsplash.com/photo-1571473569215-d86aa5a582c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib2xkJTIwZ3JhcGhpYyUyMHBvc3RlciUyMGlsbHVzdHJhdGlvbiUyMHByaW50fGVufDF8fHx8MTc3NDUwNzEyMXww&ixlib=rb-4.1.0&q=80&w=1080',
-    stats: { duration: '6 weeks', deliverables: '25+ illustrations' }
   },
   {
     id: 2,
@@ -28,7 +37,6 @@ const caseStudies = [
     client: 'Independent Publishing',
     description: 'A 32-page adventure filled with hand-painted watercolour illustrations, from character development through to final artwork and print-ready files.',
     image: 'https://images.unsplash.com/photo-1649750291589-8812197b698c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMGJvb2slMjBpbGx1c3RyYXRpb24lMjBjb2xvcmZ1bHxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    stats: { duration: '4 months', deliverables: '40+ illustrations' }
   },
   {
     id: 3,
@@ -36,11 +44,47 @@ const caseStudies = [
     client: 'Hastings Council',
     description: 'A 40-foot celebration of local history and community, created through workshops with residents to ensure it truly represented their stories and spirit.',
     image: 'https://images.unsplash.com/photo-1759936263498-325015569a1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMHdhbGwlMjBtdXJhbCUyMHVyYmFuJTIwYXJ0fGVufDF8fHx8MTc3NDUwNzExOHww&ixlib=rb-4.1.0&q=80&w=1080',
-    stats: { duration: '3 months', deliverables: '1 epic mural' }
-  }
+  },
 ];
 
+function blocksToText(blocks: any[]): string {
+  if (!Array.isArray(blocks)) return '';
+  return blocks
+    .filter((b: any) => b._type === 'block')
+    .map((b: any) => (b.children || []).map((c: any) => c.text || '').join(''))
+    .join(' ');
+}
+
 export function CommissionsPage() {
+  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>(fallbackCaseStudies);
+
+  useEffect(() => {
+    client
+      .fetch<any[]>(
+        `*[_type == "caseStudy"] | order(_createdAt desc) {
+          _id, title, client, heroImage, description, outcome
+        }`
+      )
+      .then((data) => {
+        if (data && data.length > 0) {
+          setCaseStudies(
+            data.map((item, idx) => ({
+              id: item._id,
+              title: item.title,
+              client: item.client || '',
+              description: item.description
+                ? blocksToText(item.description)
+                : fallbackCaseStudies[idx % fallbackCaseStudies.length].description,
+              image: item.heroImage
+                ? urlFor(item.heroImage).width(1200).url()
+                : fallbackCaseStudies[idx % fallbackCaseStudies.length].image,
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="py-20 overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-6">
@@ -147,16 +191,6 @@ export function CommissionsPage() {
                   <p className="text-lg text-[#6B7554] leading-relaxed mb-6">
                     {study.description}
                   </p>
-                  <div className="flex gap-8 mb-6">
-                    <div>
-                      <div className="text-sm text-[#6B7554] mb-1">Duration</div>
-                      <div className="font-['Fredoka'] text-lg text-[#4A3428]">{study.stats.duration}</div>
-                    </div>
-                    <div>
-                      <div className="text-sm text-[#6B7554] mb-1">Deliverables</div>
-                      <div className="font-['Fredoka'] text-lg text-[#4A3428]">{study.stats.deliverables}</div>
-                    </div>
-                  </div>
                   <button className="text-[#E8846F] hover:text-[#4A3428] transition-colors flex items-center gap-2 font-['Nunito']">
                     View full case study <ArrowRight className="w-4 h-4" />
                   </button>

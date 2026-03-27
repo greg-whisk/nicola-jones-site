@@ -1,14 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ShoppingBag } from 'lucide-react';
 import { Link } from 'react-router';
 import { BlobShape } from '../components/BlobShape';
 import { PillButton } from '../components/PillButton';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { client, urlFor } from '../../lib/sanity';
 
 const categories = ['All', 'Prints', 'Original Art', 'Tote Bags', 'Merch'];
 
-const products = [
+interface Product {
+  id: string | number;
+  name: string;
+  price: number;
+  category: string;
+  image: string;
+}
+
+interface FeaturedProduct {
+  name: string;
+  price: number;
+  description: string;
+  image: string;
+}
+
+const fallbackProducts: Product[] = [
   { id: 1, name: 'Cheeky Seagull Print', price: 28, category: 'Prints', image: 'https://images.unsplash.com/photo-1763690792486-812722ffb455?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnQlMjBwcmludCUyMGZyYW1lZCUyMGlsbHVzdHJhdGlvbiUyMHdhbGx8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080' },
   { id: 2, name: 'Dancing Fish Original', price: 450, category: 'Original Art', image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmNvbG9yJTIwcGFpbnRpbmclMjBjb2xvcmZ1bCUyMGFic3RyYWN0JTIwYXJ0fGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080' },
   { id: 3, name: 'Illustrated Tote Bag', price: 18, category: 'Tote Bags', image: 'https://images.unsplash.com/photo-1648994605536-10633d3e0886?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbGx1c3RyYXRlZCUyMHRvdGUlMjBiYWclMjBjYW52YXMlMjBkZXNpZ258ZW58MXx8fHwxNzc0NTA3MTE5fDA&ixlib=rb-4.1.0&q=80&w=1080' },
@@ -20,8 +36,64 @@ const products = [
   { id: 9, name: 'Character Pin Set', price: 15, category: 'Merch', image: 'https://images.unsplash.com/photo-1684342936280-df0d753e2753?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbmFtZWwlMjBwaW4lMjBiYWRnZSUyMHNldCUyMGNvbG9yZnVsfGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080' },
 ];
 
+const fallbackFeatured: FeaturedProduct = {
+  name: 'Dancing Fish Original',
+  price: 450,
+  description: 'A vibrant original watercolour piece bursting with personality. Hand-painted on 300gsm paper, signed and ready to bring joy to your walls.',
+  image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmNvbG9yJTIwcGFpbnRpbmclMjBjb2xvcmZ1bCUyMGFic3RyYWN0JTIwYXJ0fGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080',
+};
+
+function blocksToText(blocks: any[]): string {
+  if (!Array.isArray(blocks)) return '';
+  return blocks
+    .filter((b: any) => b._type === 'block')
+    .map((b: any) => (b.children || []).map((c: any) => c.text || '').join(''))
+    .join(' ');
+}
+
 export function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [products, setProducts] = useState<Product[]>(fallbackProducts);
+  const [featuredProduct, setFeaturedProduct] = useState<FeaturedProduct>(fallbackFeatured);
+
+  useEffect(() => {
+    client
+      .fetch<any[]>(
+        `*[_type == "shopProduct" && inStock != false] | order(_createdAt desc) {
+          _id, name, price, category, image, description
+        }`
+      )
+      .then((data) => {
+        if (data && data.length > 0) {
+          const mapped: Product[] = data.map((item, idx) => ({
+            id: item._id,
+            name: item.name,
+            price: item.price ?? 0,
+            category: item.category || '',
+            image: item.image
+              ? urlFor(item.image).width(600).url()
+              : fallbackProducts[idx % fallbackProducts.length].image,
+          }));
+          setProducts(mapped);
+
+          // Use first "Original Art" item as featured, fallback to first item
+          const featured = data.find((p) => p.category === 'Original Art') || data[0];
+          if (featured) {
+            setFeaturedProduct({
+              name: featured.name,
+              price: featured.price ?? 0,
+              description: featured.description
+                ? blocksToText(featured.description)
+                : fallbackFeatured.description,
+              image: featured.image
+                ? urlFor(featured.image).width(1200).url()
+                : fallbackFeatured.image,
+            });
+          }
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const filteredProducts = selectedCategory === 'All'
     ? products
@@ -73,8 +145,8 @@ export function ShopPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
             <div className="rounded-2xl overflow-hidden shadow-2xl transform -rotate-2 hover:rotate-0 transition-transform duration-500 order-2 lg:order-1">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmNvbG9yJTIwcGFpbnRpbmclMjBjb2xvcmZ1bCUyMGFic3RyYWN0JTIwYXJ0fGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Featured product"
+                src={featuredProduct.image}
+                alt={featuredProduct.name}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -83,13 +155,15 @@ export function ShopPage() {
                 Limited Edition
               </span>
               <h2 className="font-['Fredoka'] text-3xl lg:text-4xl text-white mb-4">
-                Dancing Fish Original
+                {featuredProduct.name}
               </h2>
-              <p className="text-white/90 text-lg leading-relaxed mb-6">
-                A vibrant original watercolour piece bursting with personality. Hand-painted on 300gsm paper, signed and ready to bring joy to your walls.
-              </p>
+              {featuredProduct.description && (
+                <p className="text-white/90 text-lg leading-relaxed mb-6">
+                  {featuredProduct.description}
+                </p>
+              )}
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="font-['Fredoka'] text-3xl text-white">£450</span>
+                <span className="font-['Fredoka'] text-3xl text-white">£{featuredProduct.price}</span>
                 <PillButton variant="primary" className="bg-white !text-[#D8767D] hover:bg-[#F5EFE8]">
                   Add to bag
                 </PillButton>

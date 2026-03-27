@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
 import { ArrowRight, Star, ShoppingBag, Palette, Briefcase } from 'lucide-react';
@@ -5,48 +6,102 @@ import { BlobShape } from '../components/BlobShape';
 import { PillButton } from '../components/PillButton';
 import { WavyDivider } from '../components/WavyDivider';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { client, urlFor } from '../../lib/sanity';
+
+const pathways = [
+  {
+    title: 'Buy Something Fun',
+    description: 'Prints, tote bags, and original art pieces for your walls and your life.',
+    link: '/shop',
+    color: '#E8846F',
+    bgColor: '#FDF0ED',
+    icon: ShoppingBag,
+    rotation: -3,
+    image: 'https://images.unsplash.com/photo-1648994605536-10633d3e0886?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbGx1c3RyYXRlZCUyMHRvdGUlMjBiYWclMjBjYW52YXMlMjBkZXNpZ258ZW58MXx8fHwxNzc0NTA3MTE5fDA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+  {
+    title: 'Commission Nicola',
+    description: 'Murals, books, brands, and bespoke illustrations made just for you.',
+    link: '/commissions',
+    color: '#5D9B9B',
+    bgColor: '#EDF5F5',
+    icon: Palette,
+    rotation: 2,
+    image: 'https://images.unsplash.com/photo-1759936263498-325015569a1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMHdhbGwlMjBtdXJhbCUyMHVyYmFuJTIwYXJ0fGVufDF8fHx8MTc3NDUwNzExOHww&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+  {
+    title: 'Browse the Portfolio',
+    description: 'Dive into a world of bold, playful, characterful work.',
+    link: '/portfolio',
+    color: '#D8767D',
+    bgColor: '#F9EDEE',
+    icon: Briefcase,
+    rotation: -2,
+    image: 'https://images.unsplash.com/photo-1769053012127-b05ba10350d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aGltc2ljYWwlMjBjYXJ0b29uJTIwY2hhcmFjdGVyJTIwYXJ0JTIwcGFpbnRpbmd8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080',
+  }
+];
+
+const fallbackFeaturedWork = [
+  { id: 1, image: 'https://images.unsplash.com/photo-1758426637884-8d27c12b2741?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXJnZSUyMGJ1aWxkaW5nJTIwbXVyYWwlMjBzdHJlZXQlMjBwYWludGluZ3xlbnwxfHx8fDE3NzQ1MDcxMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'High Street Mural', category: 'Murals' },
+  { id: 2, image: 'https://images.unsplash.com/photo-1649750291589-8812197b698c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMGJvb2slMjBpbGx1c3RyYXRpb24lMjBjb2xvcmZ1bHxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'The Curious Cat', category: 'Books' },
+  { id: 3, image: 'https://images.unsplash.com/photo-1737617009800-5d570a8552ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0aGVhdHJlJTIwc3RhZ2UlMjBzZXQlMjBjb2xvcmZ1bCUyMGRlc2lnbnxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Midsummer Night Set', category: 'Theatre' },
+  { id: 4, image: 'https://images.unsplash.com/photo-1571473569215-d86aa5a582c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib2xkJTIwZ3JhcGhpYyUyMHBvc3RlciUyMGlsbHVzdHJhdGlvbiUyMHByaW50fGVufDF8fHx8MTc3NDUwNzEyMXww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Brand Identity Work', category: 'Illustration' },
+  { id: 5, image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmNvbG9yJTIwcGFpbnRpbmclMjBjb2xvcmZ1bCUyMGFic3RyYWN0JTIwYXJ0fGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Watercolour Originals', category: 'Illustration' },
+];
+
+interface FeaturedWork {
+  id: string | number;
+  image: string;
+  title: string;
+  category: string;
+}
+
+interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+}
+
+const fallbackTestimonial: Testimonial = {
+  quote: 'Nicola transformed our entire office building with a mural that makes everyone smile. Her characters are so full of life, and the process was an absolute joy from start to finish.',
+  author: 'Sarah Chen',
+  role: 'Creative Director at Bloom Studio',
+};
 
 export function HomePage() {
-  const pathways = [
-    {
-      title: 'Buy Something Fun',
-      description: 'Prints, tote bags, and original art pieces for your walls and your life.',
-      link: '/shop',
-      color: '#E8846F',
-      bgColor: '#FDF0ED',
-      icon: ShoppingBag,
-      rotation: -3,
-      image: 'https://images.unsplash.com/photo-1648994605536-10633d3e0886?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbGx1c3RyYXRlZCUyMHRvdGUlMjBiYWclMjBjYW52YXMlMjBkZXNpZ258ZW58MXx8fHwxNzc0NTA3MTE5fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      title: 'Commission Nicola',
-      description: 'Murals, books, brands, and bespoke illustrations made just for you.',
-      link: '/commissions',
-      color: '#5D9B9B',
-      bgColor: '#EDF5F5',
-      icon: Palette,
-      rotation: 2,
-      image: 'https://images.unsplash.com/photo-1759936263498-325015569a1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMHdhbGwlMjBtdXJhbCUyMHVyYmFuJTIwYXJ0fGVufDF8fHx8MTc3NDUwNzExOHww&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      title: 'Browse the Portfolio',
-      description: 'Dive into a world of bold, playful, characterful work.',
-      link: '/portfolio',
-      color: '#D8767D',
-      bgColor: '#F9EDEE',
-      icon: Briefcase,
-      rotation: -2,
-      image: 'https://images.unsplash.com/photo-1769053012127-b05ba10350d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aGltc2ljYWwlMjBjYXJ0b29uJTIwY2hhcmFjdGVyJTIwYXJ0JTIwcGFpbnRpbmd8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    }
-  ];
+  const [featuredWork, setFeaturedWork] = useState<FeaturedWork[]>(fallbackFeaturedWork);
+  const [testimonial, setTestimonial] = useState<Testimonial>(fallbackTestimonial);
 
-  const featuredWork = [
-    { id: 1, image: 'https://images.unsplash.com/photo-1758426637884-8d27c12b2741?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXJnZSUyMGJ1aWxkaW5nJTIwbXVyYWwlMjBzdHJlZXQlMjBwYWludGluZ3xlbnwxfHx8fDE3NzQ1MDcxMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'High Street Mural', category: 'Murals' },
-    { id: 2, image: 'https://images.unsplash.com/photo-1649750291589-8812197b698c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMGJvb2slMjBpbGx1c3RyYXRpb24lMjBjb2xvcmZ1bHxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'The Curious Cat', category: 'Books' },
-    { id: 3, image: 'https://images.unsplash.com/photo-1737617009800-5d570a8552ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0aGVhdHJlJTIwc3RhZ2UlMjBzZXQlMjBjb2xvcmZ1bCUyMGRlc2lnbnxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Midsummer Night Set', category: 'Theatre' },
-    { id: 4, image: 'https://images.unsplash.com/photo-1571473569215-d86aa5a582c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib2xkJTIwZ3JhcGhpYyUyMHBvc3RlciUyMGlsbHVzdHJhdGlvbiUyMHByaW50fGVufDF8fHx8MTc3NDUwNzEyMXww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Brand Identity Work', category: 'Illustration' },
-    { id: 5, image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmNvbG9yJTIwcGFpbnRpbmclMjBjb2xvcmZ1bCUyMGFic3RyYWN0JTIwYXJ0fGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Watercolour Originals', category: 'Illustration' },
-  ];
+  useEffect(() => {
+    client
+      .fetch<any[]>(
+        `*[_type == "portfolioProject" && featured == true][0..4]{
+          _id, title, category, mainImage
+        }`
+      )
+      .then((data) => {
+        if (data && data.length > 0) {
+          setFeaturedWork(
+            data.map((item, idx) => ({
+              id: item._id,
+              title: item.title,
+              category: item.category || '',
+              image: item.mainImage
+                ? urlFor(item.mainImage).width(600).url()
+                : fallbackFeaturedWork[idx % fallbackFeaturedWork.length].image,
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+
+    client
+      .fetch<Testimonial | null>(`*[_type == "testimonial"][0]{ quote, author, role }`)
+      .then((data) => {
+        if (data && data.quote) setTestimonial(data);
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <div className="overflow-hidden">
@@ -291,10 +346,10 @@ export function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            "Nicola transformed our entire office building with a mural that makes everyone smile. Her characters are so full of life, and the process was an absolute joy from start to finish."
+            "{testimonial.quote}"
           </motion.blockquote>
           <cite className="font-['Fredoka'] text-lg text-[#6B7554] not-italic">
-            — Sarah Chen, Creative Director at Bloom Studio
+            — {testimonial.author}{testimonial.role ? `, ${testimonial.role}` : ''}
           </cite>
 
           {/* Character reacting */}
