@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router';
-import { ShoppingBag, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export function Navigation() {
@@ -60,12 +60,6 @@ export function Navigation() {
             </Link>
           ))}
 
-          <Link to="/shop" className="relative p-2 hover:bg-[#F5EFE8] rounded-full transition-colors">
-            <ShoppingBag className="w-5 h-5 text-[#4A3428]" />
-            <span className="absolute -top-1 -right-1 bg-[#E8846F] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-              0
-            </span>
-          </Link>
         </div>
 
         {/* Mobile toggle */}
