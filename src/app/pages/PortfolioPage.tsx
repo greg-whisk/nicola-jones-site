@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 import { motion, AnimatePresence } from 'motion/react';
 import Masonry from 'react-responsive-masonry';
 import { BlobShape } from '../components/BlobShape';
@@ -19,6 +20,7 @@ interface PortfolioItem {
   category: string;
   image: string;
   title: string;
+  slug?: string;
 }
 
 interface FeaturedProject {
@@ -28,14 +30,14 @@ interface FeaturedProject {
 }
 
 const fallbackItems: PortfolioItem[] = [
-  { id: 1, category: 'Murals', image: 'https://images.unsplash.com/photo-1758426637884-8d27c12b2741?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXJnZSUyMGJ1aWxkaW5nJTIwbXVyYWwlMjBzdHJlZXQlMjBwYWludGluZ3xlbnwxfHx8fDE3NzQ1MDcxMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'High Street Mural' },
-  { id: 2, category: 'Books', image: 'https://images.unsplash.com/photo-1649750291589-8812197b698c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMGJvb2slMjBpbGx1c3RyYXRpb24lMjBjb2xvcmZ1bHxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'The Curious Cat' },
-  { id: 3, category: 'Theatre & Events', image: 'https://images.unsplash.com/photo-1737617009800-5d570a8552ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0aGVhdHJlJTIwc3RhZ2UlMjBzZXQlMjBjb2xvcmZ1bCUyMGRlc2lnbnxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Midsummer Night Set' },
-  { id: 4, category: 'Illustration', image: 'https://images.unsplash.com/photo-1571473569215-d86aa5a582c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib2xkJTIwZ3JhcGhpYyUyMHBvc3RlciUyMGlsbHVzdHJhdGlvbiUyMHByaW50fGVufDF8fHx8MTc3NDUwNzEyMXww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Brand Characters' },
-  { id: 5, category: 'Illustration', image: 'https://images.unsplash.com/photo-1769053012127-b05ba10350d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aGltc2ljYWwlMjBjYXJ0b29uJTIwY2hhcmFjdGVyJTIwYXJ0JTIwcGFpbnRpbmd8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Whimsical Series' },
-  { id: 6, category: 'Murals', image: 'https://images.unsplash.com/photo-1759936263498-325015569a1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMHdhbGwlMjBtdXJhbCUyMHVyYmFuJTIwYXJ0fGVufDF8fHx8MTc3NDUwNzExOHww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Community Center Mural' },
-  { id: 7, category: 'Books', image: 'https://images.unsplash.com/photo-1770726345481-01bb16e5c76c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYW5kJTIwZHJhd24lMjBza2V0Y2glMjBkb29kbGUlMjBhcnR8ZW58MXx8fHwxNzc0NTA3MTIwfDA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Adventure Book' },
-  { id: 8, category: 'Illustration', image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmNvbG9yJTIwcGFpbnRpbmclMjBjb2xvcmZ1bCUyMGFic3RyYWN0JTIwYXJ0fGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Watercolour Originals' },
+  { id: 1, category: 'Murals', image: 'https://images.unsplash.com/photo-1758426637884-8d27c12b2741?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXJnZSUyMGJ1aWxkaW5nJTIwbXVyYWwlMjBzdHJlZXQlMjBwYWludGluZ3xlbnwxfHx8fDE3NzQ1MDcxMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'High Street Mural', slug: 'high-street-mural' },
+  { id: 2, category: 'Books', image: 'https://images.unsplash.com/photo-1649750291589-8812197b698c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMGJvb2slMjBpbGx1c3RyYXRpb24lMjBjb2xvcmZ1bHxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'The Curious Cat', slug: 'the-curious-cat' },
+  { id: 3, category: 'Theatre & Events', image: 'https://images.unsplash.com/photo-1737617009800-5d570a8552ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0aGVhdHJlJTIwc3RhZ2UlMjBzZXQlMjBjb2xvcmZ1bCUyMGRlc2lnbnxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Midsummer Night Set', slug: 'midsummer-night-set' },
+  { id: 4, category: 'Illustration', image: 'https://images.unsplash.com/photo-1571473569215-d86aa5a582c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib2xkJTIwZ3JhcGhpYyUyMHBvc3RlciUyMGlsbHVzdHJhdGlvbiUyMHByaW50fGVufDF8fHx8MTc3NDUwNzEyMXww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Brand Characters', slug: 'brand-characters' },
+  { id: 5, category: 'Illustration', image: 'https://images.unsplash.com/photo-1769053012127-b05ba10350d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aGltc2ljYWwlMjBjYXJ0b29uJTIwY2hhcmFjdGVyJTIwYXJ0JTIwcGFpbnRpbmd8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Whimsical Series', slug: 'whimsical-series' },
+  { id: 6, category: 'Murals', image: 'https://images.unsplash.com/photo-1759936263498-325015569a1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMHdhbGwlMjBtdXJhbCUyMHVyYmFuJTIwYXJ0fGVufDF8fHx8MTc3NDUwNzExOHww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Community Center Mural', slug: 'community-center-mural' },
+  { id: 7, category: 'Books', image: 'https://images.unsplash.com/photo-1770726345481-01bb16e5c76c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYW5kJTIwZHJhd24lMjBza2V0Y2glMjBkb29kbGUlMjBhcnR8ZW58MXx8fHwxNzc0NTA3MTIwfDA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Adventure Book', slug: 'adventure-book' },
+  { id: 8, category: 'Illustration', image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmNvbG9yJTIwcGFpbnRpbmclMjBjb2xvcmZ1bCUyMGFic3RyYWN0JTIwYXJ0fGVufDF8fHx8MTc3NDUwNzIyMnww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Watercolour Originals', slug: 'watercolour-originals' },
 ];
 
 const fallbackFeatured: FeaturedProject = {
@@ -61,7 +63,7 @@ export function PortfolioPage() {
     client
       .fetch<any[]>(
         `*[_type == "portfolioProject"] | order(_createdAt desc) {
-          _id, title, category, mainImage, featured
+          _id, title, category, mainImage, featured, slug
         }`
       )
       .then((data) => {
@@ -70,6 +72,7 @@ export function PortfolioPage() {
             id: item._id,
             title: item.title,
             category: categoryMap[item.category] || item.category || '',
+            slug: item.slug?.current,
             image: item.mainImage
               ? urlFor(item.mainImage).width(800).url()
               : fallbackItems[idx % fallbackItems.length].image,
@@ -239,6 +242,7 @@ export function PortfolioPage() {
                   transition={{ duration: 0.5, delay: index * 0.08 }}
                   className="relative group cursor-pointer"
                 >
+                  <Link to={`/portfolio/${item.slug}`} className="block">
                   <div className="relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300">
                     {index % 3 === 0 && (
                       <BlobShape
@@ -259,6 +263,7 @@ export function PortfolioPage() {
                       <h3 className="font-['Fredoka'] text-2xl text-white">{item.title}</h3>
                     </div>
                   </div>
+                  </Link>
                 </motion.div>
               ))}
             </Masonry>

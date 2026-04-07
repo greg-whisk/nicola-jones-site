@@ -42,6 +42,13 @@ export default defineType({
       title: 'Footer Text',
       type: 'string',
     }),
+    defineField({
+      name: 'logo',
+      title: 'Logo (SVG)',
+      type: 'file',
+      description: 'Site logo — SVG with transparent background',
+      options: { accept: 'image/svg+xml' },
+    }),
   ],
   preview: {
     prepare() {
