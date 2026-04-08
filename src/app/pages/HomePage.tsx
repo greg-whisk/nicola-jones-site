@@ -180,7 +180,7 @@ export function HomePage() {
             {/* Main illustration image */}
             <div className="relative z-10 transform rotate-2 hover:rotate-0 transition-transform duration-500">
               <ImageWithFallback
-                src="https://cdn.sanity.io/images/fnwcgtif/production/b74056942f180fa86437e88ddf45c7482b751290-938x688.webp"
+                src="/nicola-jones-hero.webp"
                 alt="Bold illustration work"
                 className="w-full h-auto rounded-3xl shadow-2xl"
               />
