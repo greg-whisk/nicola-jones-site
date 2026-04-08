@@ -74,7 +74,12 @@ export function Footer() {
       <div className="max-w-[1440px] mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           <div>
-            <h3 className="font-['Fredoka'] text-xl mb-4">Nicola Jones</h3>
+            <img
+              src="/nicola-jones-logo.svg"
+              alt="Nicola Jones"
+              className="mb-4"
+              style={{ width: '70px', height: '70px', filter: 'brightness(0) invert(1) sepia(0.15)', opacity: 0.88 }}
+            />
             <p className="text-[#D4A99C] text-sm leading-relaxed">
               Bold illustration. Big walls. Tiny tote bags. Everything in between.
             </p>

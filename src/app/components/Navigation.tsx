@@ -19,7 +19,7 @@ export function Navigation() {
     <nav className="sticky top-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-sm border-b border-[#4A3428]/10">
       <div className="max-w-[1440px] mx-auto px-6 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center group" onClick={() => setMobileOpen(false)}>
-          <img src="/nicola-jones-logo.svg" alt="Nicola Jones" className="h-12 w-auto" />
+          <img src="/nicola-jones-logo-horizontal.svg" alt="Nicola Jones" className="h-10 w-auto" />
         </Link>
 
         {/* Desktop Nav */}
