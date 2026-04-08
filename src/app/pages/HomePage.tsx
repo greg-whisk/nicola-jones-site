@@ -17,7 +17,7 @@ const pathways = [
     bgColor: '#FDF0ED',
     icon: ShoppingBag,
     rotation: -3,
-    image: 'https://images.unsplash.com/photo-1648994605536-10633d3e0886?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbGx1c3RyYXRlZCUyMHRvdGUlMjBiYWclMjBjYW52YXMlMjBkZXNpZ258ZW58MXx8fHwxNzc0NTA3MTE5fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    image: 'https://cdn.sanity.io/images/fnwcgtif/production/292cd1801a4012ceb14be47972788201fbf0de9b-2500x2500.webp',
   },
   {
     title: 'Commission Nicola',
@@ -27,7 +27,7 @@ const pathways = [
     bgColor: '#EDF5F5',
     icon: Palette,
     rotation: 2,
-    image: 'https://images.unsplash.com/photo-1759936263498-325015569a1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMHdhbGwlMjBtdXJhbCUyMHVyYmFuJTIwYXJ0fGVufDF8fHx8MTc3NDUwNzExOHww&ixlib=rb-4.1.0&q=80&w=1080',
+    image: 'https://cdn.sanity.io/images/fnwcgtif/production/3019706bf19f8f899bc740a4d32484ee1fea82e6-1582x792.webp',
   },
   {
     title: 'Browse the Portfolio',
@@ -37,7 +37,7 @@ const pathways = [
     bgColor: '#F9EDEE',
     icon: Briefcase,
     rotation: -2,
-    image: 'https://images.unsplash.com/photo-1769053012127-b05ba10350d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aGltc2ljYWwlMjBjYXJ0b29uJTIwY2hhcmFjdGVyJTIwYXJ0JTIwcGFpbnRpbmd8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080',
+    image: 'https://cdn.sanity.io/images/fnwcgtif/production/b74056942f180fa86437e88ddf45c7482b751290-938x688.webp',
   }
 ];
 
@@ -46,25 +46,26 @@ const FEATURED_SLUGS = [
   'trees-for-cities',
   'pinpoint-graphic-design',
   'springtide-branding',
-  'the-common-good-live-event-illustration',
+  'the-common-good-live-event',
   'darling-and-edge',
   'mermaids',
   'cheeky-bits',
 ];
 
 const fallbackFeaturedWork = [
-  { id: 'shitfaced-shakespeare', image: 'https://images.unsplash.com/photo-1737617009800-5d570a8552ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0aGVhdHJlJTIwc3RhZ2UlMjBzZXQlMjBjb2xvcmZ1bCUyMGRlc2lnbnxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Shitfaced Shakespeare', category: 'Theatre' },
-  { id: 'trees-for-cities', image: 'https://images.unsplash.com/photo-1759936263498-325015569a1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMHdhbGwlMjBtdXJhbCUyMHVyYmFuJTIwYXJ0fGVufDF8fHx8MTc3NDUwNzExOHww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Trees for Cities', category: 'Murals' },
-  { id: 'pinpoint-graphic-design', image: 'https://images.unsplash.com/photo-1571473569215-d86aa5a582c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib2xkJTIwZ3JhcGhpYyUyMHBvc3RlciUyMGlsbHVzdHJhdGlvbiUyMHByaW50fGVufDF8fHx8MTc3NDUwNzEyMXww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Pinpoint Graphic Design', category: 'Illustration' },
-  { id: 'springtide-branding', image: 'https://images.unsplash.com/photo-1649750291589-8812197b698c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMGJvb2slMjBpbGx1c3RyYXRpb24lMjBjb2xvcmZ1bHxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Springtide Branding', category: 'Branding' },
-  { id: 'the-common-good-live-event-illustration', image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmNvbG9yJTIwcGFpbnRpbmclMjBjb2xvcmZ1bCUyMGFic3RyYWN0JTIwYXJ0fGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080', title: 'The Common Good Live Event', category: 'Live Illustration' },
-  { id: 'darling-and-edge', image: 'https://images.unsplash.com/photo-1769053012127-b05ba10350d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aGltc2ljYWwlMjBjYXJ0b29uJTIwY2hhcmFjdGVyJTIwYXJ0JTIwcGFpbnRpbmd8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Darling & Edge', category: 'Illustration' },
-  { id: 'mermaids', image: 'https://images.unsplash.com/photo-1763690792486-812722ffb455?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnQlMjBwcmludCUyMGZyYW1lZCUyMGlsbHVzdHJhdGlvbiUyMHdhbGx8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Mermaids', category: 'Illustration' },
-  { id: 'cheeky-bits', image: 'https://images.unsplash.com/photo-1648994605536-10633d3e0886?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbGx1c3RyYXRlZCUyMHRvdGUlMjBiYWclMjBjYW52YXMlMjBkZXNpZ258ZW58MXx8fHwxNzc0NTA3MTE5fDA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Cheeky Bits', category: 'Personal Work' },
+  { id: 'shitfaced-shakespeare', slug: 'shitfaced-shakespeare', image: 'https://cdn.sanity.io/images/fnwcgtif/production/b74056942f180fa86437e88ddf45c7482b751290-938x688.webp', title: 'Shitfaced Shakespeare', category: 'Theatre' },
+  { id: 'trees-for-cities', slug: 'trees-for-cities', image: 'https://cdn.sanity.io/images/fnwcgtif/production/3019706bf19f8f899bc740a4d32484ee1fea82e6-1582x792.webp', title: 'Trees for Cities', category: 'Murals' },
+  { id: 'pinpoint-graphic-design', slug: 'pinpoint-graphic-design', image: 'https://cdn.sanity.io/images/fnwcgtif/production/3a34e71f48b9c70618f87f21de9a1e75990ac1cd-2388x1668.webp', title: 'Pinpoint Graphic Design', category: 'Illustration' },
+  { id: 'springtide-branding', slug: 'springtide-branding', image: 'https://cdn.sanity.io/images/fnwcgtif/production/abf3d9801d54142b3dccaaa6565f6666b9e6b11d-2442x2500.webp', title: 'Springtide Branding', category: 'Branding' },
+  { id: 'the-common-good-live-event', slug: 'the-common-good-live-event', image: 'https://cdn.sanity.io/images/fnwcgtif/production/bb60ff474e033dca8bf51908e552186fae8b9ad1-1668x2388.webp', title: 'The Common Good Live Event', category: 'Live Illustration' },
+  { id: 'darling-and-edge', slug: 'darling-and-edge', image: 'https://cdn.sanity.io/images/fnwcgtif/production/911d4c1b88396c9ca522d0012c4cf58d10dcb74d-1365x1365.webp', title: 'Darling & Edge', category: 'Illustration' },
+  { id: 'mermaids', slug: 'mermaids', image: 'https://cdn.sanity.io/images/fnwcgtif/production/185033b23580aa12fab8e77751ddf777fc888523-2500x1407.webp', title: 'Mermaids', category: 'Illustration' },
+  { id: 'cheeky-bits', slug: 'cheeky-bits', image: 'https://cdn.sanity.io/images/fnwcgtif/production/292cd1801a4012ceb14be47972788201fbf0de9b-2500x2500.webp', title: 'Cheeky Bits', category: 'Personal Work' },
 ];
 
 interface FeaturedWork {
   id: string | number;
+  slug?: string;
   image: string;
   title: string;
   category: string;
@@ -77,8 +78,8 @@ interface Testimonial {
 }
 
 const fallbackTestimonial: Testimonial = {
-  quote: "Nicola's work transformed our space. Bold, imaginative, and delivered with infectious enthusiasm.",
-  author: 'placeholder until we get a real quote',
+  quote: '',
+  author: '',
   role: '',
 };
 
@@ -103,6 +104,7 @@ export function HomePage() {
           setFeaturedWork(
             sorted.map((item: any, idx: number) => ({
               id: item._id,
+              slug: item.slug,
               title: item.title,
               category: item.category || '',
               image: item.mainImage
@@ -149,7 +151,7 @@ export function HomePage() {
               <span className="text-[#E8846F]">All drawn with a grin.</span>
             </h1>
             <p className="text-xl text-[#6B7554] mb-8 leading-relaxed max-w-xl">
-              Hastings-based illustrator and decorative painter. From the side of a building to the back of a tote bag — bold, playful work that makes people smile.
+              Brighton-born illustrator and decorative painter, now based in Hastings. Theatre backdrops, community murals, brand illustration — and the occasional very large fish.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to="/portfolio">
@@ -178,7 +180,7 @@ export function HomePage() {
             {/* Main illustration image */}
             <div className="relative z-10 transform rotate-2 hover:rotate-0 transition-transform duration-500">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1769053012127-b05ba10350d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aGltc2ljYWwlMjBjYXJ0b29uJTIwY2hhcmFjdGVyJTIwYXJ0JTIwcGFpbnRpbmd8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080"
+                src="https://cdn.sanity.io/images/fnwcgtif/production/b74056942f180fa86437e88ddf45c7482b751290-938x688.webp"
                 alt="Bold illustration work"
                 className="w-full h-auto rounded-3xl shadow-2xl"
               />
@@ -310,6 +312,7 @@ export function HomePage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
               >
+                <Link to={`/portfolio/${work.slug || work.id}`}>
                 <div className="relative overflow-hidden rounded-3xl aspect-[3/4]">
                   <ImageWithFallback
                     src={work.image}
@@ -332,14 +335,15 @@ export function HomePage() {
                     />
                   </div>
                 )}
+                </Link>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonial */}
-      <section className="bg-[#F5EFE8] py-20 relative overflow-hidden">
+      {/* Testimonial — only rendered when real data is available from Sanity */}
+      {testimonial.quote && <section className="bg-[#F5EFE8] py-20 relative overflow-hidden">
         <BlobShape color="#D8767D" className="absolute top-10 left-10 w-48 h-48 opacity-10" variant={3} />
         <BlobShape color="#5D9B9B" className="absolute bottom-10 right-10 w-36 h-36 opacity-10" variant={1} />
 
@@ -383,7 +387,7 @@ export function HomePage() {
             </svg>
           </motion.div>
         </div>
-      </section>
+      </section>}
 
       {/* Footer note */}
       <section className="py-8 bg-[#FAF8F5]">

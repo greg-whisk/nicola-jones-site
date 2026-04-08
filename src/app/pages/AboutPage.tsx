@@ -23,11 +23,11 @@ const stepIcons = ['💬', '✏️', '🎨', '✨'];
 const fallbackBio = [
   "Brighton born Nicola is an illustrator and decorative painter living in Hastings. She graduated with BA Hons in Illustration from NUCA 2012, and subsequently spent 10 years in London developing skills in scenic arts for immersive theatre, television and commercials.",
   "Her personal work is playful and jubilant with bold colour schemes. She is passionate about the positive change that creative input can bring about in community.",
-  "Nicola designs backdrops for Shitfaced Shakespeare annually, creating the vivid theatrical sets that bring their chaotic productions to life. She has painted murals for Trees for Cities, bringing colour and joy to urban green spaces across the UK.",
-  "Her digital illustration work extends to collaborations with graphic designers, producing bold brand assets and editorial illustrations that translate seamlessly across print and screen.",
+  "Nicola annually designs and paints the theatrical backdrops for Shitfaced Shakespeare, the long-running hit comedy show. She has also delivered murals for Trees for Cities — the charity that creates edible playgrounds and green spaces in urban communities, with themes of woodlands, growing food, and clean air — working in weatherproof paint built to last outdoors.",
+  "She digitally generates illustrations for graphic designers, producing fast-paced, versatile work for print and screen. From brand campaigns to editorial, the work is always bold, always warm, and always full of character.",
 ];
 
-const fallbackPhoto = 'https://images.unsplash.com/photo-1752649935691-ac99478aaa56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGFydGlzdCUyMHBhaW50aW5nJTIwc3R1ZGlvJTIwY3JlYXRpdmV8ZW58MXx8fHwxNzc0NTA3MTE4fDA&ixlib=rb-4.1.0&q=80&w=1080';
+const fallbackPhoto = '/photo-placeholder.svg';
 
 const clients = ['Shitfaced Shakespeare', 'Trees for Cities', 'Pinpoint Graphic Design', 'Springtide', 'The Common Good', 'Darling & Edge'];
 
@@ -255,9 +255,9 @@ export function AboutPage() {
           <BlobShape color="#D8767D" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 opacity-10" variant={3} />
 
           <p className="text-2xl text-[#4A3428] font-['Fredoka'] relative z-10">
-            Fun fact: I've painted over 200 seagulls in my career.
+            Brighton girl. Hastings life. Ten years of London scaffolding.
             <br />
-            <span className="text-[#E8846F]">Not one of them has been grumpy.</span>
+            <span className="text-[#E8846F]">Now making big, bright things by the sea.</span>
           </p>
         </motion.div>
       </div>

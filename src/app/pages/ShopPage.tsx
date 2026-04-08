@@ -25,22 +25,22 @@ interface FeaturedProduct {
 }
 
 const fallbackProducts: Product[] = [
-  { id: 1, name: 'Cheeky Seagull Print', price: 28, category: 'Prints', image: 'https://images.unsplash.com/photo-1763690792486-812722ffb455?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnQlMjBwcmludCUyMGZyYW1lZCUyMGlsbHVzdHJhdGlvbiUyMHdhbGx8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080' },
-  { id: 2, name: 'Dancing Fish Original', price: 450, category: 'Original Art', image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmNvbG9yJTIwcGFpbnRpbmclMjBjb2xvcmZ1bCUyMGFic3RyYWN0JTIwYXJ0fGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080' },
-  { id: 3, name: 'Illustrated Tote Bag', price: 18, category: 'Tote Bags', image: 'https://images.unsplash.com/photo-1648994605536-10633d3e0886?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbGx1c3RyYXRlZCUyMHRvdGUlMjBiYWclMjBjYW52YXMlMjBkZXNpZ258ZW58MXx8fHwxNzc0NTA3MTE5fDA&ixlib=rb-4.1.0&q=80&w=1080' },
-  { id: 4, name: 'Bold Character Print', price: 32, category: 'Prints', image: 'https://images.unsplash.com/photo-1571473569215-d86aa5a582c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib2xkJTIwZ3JhcGhpYyUyMHBvc3RlciUyMGlsbHVzdHJhdGlvbiUyMHByaW50fGVufDF8fHx8MTc3NDUwNzEyMXww&ixlib=rb-4.1.0&q=80&w=1080' },
-  { id: 5, name: 'Adventure Sticker Pack', price: 8, category: 'Merch', image: 'https://images.unsplash.com/photo-1770726345481-01bb16e5c76c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYW5kJTIwZHJhd24lMjBza2V0Y2glMjBkb29kbGUlMjBhcnR8ZW58MXx8fHwxNzc0NTA3MTIwfDA&ixlib=rb-4.1.0&q=80&w=1080' },
-  { id: 6, name: 'Whimsy Collection Print', price: 35, category: 'Prints', image: 'https://images.unsplash.com/photo-1769053012127-b05ba10350d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aGltc2ljYWwlMjBjYXJ0b29uJTIwY2hhcmFjdGVyJTIwYXJ0JTIwcGFpbnRpbmd8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080' },
-  { id: 7, name: 'Coastal Tote Bag', price: 22, category: 'Tote Bags', image: 'https://images.unsplash.com/photo-1648994605536-10633d3e0886?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbGx1c3RyYXRlZCUyMHRvdGUlMjBiYWclMjBkZXNpZ258ZW58MXx8fHwxNzc0NDc0MjIxfDA&ixlib=rb-4.1.0&q=80&w=1080' },
-  { id: 8, name: 'Original Watercolour', price: 380, category: 'Original Art', image: 'https://images.unsplash.com/photo-1649750291589-8812197b698c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMGJvb2slMjBpbGx1c3RyYXRpb24lMjBjb2xvcmZ1bHxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080' },
-  { id: 9, name: 'Character Pin Set', price: 15, category: 'Merch', image: 'https://images.unsplash.com/photo-1684342936280-df0d753e2753?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbmFtZWwlMjBwaW4lMjBiYWRnZSUyMHNldCUyMGNvbG9yZnVsfGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080' },
+  { id: 1, name: 'Cheeky Bits Print', price: 28, category: 'Prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/292cd1801a4012ceb14be47972788201fbf0de9b-2500x2500.webp' },
+  { id: 2, name: 'Bedroom Nudes Original', price: 450, category: 'Original Art', image: 'https://cdn.sanity.io/images/fnwcgtif/production/f8a9a2b0d7fceff55f37abc7c2ecd1ef19f41f0f-1962x2500.webp' },
+  { id: 3, name: 'Illustrated Tote Bag', price: 18, category: 'Tote Bags', image: 'https://cdn.sanity.io/images/fnwcgtif/production/0e2220428fdc8c17d6ca3efb11d455ece1391b39-2500x2500.webp' },
+  { id: 4, name: 'Posters & Flyers Print', price: 32, category: 'Prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/d83fff21b5459aff10076597afaa0809729a1a3a-1088x1577.webp' },
+  { id: 5, name: 'Sketches Pack', price: 8, category: 'Merch', image: 'https://cdn.sanity.io/images/fnwcgtif/production/12a5c46ac21512bf7ff423c7346f5a886c9a45ad-2500x2500.webp' },
+  { id: 6, name: 'Springtide Print', price: 35, category: 'Prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/abf3d9801d54142b3dccaaa6565f6666b9e6b11d-2442x2500.webp' },
+  { id: 7, name: 'Mermaids Tote Bag', price: 22, category: 'Tote Bags', image: 'https://cdn.sanity.io/images/fnwcgtif/production/185033b23580aa12fab8e77751ddf777fc888523-2500x1407.webp' },
+  { id: 8, name: 'Original Illustration', price: 380, category: 'Original Art', image: 'https://cdn.sanity.io/images/fnwcgtif/production/bb60ff474e033dca8bf51908e552186fae8b9ad1-1668x2388.webp' },
+  { id: 9, name: 'Pinpoint Print', price: 15, category: 'Prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/3a34e71f48b9c70618f87f21de9a1e75990ac1cd-2388x1668.webp' },
 ];
 
 const fallbackFeatured: FeaturedProduct = {
-  name: 'Dancing Fish Original',
+  name: 'Bedroom Nudes Original',
   price: 450,
-  description: 'A vibrant original watercolour piece bursting with personality. Hand-painted on 300gsm paper, signed and ready to bring joy to your walls.',
-  image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmNvbG9yJTIwcGFpbnRpbmclMjBjb2xvcmZ1bCUyMGFic3RyYWN0JTIwYXJ0fGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080',
+  description: 'A vibrant original piece bursting with personality. Hand-painted, signed and ready to bring joy to your walls.',
+  image: 'https://cdn.sanity.io/images/fnwcgtif/production/f8a9a2b0d7fceff55f37abc7c2ecd1ef19f41f0f-1962x2500.webp',
 };
 
 function blocksToText(blocks: any[]): string {

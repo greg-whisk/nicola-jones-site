@@ -67,42 +67,42 @@ const slugDefaults: Record<string, { title: string; summary: string; image: stri
   'trees-for-cities': {
     title: 'Trees For Cities',
     summary: 'Large-scale mural celebrating urban green spaces and community life.',
-    image: 'https://images.unsplash.com/photo-1759936263498-325015569a1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    image: 'https://cdn.sanity.io/images/fnwcgtif/production/3019706bf19f8f899bc740a4d32484ee1fea82e6-1582x792.webp',
   },
   'greenpeace-glastonbury': {
     title: 'Greenpeace Glastonbury',
     summary: "Bold mural artwork created for Greenpeace's presence at Glastonbury Festival.",
-    image: 'https://images.unsplash.com/photo-1762844877957-234161edd3f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    image: 'https://cdn.sanity.io/images/fnwcgtif/production/c1924c5cafe4c88202daf3d5a78a5903b6e31c39-2500x1875.webp',
   },
   'shitfaced-shakespeare': {
     title: 'Shitfaced Shakespeare',
     summary: 'Theatrical set design and scenic painting for the hit comedy show.',
-    image: 'https://images.unsplash.com/photo-1737617009800-5d570a8552ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    image: 'https://cdn.sanity.io/images/fnwcgtif/production/b74056942f180fa86437e88ddf45c7482b751290-938x688.webp',
   },
   'darling-and-edge': {
     title: 'Darling and Edge',
     summary: 'Scenic art and set decoration for the immersive theatre production.',
-    image: 'https://images.unsplash.com/photo-1598620617148-c9e8ddee6711?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    image: 'https://cdn.sanity.io/images/fnwcgtif/production/911d4c1b88396c9ca522d0012c4cf58d10dcb74d-1365x1365.webp',
   },
   'pinpoint-graphic-design': {
     title: 'Pinpoint Graphic Design',
     summary: 'Illustration and graphic design work for a leading digital agency.',
-    image: 'https://images.unsplash.com/photo-1571473569215-d86aa5a582c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    image: 'https://cdn.sanity.io/images/fnwcgtif/production/3a34e71f48b9c70618f87f21de9a1e75990ac1cd-2388x1668.webp',
   },
   'springtide-branding': {
     title: 'Springtide Branding',
     summary: 'Brand identity and illustration work for Springtide.',
-    image: 'https://images.unsplash.com/photo-1769053012127-b05ba10350d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    image: 'https://cdn.sanity.io/images/fnwcgtif/production/abf3d9801d54142b3dccaaa6565f6666b9e6b11d-2442x2500.webp',
   },
   'cheeky-bits': {
     title: 'Cheeky Bits',
     summary: 'A playful personal commission series full of humour and warmth.',
-    image: 'https://images.unsplash.com/photo-1649750291589-8812197b698c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    image: 'https://cdn.sanity.io/images/fnwcgtif/production/292cd1801a4012ceb14be47972788201fbf0de9b-2500x2500.webp',
   },
   'just-add-hair': {
     title: 'Just Add Hair',
     summary: 'Witty illustrated portraits and character work for a personal commission.',
-    image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+    image: 'https://cdn.sanity.io/images/fnwcgtif/production/0e2220428fdc8c17d6ca3efb11d455ece1391b39-2500x2500.webp',
   },
 };
 

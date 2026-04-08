@@ -18,26 +18,8 @@ export function Navigation() {
   return (
     <nav className="sticky top-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-sm border-b border-[#4A3428]/10">
       <div className="max-w-[1440px] mx-auto px-6 py-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3 group" onClick={() => setMobileOpen(false)}>
-          {/* Illustrated character on nav */}
-          <div className="relative w-11 h-11">
-            <svg viewBox="0 0 44 44" className="w-full h-full">
-              <circle cx="22" cy="22" r="20" fill="#E8846F" />
-              <circle cx="16" cy="18" r="3" fill="#4A3428" />
-              <circle cx="28" cy="18" r="3" fill="#4A3428" />
-              <path d="M14 28 Q22 35 30 28" stroke="#4A3428" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-              <circle cx="17" cy="17" r="1" fill="#FAF8F5" />
-              <circle cx="29" cy="17" r="1" fill="#FAF8F5" />
-            </svg>
-            <motion.div
-              className="absolute -top-1 -right-1 w-4 h-4 bg-[#5D9B9B] rounded-full"
-              animate={{ scale: [1, 1.3, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </div>
-          <span className="font-['Fredoka'] text-xl text-[#4A3428] group-hover:text-[#E8846F] transition-colors">
-            Nicola Jones
-          </span>
+        <Link to="/" className="flex items-center group" onClick={() => setMobileOpen(false)}>
+          <img src="/nicola-jones-logo.svg" alt="Nicola Jones" className="h-12 w-auto" />
         </Link>
 
         {/* Desktop Nav */}
