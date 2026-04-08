@@ -2,12 +2,20 @@ import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight, Star, Calendar, User } from 'lucide-react';
-import { getProjectBySlug, getNextProject, type Project } from '../data/projects';
+import { getProjectBySlug, getProjectNeighbours, type Project } from '../data/projects';
 import { BlobShape } from '../components/BlobShape';
 import { PillButton } from '../components/PillButton';
 import { WavyDivider } from '../components/WavyDivider';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { client, urlFor } from '../../lib/sanity';
+
+interface NavProject {
+  slug: string;
+  title: string;
+  category: string;
+  heroImage: string;
+  accentColor: string;
+}
 
 const categoryMap: Record<string, Project['category']> = {
   illustration: 'Illustration',
@@ -55,12 +63,16 @@ function mapSanityToProject(data: any): Project | null {
 export function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
+  const staticNeighbours = slug ? getProjectNeighbours(slug) : { prev: undefined, next: undefined };
+
+  const toNavProject = (p: Project | undefined): NavProject | null =>
+    p ? { slug: p.slug, title: p.title, category: p.category, heroImage: p.heroImage, accentColor: p.accentColor } : null;
+
   const [project, setProject] = useState<Project | null>(
     slug ? getProjectBySlug(slug) || null : null
   );
-  const [nextProject, setNextProject] = useState<Project | undefined>(
-    slug ? getNextProject(slug) : undefined
-  );
+  const [prevNavProject, setPrevNavProject] = useState<NavProject | null>(toNavProject(staticNeighbours.prev));
+  const [nextNavProject, setNextNavProject] = useState<NavProject | null>(toNavProject(staticNeighbours.next));
 
   useEffect(() => {
     if (!slug) return;
@@ -79,13 +91,33 @@ export function ProjectDetailPage() {
       )
       .then((data) => {
         const mapped = mapSanityToProject(data);
-        if (mapped && mapped.title) {
-          setProject(mapped);
-          if (mapped.nextProjectSlug) {
-            const next = getProjectBySlug(mapped.nextProjectSlug);
-            setNextProject(next);
-          }
-        }
+        if (mapped && mapped.title) setProject(mapped);
+      })
+      .catch(console.error);
+
+    // Fetch all projects for prev/next navigation
+    client
+      .fetch<NavProject[]>(
+        `*[_type == "portfolioProject"] | order(_createdAt asc) {
+          "slug": slug.current, title, category, accentColor,
+          "heroImage": coalesce(heroImage, mainImage)
+        }`
+      )
+      .then((all) => {
+        if (!all?.length) return;
+        // heroImage is a reference object; resolve to URL
+        const resolved = all.map((p) => ({
+          ...p,
+          heroImage: p.heroImage
+            ? (typeof p.heroImage === 'string' ? p.heroImage : urlFor(p.heroImage).width(800).url())
+            : '',
+          accentColor: p.accentColor || '#5D9B9B',
+        }));
+        const idx = resolved.findIndex((p) => p.slug === slug);
+        if (idx === -1) return;
+        const total = resolved.length;
+        setPrevNavProject(resolved[(idx - 1 + total) % total]);
+        setNextNavProject(resolved[(idx + 1) % total]);
       })
       .catch(console.error);
   }, [slug]);
@@ -372,46 +404,77 @@ export function ProjectDetailPage() {
         </section>
       )}
 
-      {/* Next Project */}
-      {nextProject && (
-        <section className="py-16 relative overflow-hidden">
+      {/* More Projects */}
+      {(prevNavProject || nextNavProject) && (
+        <section className="py-16 bg-[#F5EFE8]">
           <div className="max-w-[1440px] mx-auto px-6">
-            <Link to={`/portfolio/${nextProject.slug}`}>
-              <motion.div
-                className="rounded-3xl overflow-hidden relative group cursor-pointer"
-                style={{ backgroundColor: nextProject.accentColor }}
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.3 }}
-              >
-                <BlobShape color="rgba(255,255,255,0.1)" className="absolute -top-20 -right-20 w-96 h-96" variant={3} />
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8 lg:p-12 items-center relative z-10">
-                  <div>
-                    <p className="text-white/70 text-sm uppercase tracking-wider mb-2 font-['Nunito']">
-                      Next Project
-                    </p>
-                    <h2 className="font-['Fredoka'] text-4xl text-white mb-3">
-                      {nextProject.title}
-                    </h2>
-                    {nextProject.summary && (
-                      <p className="text-white/80 text-lg mb-6 leading-relaxed">
-                        {nextProject.summary}
-                      </p>
-                    )}
-                    <span className="inline-flex items-center gap-2 text-white font-['Nunito'] group-hover:gap-4 transition-all">
-                      View project <ArrowRight className="w-5 h-5" />
-                    </span>
-                  </div>
-                  <div className="rounded-2xl overflow-hidden shadow-2xl transform rotate-1 group-hover:rotate-0 transition-transform duration-500">
-                    <ImageWithFallback
-                      src={nextProject.heroImage}
-                      alt={nextProject.title}
-                      className="w-full h-auto"
-                    />
-                  </div>
-                </div>
-              </motion.div>
-            </Link>
+            <h2 className="font-['Fredoka'] text-4xl text-[#4A3428] mb-10 text-center">More Projects</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {prevNavProject && (
+                <Link to={`/portfolio/${prevNavProject.slug}`}>
+                  <motion.div
+                    className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                    whileHover={{ y: -4 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="relative overflow-hidden aspect-[16/9]">
+                      <ImageWithFallback
+                        src={prevNavProject.heroImage}
+                        alt={prevNavProject.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                      <span
+                        className="absolute top-4 left-4 text-white text-xs px-3 py-1 rounded-full font-['Nunito']"
+                        style={{ backgroundColor: prevNavProject.accentColor }}
+                      >
+                        {prevNavProject.category}
+                      </span>
+                      <span className="absolute top-4 right-4 bg-white/80 text-[#6B7554] text-xs px-3 py-1 rounded-full font-['Nunito'] flex items-center gap-1">
+                        <ArrowLeft className="w-3 h-3" /> Previous
+                      </span>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="font-['Fredoka'] text-2xl text-[#4A3428] group-hover:text-[#E8846F] transition-colors">
+                        {prevNavProject.title}
+                      </h3>
+                    </div>
+                  </motion.div>
+                </Link>
+              )}
+              {nextNavProject && (
+                <Link to={`/portfolio/${nextNavProject.slug}`}>
+                  <motion.div
+                    className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                    whileHover={{ y: -4 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="relative overflow-hidden aspect-[16/9]">
+                      <ImageWithFallback
+                        src={nextNavProject.heroImage}
+                        alt={nextNavProject.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                      <span
+                        className="absolute top-4 left-4 text-white text-xs px-3 py-1 rounded-full font-['Nunito']"
+                        style={{ backgroundColor: nextNavProject.accentColor }}
+                      >
+                        {nextNavProject.category}
+                      </span>
+                      <span className="absolute top-4 right-4 bg-white/80 text-[#6B7554] text-xs px-3 py-1 rounded-full font-['Nunito'] flex items-center gap-1">
+                        Next <ArrowRight className="w-3 h-3" />
+                      </span>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="font-['Fredoka'] text-2xl text-[#4A3428] group-hover:text-[#E8846F] transition-colors">
+                        {nextNavProject.title}
+                      </h3>
+                    </div>
+                  </motion.div>
+                </Link>
+              )}
+            </div>
           </div>
         </section>
       )}

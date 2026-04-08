@@ -1,86 +1,149 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
-import { Building2, Palette, BookOpen, Theater, Heart, ArrowRight } from 'lucide-react';
+import { Building2, Palette, Theater, Heart, ArrowRight } from 'lucide-react';
 import { BlobShape } from '../components/BlobShape';
 import { PillButton } from '../components/PillButton';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { client, urlFor } from '../../lib/sanity';
 
-const services = [
-  { icon: Building2, title: 'Building Murals', description: 'Large-scale exterior and interior murals that transform spaces and tell stories', color: '#E8846F' },
-  { icon: Palette, title: 'Brand Illustration', description: 'Custom character design and illustration systems that bring brands to life', color: '#5D9B9B' },
-  { icon: BookOpen, title: 'Book Illustration', description: "Enchanting illustrations for children's books, graphic novels, and publications", color: '#D8767D' },
-  { icon: Theater, title: 'Theatre & Events', description: 'Set design, backdrops, and illustrated environments for performances', color: '#6B7554' },
-  { icon: Heart, title: 'Personal Commissions', description: 'One-of-a-kind pieces for your home, gifts, or special occasions', color: '#E8846F' },
-];
-
-interface CaseStudy {
-  id: string | number;
+interface CommissionProject {
+  slug: string;
   title: string;
-  client: string;
-  description: string;
   image: string;
+  summary: string;
 }
 
-const fallbackCaseStudies: CaseStudy[] = [
+interface CommissionType {
+  id: string;
+  label: string;
+  color: string;
+  icon: React.ElementType;
+  description: string;
+  slugs: string[];
+}
+
+const commissionTypes: CommissionType[] = [
   {
-    id: 1,
-    title: 'Bloom Coffee Brand Identity',
-    client: 'Bloom Coffee Co.',
-    description: 'A complete illustration system featuring quirky coffee characters, hand-drawn patterns, and packaging designs that helped this local roaster stand out on shelves and online.',
-    image: 'https://images.unsplash.com/photo-1571473569215-d86aa5a582c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib2xkJTIwZ3JhcGhpYyUyMHBvc3RlciUyMGlsbHVzdHJhdGlvbiUyMHByaW50fGVufDF8fHx8MTc3NDUwNzEyMXww&ixlib=rb-4.1.0&q=80&w=1080',
+    id: 'murals',
+    label: 'Mural Commissions',
+    color: '#5D9B9B',
+    icon: Building2,
+    description:
+      'Transform walls, buildings, and spaces into vibrant works of art. From community murals to festival installations, I work with clients to create large-scale pieces that tell their unique story.',
+    slugs: ['trees-for-cities', 'greenpeace-glastonbury'],
   },
   {
-    id: 2,
-    title: "The Curious Cat Children's Book",
-    client: 'Independent Publishing',
-    description: 'A 32-page adventure filled with hand-painted watercolour illustrations, from character development through to final artwork and print-ready files.',
-    image: 'https://images.unsplash.com/photo-1649750291589-8812197b698c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMGJvb2slMjBpbGx1c3RyYXRpb24lMjBjb2xvcmZ1bHxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    id: 'theatre',
+    label: 'Theatre & Events',
+    color: '#6B7554',
+    icon: Theater,
+    description:
+      'Set design, backdrops, and scenic art for theatrical productions and live events. I create immersive illustrated environments that transport audiences into another world from the moment they arrive.',
+    slugs: ['shitfaced-shakespeare', 'darling-and-edge'],
   },
   {
-    id: 3,
-    title: 'Hastings Community Center Mural',
-    client: 'Hastings Council',
-    description: 'A 40-foot celebration of local history and community, created through workshops with residents to ensure it truly represented their stories and spirit.',
-    image: 'https://images.unsplash.com/photo-1759936263498-325015569a1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMHdhbGwlMjBtdXJhbCUyMHVyYmFuJTIwYXJ0fGVufDF8fHx8MTc3NDUwNzExOHww&ixlib=rb-4.1.0&q=80&w=1080',
+    id: 'brand',
+    label: 'Brand Illustration',
+    color: '#D8767D',
+    icon: Palette,
+    description:
+      'Custom illustration systems, characters, and visual identities that give brands real personality and warmth. From packaging to digital assets, I bring your brand to life with bold, distinctive work.',
+    slugs: ['pinpoint-graphic-design', 'springtide-branding'],
+  },
+  {
+    id: 'personal',
+    label: 'Personal Commissions',
+    color: '#E8846F',
+    icon: Heart,
+    description:
+      'One-of-a-kind illustrated pieces for your home, as a gift, or for a special occasion. Portraits, pet illustrations, wedding illustrations — anything that captures the people and moments you love.',
+    slugs: ['cheeky-bits', 'just-add-hair'],
   },
 ];
 
-function blocksToText(blocks: any[]): string {
-  if (!Array.isArray(blocks)) return '';
-  return blocks
-    .filter((b: any) => b._type === 'block')
-    .map((b: any) => (b.children || []).map((c: any) => c.text || '').join(''))
-    .join(' ');
-}
+// Static fallback titles & summaries per slug
+const slugDefaults: Record<string, { title: string; summary: string; image: string }> = {
+  'trees-for-cities': {
+    title: 'Trees For Cities',
+    summary: 'Large-scale mural celebrating urban green spaces and community life.',
+    image: 'https://images.unsplash.com/photo-1759936263498-325015569a1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  },
+  'greenpeace-glastonbury': {
+    title: 'Greenpeace Glastonbury',
+    summary: "Bold mural artwork created for Greenpeace's presence at Glastonbury Festival.",
+    image: 'https://images.unsplash.com/photo-1762844877957-234161edd3f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  },
+  'shitfaced-shakespeare': {
+    title: 'Shitfaced Shakespeare',
+    summary: 'Theatrical set design and scenic painting for the hit comedy show.',
+    image: 'https://images.unsplash.com/photo-1737617009800-5d570a8552ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  },
+  'darling-and-edge': {
+    title: 'Darling and Edge',
+    summary: 'Scenic art and set decoration for the immersive theatre production.',
+    image: 'https://images.unsplash.com/photo-1598620617148-c9e8ddee6711?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  },
+  'pinpoint-graphic-design': {
+    title: 'Pinpoint Graphic Design',
+    summary: 'Illustration and graphic design work for a leading digital agency.',
+    image: 'https://images.unsplash.com/photo-1571473569215-d86aa5a582c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  },
+  'springtide-branding': {
+    title: 'Springtide Branding',
+    summary: 'Brand identity and illustration work for Springtide.',
+    image: 'https://images.unsplash.com/photo-1769053012127-b05ba10350d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  },
+  'cheeky-bits': {
+    title: 'Cheeky Bits',
+    summary: 'A playful personal commission series full of humour and warmth.',
+    image: 'https://images.unsplash.com/photo-1649750291589-8812197b698c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  },
+  'just-add-hair': {
+    title: 'Just Add Hair',
+    summary: 'Witty illustrated portraits and character work for a personal commission.',
+    image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  },
+};
+
+const ALL_SLUGS = commissionTypes.flatMap((ct) => ct.slugs);
 
 export function CommissionsPage() {
-  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>(fallbackCaseStudies);
+  const [projectData, setProjectData] = useState<Record<string, CommissionProject>>(
+    () =>
+      Object.fromEntries(
+        ALL_SLUGS.map((slug) => [
+          slug,
+          { slug, title: slugDefaults[slug].title, image: slugDefaults[slug].image, summary: slugDefaults[slug].summary },
+        ])
+      )
+  );
 
   useEffect(() => {
     client
       .fetch<any[]>(
-        `*[_type == "caseStudy"] | order(_createdAt desc) {
-          _id, title, client, heroImage, description, outcome
-        }`
+        `*[_type == "portfolioProject" && slug.current in $slugs] {
+          "slug": slug.current, title, summary, mainImage
+        }`,
+        { slugs: ALL_SLUGS }
       )
       .then((data) => {
-        if (data && data.length > 0) {
-          setCaseStudies(
-            data.map((item, idx) => ({
-              id: item._id,
-              title: item.title,
-              client: item.client || '',
-              description: item.description
-                ? blocksToText(item.description)
-                : fallbackCaseStudies[idx % fallbackCaseStudies.length].description,
-              image: item.heroImage
-                ? urlFor(item.heroImage).width(1200).url()
-                : fallbackCaseStudies[idx % fallbackCaseStudies.length].image,
-            }))
-          );
-        }
+        if (!data?.length) return;
+        setProjectData((prev) => {
+          const next = { ...prev };
+          data.forEach((item) => {
+            if (!item.slug) return;
+            next[item.slug] = {
+              slug: item.slug,
+              title: item.title || slugDefaults[item.slug]?.title || item.slug,
+              summary: item.summary || slugDefaults[item.slug]?.summary || '',
+              image: item.mainImage
+                ? urlFor(item.mainImage).width(800).url()
+                : (slugDefaults[item.slug]?.image || ''),
+            };
+          });
+          return next;
+        });
       })
       .catch(console.error);
   }, []);
@@ -107,12 +170,11 @@ export function CommissionsPage() {
             Whether it's a building-sized mural, a book full of characters, or a brand that needs personality — I'd love to bring your vision to life with bold, playful illustration.
           </motion.p>
 
-          {/* Illustrated handshake scene */}
           <motion.div
             className="flex justify-center gap-4"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, type: "spring" }}
+            transition={{ delay: 0.4, type: 'spring' }}
           >
             <svg viewBox="0 0 120 60" className="w-32 h-16">
               <circle cx="25" cy="30" r="22" fill="#E8846F" />
@@ -129,113 +191,112 @@ export function CommissionsPage() {
           </motion.div>
         </div>
 
-        {/* Services Grid - staggered offset */}
-        <div className="mb-24">
-          <h2 className="font-['Fredoka'] text-4xl text-[#4A3428] mb-12 text-center">What I Do</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="relative"
-                style={{ marginTop: index % 2 === 1 ? '2rem' : 0 }}
-              >
-                <motion.div
-                  className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group"
-                  whileHover={{ y: -5 }}
-                >
-                  <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
-                    style={{ backgroundColor: service.color }}
-                  >
-                    <service.icon className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="font-['Fredoka'] text-2xl text-[#4A3428] mb-3">{service.title}</h3>
-                  <p className="text-[#6B7554] leading-relaxed">{service.description}</p>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Case Studies */}
+        {/* Commission Types */}
         <div className="mb-20">
-          <h2 className="font-['Fredoka'] text-4xl text-[#4A3428] mb-4 text-center">Recent Projects</h2>
+          <h2 className="font-['Fredoka'] text-4xl text-[#4A3428] mb-4 text-center">Commission Types</h2>
           <p className="text-xl text-[#6B7554] text-center mb-16 max-w-2xl mx-auto">
-            Here's a peek at some recent collaborations and the magic we made together.
+            Here's a selection of recent commissions across my main areas of work.
           </p>
 
           <div className="space-y-24">
-            {caseStudies.map((study, index) => (
-              <motion.div
-                key={study.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                  index % 2 === 1 ? 'lg:grid-flow-dense' : ''
-                }`}
-              >
-                <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                  <span className="inline-block bg-[#E8846F] text-white px-4 py-2 rounded-full text-sm mb-4">
-                    {study.client}
-                  </span>
-                  <h3 className="font-['Fredoka'] text-3xl text-[#4A3428] mb-4">
-                    {study.title}
-                  </h3>
-                  <p className="text-lg text-[#6B7554] leading-relaxed mb-6">
-                    {study.description}
-                  </p>
-                  <button className="text-[#E8846F] hover:text-[#4A3428] transition-colors flex items-center gap-2 font-['Nunito']">
-                    View full case study <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-
-                <div className={`relative ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-                  <BlobShape
-                    color={index % 2 === 0 ? '#5D9B9B' : '#D8767D'}
-                    className="absolute -top-10 -right-10 w-32 h-32 opacity-20 z-0"
-                    variant={((index % 3) + 1) as 1 | 2 | 3}
-                  />
-
-                  <motion.div
-                    className="rounded-3xl overflow-hidden shadow-2xl relative z-10"
-                    whileHover={{ scale: 1.03, rotate: index % 2 === 0 ? 1 : -1 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <ImageWithFallback
-                      src={study.image}
-                      alt={study.title}
-                      className="w-full h-auto"
-                    />
-                  </motion.div>
-
-                  {/* Connecting character walking between case studies */}
-                  {index < caseStudies.length - 1 && (
-                    <motion.div
-                      className="absolute -bottom-16 left-1/2 -translate-x-1/2 z-20 hidden lg:block"
-                      animate={{ y: [0, -5, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
+            {commissionTypes.map((ct, index) => {
+              const projects = ct.slugs.map((s) => projectData[s]).filter(Boolean);
+              return (
+                <motion.div
+                  key={ct.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-start ${
+                    index % 2 === 1 ? 'lg:grid-flow-dense' : ''
+                  }`}
+                >
+                  {/* Text side */}
+                  <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
+                    <div
+                      className="w-14 h-14 rounded-full flex items-center justify-center mb-5"
+                      style={{ backgroundColor: ct.color }}
                     >
-                      <svg viewBox="0 0 30 40" className="w-8 h-10">
-                        <ellipse cx="15" cy="15" rx="12" ry="14" fill="#D8767D" />
-                        <circle cx="11" cy="12" r="2" fill="#4A3428" />
-                        <circle cx="19" cy="12" r="2" fill="#4A3428" />
-                        <path d="M10 19 Q15 23 20 19" stroke="#4A3428" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                        <line x1="15" y1="29" x2="15" y2="35" stroke="#D8767D" strokeWidth="3" strokeLinecap="round" />
-                        <line x1="10" y1="38" x2="15" y2="35" stroke="#D8767D" strokeWidth="3" strokeLinecap="round" />
-                        <line x1="20" y1="38" x2="15" y2="35" stroke="#D8767D" strokeWidth="3" strokeLinecap="round" />
-                      </svg>
-                    </motion.div>
-                  )}
-                </div>
-              </motion.div>
-            ))}
+                      <ct.icon className="w-7 h-7 text-white" />
+                    </div>
+                    <span
+                      className="inline-block text-white px-4 py-2 rounded-full text-sm mb-4 font-['Nunito']"
+                      style={{ backgroundColor: ct.color }}
+                    >
+                      {ct.label}
+                    </span>
+                    <h3 className="font-['Fredoka'] text-3xl text-[#4A3428] mb-4">{ct.label}</h3>
+                    <p className="text-lg text-[#6B7554] leading-relaxed mb-8">{ct.description}</p>
+                    <Link to="/contact">
+                      <button
+                        className="text-[#E8846F] hover:text-[#4A3428] transition-colors flex items-center gap-2 font-['Nunito'] group"
+                        style={{ color: ct.color }}
+                      >
+                        Commission this type of work
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </button>
+                    </Link>
+                  </div>
+
+                  {/* Project thumbnails */}
+                  <div className={`relative ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+                    <BlobShape
+                      color={ct.color}
+                      className="absolute -top-10 -right-10 w-32 h-32 opacity-20 z-0"
+                      variant={((index % 3) + 1) as 1 | 2 | 3}
+                    />
+                    <div className="grid grid-cols-2 gap-4 relative z-10">
+                      {projects.map((proj, pi) => (
+                        <Link key={proj.slug} to={`/portfolio/${proj.slug}`}>
+                          <motion.div
+                            className="group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 bg-white"
+                            whileHover={{ y: -4, rotate: pi % 2 === 0 ? 1 : -1 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <div className="relative overflow-hidden aspect-square">
+                              <ImageWithFallback
+                                src={proj.image}
+                                alt={proj.title}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                              <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                <span className="text-white text-xs font-['Nunito'] flex items-center gap-1">
+                                  View project <ArrowRight className="w-3 h-3" />
+                                </span>
+                              </div>
+                            </div>
+                            <div className="p-3">
+                              <p className="font-['Fredoka'] text-base text-[#4A3428] leading-tight">{proj.title}</p>
+                            </div>
+                          </motion.div>
+                        </Link>
+                      ))}
+                    </div>
+
+                    {/* Walking character between sections */}
+                    {index < commissionTypes.length - 1 && (
+                      <motion.div
+                        className="absolute -bottom-16 left-1/2 -translate-x-1/2 z-20 hidden lg:block"
+                        animate={{ y: [0, -5, 0] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        <svg viewBox="0 0 30 40" className="w-8 h-10">
+                          <ellipse cx="15" cy="15" rx="12" ry="14" fill="#D8767D" />
+                          <circle cx="11" cy="12" r="2" fill="#4A3428" />
+                          <circle cx="19" cy="12" r="2" fill="#4A3428" />
+                          <path d="M10 19 Q15 23 20 19" stroke="#4A3428" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                          <line x1="15" y1="29" x2="15" y2="35" stroke="#D8767D" strokeWidth="3" strokeLinecap="round" />
+                          <line x1="10" y1="38" x2="15" y2="35" stroke="#D8767D" strokeWidth="3" strokeLinecap="round" />
+                          <line x1="20" y1="38" x2="15" y2="35" stroke="#D8767D" strokeWidth="3" strokeLinecap="round" />
+                        </svg>
+                      </motion.div>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
 
@@ -250,7 +311,6 @@ export function CommissionsPage() {
           <BlobShape color="rgba(255,255,255,0.1)" className="absolute bottom-0 right-0 w-64 h-64" variant={2} />
 
           <div className="relative z-10">
-            {/* Enthusiastic character */}
             <motion.div
               className="flex justify-center mb-8"
               animate={{ scale: [1, 1.1, 1] }}

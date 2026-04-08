@@ -262,3 +262,13 @@ export function getNextProject(slug: string): Project | undefined {
   if (!current?.nextProjectSlug) return undefined;
   return getProjectBySlug(current.nextProjectSlug);
 }
+
+export function getProjectNeighbours(slug: string): { prev: Project | undefined; next: Project | undefined } {
+  const idx = projects.findIndex(p => p.slug === slug);
+  if (idx === -1) return { prev: undefined, next: undefined };
+  const total = projects.length;
+  return {
+    prev: projects[(idx - 1 + total) % total],
+    next: projects[(idx + 1) % total],
+  };
+}

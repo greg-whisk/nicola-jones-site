@@ -27,6 +27,7 @@ interface FeaturedProject {
   title: string;
   description: string;
   image: string;
+  slug: string;
 }
 
 const fallbackItems: PortfolioItem[] = [
@@ -41,9 +42,10 @@ const fallbackItems: PortfolioItem[] = [
 ];
 
 const fallbackFeatured: FeaturedProject = {
-  title: 'Hastings Seafront Mural',
-  description: 'A 40-foot celebration of coastal life featuring cheeky seagulls, dancing fish, and local characters. This project brought the community together and now serves as a beloved landmark.',
-  image: 'https://images.unsplash.com/photo-1758426637884-8d27c12b2741?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXJnZSUyMGJ1aWxkaW5nJTIwbXVyYWwlMjBzdHJlZXQlMjBwYWludGluZ3xlbnwxfHx8fDE3NzQ1MDcxMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+  title: 'Shitfaced Shakespeare',
+  description: 'Theatrical set design and scenic painting for the hit comedy show Shitfaced Shakespeare.',
+  image: 'https://images.unsplash.com/photo-1737617009800-5d570a8552ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0aGVhdHJlJTIwc3RhZ2UlMjBzZXQlMjBjb2xvcmZ1bCUyMGRlc2lnbnxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080',
+  slug: 'shitfaced-shakespeare',
 };
 
 function blocksToText(blocks: any[]): string {
@@ -97,7 +99,7 @@ export function PortfolioPage() {
     client
       .fetch<any>(
         `*[_type == "portfolioProject" && featured == true][0]{
-          title, mainImage, description
+          title, mainImage, description, "slug": slug.current
         }`
       )
       .then((data) => {
@@ -108,6 +110,7 @@ export function PortfolioPage() {
             image: data.mainImage
               ? urlFor(data.mainImage).width(1200).url()
               : fallbackFeatured.image,
+            slug: data.slug || fallbackFeatured.slug,
           });
         }
       })
@@ -196,9 +199,12 @@ export function PortfolioPage() {
                   {featuredProject.description}
                 </p>
               )}
-              <button className="bg-white text-[#5D9B9B] px-8 py-3 rounded-full hover:bg-[#F5EFE8] transition-colors font-['Nunito']">
+              <Link
+                to={`/portfolio/${featuredProject.slug}`}
+                className="inline-block bg-white text-[#5D9B9B] px-8 py-3 rounded-full hover:bg-[#F5EFE8] transition-colors font-['Nunito']"
+              >
                 View Case Study
-              </button>
+              </Link>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
               <ImageWithFallback
