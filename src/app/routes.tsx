@@ -4,6 +4,7 @@ import { HomePage } from './pages/HomePage';
 import { PortfolioPage } from './pages/PortfolioPage';
 import { ProjectDetailPage } from './pages/ProjectDetailPage';
 import { ShopPage } from './pages/ShopPage';
+import { ProductDetailPage } from './pages/ProductDetailPage';
 import { CommissionsPage } from './pages/CommissionsPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
       { path: 'portfolio', Component: PortfolioPage },
       { path: 'portfolio/:slug', Component: ProjectDetailPage },
       { path: 'shop', Component: ShopPage },
+      { path: 'shop/:slug', Component: ProductDetailPage },
       { path: 'commissions', Component: CommissionsPage },
       { path: 'about', Component: AboutPage },
       { path: 'contact', Component: ContactPage },
