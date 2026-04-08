@@ -178,7 +178,7 @@ export function HomePage() {
             <BlobShape color="#5D9B9B" className="absolute -bottom-8 -left-8 w-56 h-56 opacity-20" variant={2} />
 
             {/* Main illustration image */}
-            <div className="relative z-10 transform rotate-2 hover:rotate-0 transition-transform duration-500">
+            <div className="relative z-10 transform rotate-2 hover:rotate-0 transition-transform duration-500 max-w-[85%] mx-auto">
               <ImageWithFallback
                 src="/nicola-jones-hero.webp"
                 alt="Bold illustration work"
