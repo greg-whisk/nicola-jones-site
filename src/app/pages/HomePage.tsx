@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { ArrowRight, Star, ShoppingBag, Palette, Briefcase, Sparkles } from 'lucide-react';
 import { BlobShape } from '../components/BlobShape';
 import { PillButton } from '../components/PillButton';
@@ -139,6 +139,7 @@ const fallbackTestimonial: Testimonial = {
 };
 
 export function HomePage() {
+  const navigate = useNavigate();
   const [featuredWork, setFeaturedWork] = useState<FeaturedWork[]>(fallbackFeaturedWork);
   const [testimonial, setTestimonial] = useState<Testimonial>(fallbackTestimonial);
 
@@ -209,16 +210,12 @@ export function HomePage() {
               Brighton-born illustrator and decorative painter, now based in Hastings. Theatre backdrops, community murals, brand illustration — and the occasional very large fish.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link to="/portfolio">
-                <PillButton variant="primary">
-                  See the work <ArrowRight className="inline ml-2 w-5 h-5" />
-                </PillButton>
-              </Link>
-              <Link to="/shop">
-                <PillButton variant="accent">
-                  Visit the shop
-                </PillButton>
-              </Link>
+              <PillButton variant="primary" onClick={() => navigate('/portfolio')}>
+                See the work <ArrowRight className="inline ml-2 w-5 h-5" />
+              </PillButton>
+              <PillButton variant="accent" onClick={() => navigate('/shop')}>
+                Visit the shop
+              </PillButton>
             </div>
           </motion.div>
 
