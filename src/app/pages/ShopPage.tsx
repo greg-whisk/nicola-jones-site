@@ -167,7 +167,7 @@ export function ShopPage() {
               <div className="flex items-center gap-4 flex-wrap">
                 <span className="font-['Fredoka'] text-3xl text-white">£{featuredProduct.price}</span>
                 <PillButton variant="primary" className="bg-white !text-[#D8767D] hover:bg-[#F5EFE8]">
-                  Add to bag
+                  View →
                 </PillButton>
               </div>
             </div>
