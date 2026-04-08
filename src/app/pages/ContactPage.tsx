@@ -130,7 +130,7 @@ export function ContactPage() {
                 <div>
                   <h3 className="font-['Fredoka'] text-xl text-[#4A3428] mb-2">Location</h3>
                   <p className="text-[#6B7554] text-lg">
-                    Hastings, UK
+                    Hastings, East Sussex
                     <br />
                     <span className="text-sm">(Available for projects worldwide)</span>
                   </p>
@@ -256,10 +256,10 @@ export function ContactPage() {
                   className="w-full px-4 py-3 bg-[#F5EFE8] rounded-2xl border border-[#4A3428]/10 focus:border-[#E8846F] focus:outline-none transition-colors"
                 >
                   <option value="">Select a project type</option>
-                  <option value="print">Print enquiry</option>
-                  <option value="mural">Mural commission</option>
-                  <option value="brand">Brand collaboration</option>
-                  <option value="book">Book illustration</option>
+                  <option value="mural">Mural Commission</option>
+                  <option value="theatre">Theatre/Scenic Work</option>
+                  <option value="brand">Brand Illustration</option>
+                  <option value="print">Print Enquiry</option>
                   <option value="other">Other</option>
                 </select>
               </div>

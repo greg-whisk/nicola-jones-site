@@ -21,15 +21,15 @@ const fallbackProcessSteps: ProcessStep[] = [
 const stepIcons = ['💬', '✏️', '🎨', '✨'];
 
 const fallbackBio = [
-  "I'm an illustrator and mural artist based in Hastings, UK, who likes drawing things really, really big. When I'm not painting murals on the sides of buildings, I'm illustrating books, designing for brands, or filling tote bags with my characters.",
-  "My work is all about bold lines, warm colours, and characters with personality. I believe illustration should make you smile — whether it's a tiny drawing in a book or a massive mural on the side of a building.",
-  "I've illustrated children's books that have been read at bedtime in dozens of languages, painted murals that locals use as meeting points, and created brand characters that feel like old friends. Each project is a chance to bring a little more whimsy into the world.",
-  "When I'm not drawing, you'll find me walking along the seafront (sketching gulls), drinking far too much coffee, or convincing my cat that yes, she really does need to get off my sketchbook.",
+  "Brighton born Nicola is an illustrator and decorative painter living in Hastings. She graduated with BA Hons in Illustration from NUCA 2012, and subsequently spent 10 years in London developing skills in scenic arts for immersive theatre, television and commercials.",
+  "Her personal work is playful and jubilant with bold colour schemes. She is passionate about the positive change that creative input can bring about in community.",
+  "Nicola designs backdrops for Shitfaced Shakespeare annually, creating the vivid theatrical sets that bring their chaotic productions to life. She has painted murals for Trees for Cities, bringing colour and joy to urban green spaces across the UK.",
+  "Her digital illustration work extends to collaborations with graphic designers, producing bold brand assets and editorial illustrations that translate seamlessly across print and screen.",
 ];
 
 const fallbackPhoto = 'https://images.unsplash.com/photo-1752649935691-ac99478aaa56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGFydGlzdCUyMHBhaW50aW5nJTIwc3R1ZGlvJTIwY3JlYXRpdmV8ZW58MXx8fHwxNzc0NTA3MTE4fDA&ixlib=rb-4.1.0&q=80&w=1080';
 
-const clients = ['Penguin Books', 'National Theatre', 'Hastings Council', 'Bloom Coffee Co.', 'The Guardian', 'Brighton Festival'];
+const clients = ['Shitfaced Shakespeare', 'Trees for Cities', 'Pinpoint Graphic Design', 'Springtide', 'The Common Good', 'Darling & Edge'];
 
 function blocksToLines(blocks: any[]): string[] {
   if (!Array.isArray(blocks)) return [];

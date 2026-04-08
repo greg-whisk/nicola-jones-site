@@ -10,8 +10,8 @@ import { client, urlFor } from '../../lib/sanity';
 
 const pathways = [
   {
-    title: 'Buy Something Fun',
-    description: 'Prints, tote bags, and original art pieces for your walls and your life.',
+    title: 'Grab a Print',
+    description: 'Original prints, tote bags, and one-off pieces. Take a bit of colour home.',
     link: '/shop',
     color: '#E8846F',
     bgColor: '#FDF0ED',
@@ -21,7 +21,7 @@ const pathways = [
   },
   {
     title: 'Commission Nicola',
-    description: 'Murals, books, brands, and bespoke illustrations made just for you.',
+    description: "Murals, theatrical backdrops, brand illustration — big or small, let's make something brilliant.",
     link: '/commissions',
     color: '#5D9B9B',
     bgColor: '#EDF5F5',
@@ -31,7 +31,7 @@ const pathways = [
   },
   {
     title: 'Browse the Portfolio',
-    description: 'Dive into a world of bold, playful, characterful work.',
+    description: 'Murals, theatre sets, editorial, personal work — twelve years of drawing things really, really big.',
     link: '/portfolio',
     color: '#D8767D',
     bgColor: '#F9EDEE',
@@ -41,12 +41,26 @@ const pathways = [
   }
 ];
 
+const FEATURED_SLUGS = [
+  'shitfaced-shakespeare',
+  'trees-for-cities',
+  'pinpoint-graphic-design',
+  'springtide-branding',
+  'the-common-good-live-event-illustration',
+  'darling-and-edge',
+  'mermaids',
+  'cheeky-bits',
+];
+
 const fallbackFeaturedWork = [
-  { id: 1, image: 'https://images.unsplash.com/photo-1758426637884-8d27c12b2741?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXJnZSUyMGJ1aWxkaW5nJTIwbXVyYWwlMjBzdHJlZXQlMjBwYWludGluZ3xlbnwxfHx8fDE3NzQ1MDcxMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'High Street Mural', category: 'Murals' },
-  { id: 2, image: 'https://images.unsplash.com/photo-1649750291589-8812197b698c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMGJvb2slMjBpbGx1c3RyYXRpb24lMjBjb2xvcmZ1bHxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'The Curious Cat', category: 'Books' },
-  { id: 3, image: 'https://images.unsplash.com/photo-1737617009800-5d570a8552ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0aGVhdHJlJTIwc3RhZ2UlMjBzZXQlMjBjb2xvcmZ1bCUyMGRlc2lnbnxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Midsummer Night Set', category: 'Theatre' },
-  { id: 4, image: 'https://images.unsplash.com/photo-1571473569215-d86aa5a582c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib2xkJTIwZ3JhcGhpYyUyMHBvc3RlciUyMGlsbHVzdHJhdGlvbiUyMHByaW50fGVufDF8fHx8MTc3NDUwNzEyMXww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Brand Identity Work', category: 'Illustration' },
-  { id: 5, image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmNvbG9yJTIwcGFpbnRpbmclMjBjb2xvcmZ1bCUyMGFic3RyYWN0JTIwYXJ0fGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Watercolour Originals', category: 'Illustration' },
+  { id: 'shitfaced-shakespeare', image: 'https://images.unsplash.com/photo-1737617009800-5d570a8552ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0aGVhdHJlJTIwc3RhZ2UlMjBzZXQlMjBjb2xvcmZ1bCUyMGRlc2lnbnxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Shitfaced Shakespeare', category: 'Theatre' },
+  { id: 'trees-for-cities', image: 'https://images.unsplash.com/photo-1759936263498-325015569a1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMHdhbGwlMjBtdXJhbCUyMHVyYmFuJTIwYXJ0fGVufDF8fHx8MTc3NDUwNzExOHww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Trees for Cities', category: 'Murals' },
+  { id: 'pinpoint-graphic-design', image: 'https://images.unsplash.com/photo-1571473569215-d86aa5a582c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib2xkJTIwZ3JhcGhpYyUyMHBvc3RlciUyMGlsbHVzdHJhdGlvbiUyMHByaW50fGVufDF8fHx8MTc3NDUwNzEyMXww&ixlib=rb-4.1.0&q=80&w=1080', title: 'Pinpoint Graphic Design', category: 'Illustration' },
+  { id: 'springtide-branding', image: 'https://images.unsplash.com/photo-1649750291589-8812197b698c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMGJvb2slMjBpbGx1c3RyYXRpb24lMjBjb2xvcmZ1bHxlbnwxfHx8fDE3NzQ1MDcxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Springtide Branding', category: 'Branding' },
+  { id: 'the-common-good-live-event-illustration', image: 'https://images.unsplash.com/photo-1717675615860-1ea09962213d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmNvbG9yJTIwcGFpbnRpbmclMjBjb2xvcmZ1bCUyMGFic3RyYWN0JTIwYXJ0fGVufDF8fHx8MTc3NDUwNzEyMnww&ixlib=rb-4.1.0&q=80&w=1080', title: 'The Common Good Live Event', category: 'Live Illustration' },
+  { id: 'darling-and-edge', image: 'https://images.unsplash.com/photo-1769053012127-b05ba10350d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aGltc2ljYWwlMjBjYXJ0b29uJTIwY2hhcmFjdGVyJTIwYXJ0JTIwcGFpbnRpbmd8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Darling & Edge', category: 'Illustration' },
+  { id: 'mermaids', image: 'https://images.unsplash.com/photo-1763690792486-812722ffb455?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnQlMjBwcmludCUyMGZyYW1lZCUyMGlsbHVzdHJhdGlvbiUyMHdhbGx8ZW58MXx8fHwxNzc0NTA3MTIxfDA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Mermaids', category: 'Illustration' },
+  { id: 'cheeky-bits', image: 'https://images.unsplash.com/photo-1648994605536-10633d3e0886?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbGx1c3RyYXRlZCUyMHRvdGUlMjBiYWclMjBjYW52YXMlMjBkZXNpZ258ZW58MXx8fHwxNzc0NTA3MTE5fDA&ixlib=rb-4.1.0&q=80&w=1080', title: 'Cheeky Bits', category: 'Personal Work' },
 ];
 
 interface FeaturedWork {
@@ -63,9 +77,9 @@ interface Testimonial {
 }
 
 const fallbackTestimonial: Testimonial = {
-  quote: 'Nicola transformed our entire office building with a mural that makes everyone smile. Her characters are so full of life, and the process was an absolute joy from start to finish.',
-  author: 'Sarah Chen',
-  role: 'Creative Director at Bloom Studio',
+  quote: "Nicola's work transformed our space. Bold, imaginative, and delivered with infectious enthusiasm.",
+  author: 'placeholder until we get a real quote',
+  role: '',
 };
 
 export function HomePage() {
@@ -75,14 +89,19 @@ export function HomePage() {
   useEffect(() => {
     client
       .fetch<any[]>(
-        `*[_type == "portfolioProject" && featured == true][0..4]{
-          _id, title, category, mainImage
-        }`
+        `*[_type == "portfolioProject" && slug.current in $slugs]{
+          _id, title, category, mainImage, "slug": slug.current
+        }`,
+        { slugs: FEATURED_SLUGS }
       )
       .then((data) => {
         if (data && data.length > 0) {
+          // Sort by FEATURED_SLUGS order
+          const sorted = FEATURED_SLUGS
+            .map((slug) => data.find((d) => d.slug === slug))
+            .filter(Boolean);
           setFeaturedWork(
-            data.map((item, idx) => ({
+            sorted.map((item: any, idx: number) => ({
               id: item._id,
               title: item.title,
               category: item.category || '',
@@ -123,16 +142,14 @@ export function HomePage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
             >
-              Illustrator & Mural Artist
+              Illustrator & Decorative Painter
             </motion.p>
             <h1 className="font-['Fredoka'] text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-[#4A3428] mb-6">
-              Bold illustration.<br />
-              Big walls.<br />
-              Tiny tote bags.<br />
-              <span className="text-[#E8846F]">Everything in between.</span>
+              Murals. Theatre. Illustration.<br />
+              <span className="text-[#E8846F]">All drawn with a grin.</span>
             </h1>
             <p className="text-xl text-[#6B7554] mb-8 leading-relaxed max-w-xl">
-              Playful, characterful illustration for books, brands, buildings, and everything that needs a splash of personality. Based in Hastings, working everywhere.
+              Hastings-based illustrator and decorative painter. From the side of a building to the back of a tote bag — bold, playful work that makes people smile.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to="/portfolio">
@@ -365,6 +382,15 @@ export function HomePage() {
               <ellipse cx="25" cy="32" rx="6" ry="4" fill="#FAF8F5" />
             </svg>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Footer note */}
+      <section className="py-8 bg-[#FAF8F5]">
+        <div className="max-w-[1440px] mx-auto px-6 text-center">
+          <p className="text-sm text-[#6B7554]">
+            Nicola Jones — Illustrator &amp; Decorative Painter, Hastings, East Sussex
+          </p>
         </div>
       </section>
     </div>

@@ -130,7 +130,7 @@ export function ShopPage() {
         </div>
 
         <p className="text-xl text-[#6B7554] max-w-2xl mb-12">
-          Take a piece of the whimsy home. From affordable prints to one-of-a-kind originals.
+          Bold prints, originals, and the odd tote bag. All drawn by hand (well, mostly), all shipped from Hastings.
         </p>
 
         {/* Featured Product Banner */}
