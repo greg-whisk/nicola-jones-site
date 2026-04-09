@@ -120,7 +120,7 @@ export function ProductDetailPage() {
   if (!product) {
     return (
       <div className="py-40 text-center">
-        <h1 className="font-['Fredoka'] text-5xl text-[#4A3428] mb-4">Product not found</h1>
+        <h1 className="font-['Recursive'] font-heading-recursive text-5xl text-[#4A3428] mb-4">Product not found</h1>
         <p className="text-xl text-[#6B7554] mb-8">
           Looks like this one sold out — or wandered off. Back to the shop?
         </p>
@@ -210,11 +210,11 @@ export function ProductDetailPage() {
               </span>
             </div>
 
-            <h1 className="font-['Fredoka'] text-4xl lg:text-5xl text-[#4A3428] mb-4 leading-[1.1]">
+            <h1 className="font-['Recursive'] font-heading-recursive text-4xl lg:text-5xl text-[#4A3428] mb-4 leading-[1.1]">
               {product.name}
             </h1>
 
-            <p className="font-['Fredoka'] text-4xl text-[#4A3428] mb-6">
+            <p className="font-['Recursive'] font-heading-recursive text-4xl text-[#4A3428] mb-6">
               £{product.price}
             </p>
 
@@ -252,7 +252,7 @@ export function ProductDetailPage() {
       {related.length > 0 && (
         <section className="bg-[#F5EFE8] py-20">
           <div className="max-w-[1440px] mx-auto px-6">
-            <h2 className="font-['Fredoka'] text-4xl text-[#4A3428] mb-12 text-center">
+            <h2 className="font-['Recursive'] font-heading-recursive text-4xl text-[#4A3428] mb-12 text-center">
               You might also like
             </h2>
 
@@ -276,10 +276,10 @@ export function ProductDetailPage() {
                     </div>
                     <div className="p-5">
                       <span className="text-xs text-[#6B7554] mb-1 block">{item.category}</span>
-                      <h3 className="font-['Fredoka'] text-lg text-[#4A3428] mb-2 group-hover:text-[#E8846F] transition-colors">
+                      <h3 className="font-['Recursive'] font-heading-recursive text-lg text-[#4A3428] mb-2 group-hover:text-[#E8846F] transition-colors">
                         {item.name}
                       </h3>
-                      <span className="font-['Fredoka'] text-xl text-[#4A3428]">£{item.price}</span>
+                      <span className="font-['Recursive'] font-heading-recursive text-xl text-[#4A3428]">£{item.price}</span>
                     </div>
                   </motion.div>
                 </Link>

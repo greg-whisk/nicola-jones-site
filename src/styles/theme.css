@@ -119,6 +119,11 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+.font-heading-recursive {
+  font-variation-settings: "slnt" -5, "CASL" 1, "CRSV" 0, "MONO" 0 !important;
+  font-weight: 500;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -126,7 +131,9 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Nunito', 'Helvetica Neue', sans-serif;
+    font-family: 'Recursive', 'Helvetica Neue', sans-serif;
+    font-variation-settings: "slnt" 0, "CASL" 0, "CRSV" 0, "MONO" 0;
+    font-weight: 300;
   }
 
   /**

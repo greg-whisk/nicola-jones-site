@@ -154,7 +154,7 @@ export function CommissionsPage() {
         {/* Header */}
         <div className="relative mb-20 text-center">
           <motion.h1
-            className="font-['Fredoka'] text-5xl lg:text-7xl text-[#4A3428] mb-6"
+            className="font-['Recursive'] font-heading-recursive text-5xl lg:text-7xl text-[#4A3428] mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
           >
@@ -193,7 +193,7 @@ export function CommissionsPage() {
 
         {/* Commission Types */}
         <div className="mb-20">
-          <h2 className="font-['Fredoka'] text-4xl text-[#4A3428] mb-4 text-center">Commission Types</h2>
+          <h2 className="font-['Recursive'] font-heading-recursive text-4xl text-[#4A3428] mb-4 text-center">Commission Types</h2>
           <p className="text-xl text-[#6B7554] text-center mb-16 max-w-2xl mx-auto">
             Here's a selection of recent commissions across my main areas of work.
           </p>
@@ -226,7 +226,7 @@ export function CommissionsPage() {
                     >
                       {ct.label}
                     </span>
-                    <h3 className="font-['Fredoka'] text-3xl text-[#4A3428] mb-4">{ct.label}</h3>
+                    <h3 className="font-['Recursive'] font-heading-recursive text-3xl text-[#4A3428] mb-4">{ct.label}</h3>
                     <p className="text-lg text-[#6B7554] leading-relaxed mb-8">{ct.description}</p>
                     <Link to="/contact">
                       <button
@@ -268,7 +268,7 @@ export function CommissionsPage() {
                               </div>
                             </div>
                             <div className="p-3">
-                              <p className="font-['Fredoka'] text-base text-[#4A3428] leading-tight">{proj.title}</p>
+                              <p className="font-['Recursive'] font-heading-recursive text-base text-[#4A3428] leading-tight">{proj.title}</p>
                             </div>
                           </motion.div>
                         </Link>
@@ -328,7 +328,7 @@ export function CommissionsPage() {
               </svg>
             </motion.div>
 
-            <h2 className="font-['Fredoka'] text-4xl lg:text-5xl text-white mb-6">
+            <h2 className="font-['Recursive'] font-heading-recursive text-4xl lg:text-5xl text-white mb-6">
               Got a project in mind?
             </h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">

@@ -86,7 +86,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-['Fredoka'] mb-4">Quick Links</h4>
+            <h4 className="font-['Recursive'] font-heading-recursive mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/portfolio" className="text-[#D4A99C] hover:text-[#E8846F] transition-colors">Portfolio</Link></li>
               <li><Link to="/shop" className="text-[#D4A99C] hover:text-[#E8846F] transition-colors">Shop</Link></li>
@@ -96,7 +96,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-['Fredoka'] mb-4">Say Hello</h4>
+            <h4 className="font-['Recursive'] font-heading-recursive mb-4">Say Hello</h4>
             <div className="space-y-3">
               <p className="text-[#D4A99C] text-sm">Hastings, UK</p>
               <a
@@ -146,7 +146,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-['Fredoka'] mb-4">Newsletter</h4>
+            <h4 className="font-['Recursive'] font-heading-recursive mb-4">Newsletter</h4>
             <p className="text-[#D4A99C] text-sm mb-3">Get studio updates, new prints, and behind-the-scenes peeks.</p>
             <form
               onSubmit={(e) => { e.preventDefault(); setEmail(''); alert('Thanks for subscribing! 🎨'); }}
