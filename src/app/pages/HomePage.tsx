@@ -207,7 +207,7 @@ export function HomePage() {
               <span className="text-[#E8846F]">All drawn with a grin.</span>
             </h1>
             <p className="text-xl text-[#6B7554] mb-8 leading-relaxed max-w-xl">
-              Brighton-born illustrator and decorative painter, now based in Hastings. Theatre backdrops, community murals, brand illustration — and the occasional very large fish.
+              Brighton-born illustrator and decorative painter, now based in Hastings. Theatre backdrops, community murals, brand illustration — and quite a few bums.
             </p>
             <div className="relative z-10 flex flex-wrap gap-4">
               <PillButton variant="primary" onClick={() => navigate('/portfolio')}>

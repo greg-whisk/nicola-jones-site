@@ -27,7 +27,7 @@ export function PillButton({
     <motion.button
       type={type}
       onClick={onClick}
-      className={`px-8 py-3 rounded-full font-['Nunito'] transition-all duration-300 ${variants[variant]} ${className}`}
+      className={`px-8 py-3 rounded-full font-['Manrope'] transition-all duration-300 ${variants[variant]} ${className}`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >

@@ -173,8 +173,12 @@
     line-height: 1.5;
   }
 
+  html {
+    font-family: 'Manrope', 'Helvetica Neue', sans-serif;
+  }
+
   button, input, select, textarea, a {
-    font-family: inherit;
+    font-family: 'Manrope', 'Helvetica Neue', sans-serif;
   }
 
   button {
