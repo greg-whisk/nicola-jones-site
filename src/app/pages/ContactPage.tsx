@@ -75,7 +75,7 @@ export function ContactPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="font-['Recursive'] font-heading-recursive text-6xl text-[#4A3428] mb-4">
+          <h1 className="font-['Manrope'] font-heading-manrope text-6xl text-[#4A3428] mb-4">
             Say Hello
           </h1>
           <p className="text-xl text-[#6B7554] max-w-2xl mx-auto">
@@ -113,7 +113,7 @@ export function ContactPage() {
                   <Mail className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-['Recursive'] font-heading-recursive text-xl text-[#4A3428] mb-2">Email</h3>
+                  <h3 className="font-['Manrope'] font-heading-manrope text-xl text-[#4A3428] mb-2">Email</h3>
                   <a
                     href={`mailto:${settings.contactEmail}`}
                     className="text-[#6B7554] hover:text-[#E8846F] transition-colors text-lg"
@@ -128,7 +128,7 @@ export function ContactPage() {
                   <MapPin className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-['Recursive'] font-heading-recursive text-xl text-[#4A3428] mb-2">Location</h3>
+                  <h3 className="font-['Manrope'] font-heading-manrope text-xl text-[#4A3428] mb-2">Location</h3>
                   <p className="text-[#6B7554] text-lg">
                     Hastings, East Sussex
                     <br />
@@ -138,7 +138,7 @@ export function ContactPage() {
               </div>
 
               <div className="pt-6">
-                <h3 className="font-['Recursive'] font-heading-recursive text-xl text-[#4A3428] mb-4">Follow Along</h3>
+                <h3 className="font-['Manrope'] font-heading-manrope text-xl text-[#4A3428] mb-4">Follow Along</h3>
                 <div className="flex gap-3">
                   {hasSocialLinks ? (
                     settings.socialLinks.map((link) => {

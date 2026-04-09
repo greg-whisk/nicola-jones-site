@@ -119,9 +119,8 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-.font-heading-recursive {
-  font-variation-settings: "slnt" -5, "CASL" 1, "CRSV" 0, "MONO" 0 !important;
-  font-weight: 500;
+.font-heading-manrope {
+  font-weight: 700;
 }
 
 @layer base {
@@ -131,8 +130,7 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Recursive', 'Helvetica Neue', sans-serif;
-    font-variation-settings: "slnt" 0, "CASL" 0, "CRSV" 0, "MONO" 0;
+    font-family: 'Manrope', 'Helvetica Neue', sans-serif;
     font-weight: 300;
   }
 
@@ -173,6 +171,10 @@
     font-size: var(--text-base);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
+  }
+
+  button, input, select, textarea, a {
+    font-family: inherit;
   }
 
   button {

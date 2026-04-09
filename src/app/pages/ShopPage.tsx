@@ -107,7 +107,7 @@ export function ShopPage() {
         {/* Header */}
         <div className="relative mb-8 flex items-center gap-6 flex-wrap">
           <motion.h1
-            className="font-['Recursive'] font-heading-recursive text-5xl lg:text-7xl text-[#4A3428]"
+            className="font-['Manrope'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428]"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
           >
@@ -156,7 +156,7 @@ export function ShopPage() {
               <span className="inline-block bg-white/20 text-white px-4 py-2 rounded-full text-sm mb-4">
                 Limited Edition
               </span>
-              <h2 className="font-['Recursive'] font-heading-recursive text-3xl lg:text-4xl text-white mb-4">
+              <h2 className="font-['Manrope'] font-heading-manrope text-3xl lg:text-4xl text-white mb-4">
                 {featuredProduct.name}
               </h2>
               {featuredProduct.description && (
@@ -165,7 +165,7 @@ export function ShopPage() {
                 </p>
               )}
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="font-['Recursive'] font-heading-recursive text-3xl text-white">£{featuredProduct.price}</span>
+                <span className="font-['Manrope'] font-heading-manrope text-3xl text-white">£{featuredProduct.price}</span>
                 <PillButton variant="primary" className="bg-white !text-[#D8767D] hover:bg-[#F5EFE8]">
                   View →
                 </PillButton>
@@ -235,9 +235,9 @@ export function ShopPage() {
 
                 <div className="p-6">
                   <span className="text-sm text-[#6B7554] mb-2 block">{product.category}</span>
-                  <h3 className="font-['Recursive'] font-heading-recursive text-xl text-[#4A3428] mb-3 group-hover:text-[#E8846F] transition-colors">{product.name}</h3>
+                  <h3 className="font-['Manrope'] font-heading-manrope text-xl text-[#4A3428] mb-3 group-hover:text-[#E8846F] transition-colors">{product.name}</h3>
                   <div className="flex items-center justify-between">
-                    <span className="font-['Recursive'] font-heading-recursive text-2xl text-[#4A3428]">£{product.price}</span>
+                    <span className="font-['Manrope'] font-heading-manrope text-2xl text-[#4A3428]">£{product.price}</span>
                     <span className="text-sm text-[#E8846F] font-['Nunito'] hover:underline">View →</span>
                   </div>
                 </div>
@@ -275,7 +275,7 @@ export function ShopPage() {
             </motion.div>
 
             <div className="text-center lg:text-left flex-1">
-              <h2 className="font-['Recursive'] font-heading-recursive text-3xl lg:text-4xl text-[#4A3428] mb-4">
+              <h2 className="font-['Manrope'] font-heading-manrope text-3xl lg:text-4xl text-[#4A3428] mb-4">
                 Want something one-of-a-kind?
               </h2>
               <p className="text-xl text-[#6B7554] mb-6 max-w-2xl">

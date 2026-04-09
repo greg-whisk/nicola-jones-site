@@ -195,14 +195,14 @@ export function HomePage() {
             transition={{ duration: 0.8 }}
           >
             <motion.p
-              className="text-[#E8846F] font-['Recursive'] font-heading-recursive text-lg mb-4 uppercase tracking-wider"
+              className="text-[#E8846F] font-['Manrope'] font-heading-manrope text-lg mb-4 uppercase tracking-wider"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
             >
               Illustrator & Decorative Painter
             </motion.p>
-            <h1 className="font-['Recursive'] font-heading-recursive text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-[#4A3428] mb-6">
+            <h1 className="font-['Manrope'] font-heading-manrope text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-[#4A3428] mb-6">
               Murals. Theatre. Illustration.<br />
               <span className="text-[#E8846F]">All drawn with a grin.</span>
             </h1>
@@ -273,7 +273,7 @@ export function HomePage() {
       <section className="bg-[#F5EFE8] py-20">
         <div className="max-w-[1440px] mx-auto px-6">
           <motion.h2
-            className="font-['Recursive'] font-heading-recursive text-4xl lg:text-5xl text-center mb-16 text-[#4A3428]"
+            className="font-['Manrope'] font-heading-manrope text-4xl lg:text-5xl text-center mb-16 text-[#4A3428]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -323,7 +323,7 @@ export function HomePage() {
                       <pathway.icon className="w-7 h-7 text-white" />
                     </div>
 
-                    <h3 className="font-['Recursive'] font-heading-recursive text-2xl mb-3 text-[#4A3428]">
+                    <h3 className="font-['Manrope'] font-heading-manrope text-2xl mb-3 text-[#4A3428]">
                       {pathway.title}
                     </h3>
                     <p className="text-[#6B7554] mb-6">
@@ -347,7 +347,7 @@ export function HomePage() {
       <section className="py-20">
         <div className="max-w-[1440px] mx-auto px-6">
           <div className="flex items-center justify-between mb-12">
-            <h2 className="font-['Recursive'] font-heading-recursive text-4xl text-[#4A3428]">Featured Work</h2>
+            <h2 className="font-['Manrope'] font-heading-manrope text-4xl text-[#4A3428]">Featured Work</h2>
             <PillButton variant="outline" onClick={() => navigate('/portfolio')}>View all</PillButton>
           </div>
 
@@ -371,7 +371,7 @@ export function HomePage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#4A3428]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                     <span className="text-[#E8846F] text-sm mb-1">{work.category}</span>
-                    <h3 className="font-['Recursive'] font-heading-recursive text-xl text-white">{work.title}</h3>
+                    <h3 className="font-['Manrope'] font-heading-manrope text-xl text-white">{work.title}</h3>
                   </div>
                 </div>
 
@@ -419,7 +419,7 @@ export function HomePage() {
           >
             "{testimonial.quote}"
           </motion.blockquote>
-          <cite className="font-['Recursive'] font-heading-recursive text-lg text-[#6B7554] not-italic">
+          <cite className="font-['Manrope'] font-heading-manrope text-lg text-[#6B7554] not-italic">
             — {testimonial.author}{testimonial.role ? `, ${testimonial.role}` : ''}
           </cite>
 
@@ -446,7 +446,7 @@ export function HomePage() {
         <BlobShape color="#D8767D" className="absolute top-10 left-0 w-[300px] h-[300px] opacity-[0.06]" variant={2} />
         <div className="max-w-[1440px] mx-auto px-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-['Recursive'] font-heading-recursive text-4xl text-[#4A3428]">From the Shop</h2>
+            <h2 className="font-['Manrope'] font-heading-manrope text-4xl text-[#4A3428]">From the Shop</h2>
             <PillButton variant="outline" onClick={() => navigate('/shop')}>Browse all</PillButton>
           </div>
           <p className="text-lg text-[#6B7554] mb-12 max-w-xl">Prints, tote bags, stickers, and illustrated goodies — shipped with love from Hastings.</p>
@@ -472,10 +472,10 @@ export function HomePage() {
               </div>
               <div className="p-8 lg:p-12">
                 <span className="text-xs text-[#6B7554] uppercase tracking-wider">{shopProducts[0].category}</span>
-                <h3 className="font-['Recursive'] font-heading-recursive text-3xl lg:text-4xl text-[#4A3428] mt-2 mb-4">{shopProducts[0].title}</h3>
+                <h3 className="font-['Manrope'] font-heading-manrope text-3xl lg:text-4xl text-[#4A3428] mt-2 mb-4">{shopProducts[0].title}</h3>
                 <p className="text-lg text-[#6B7554] leading-relaxed mb-6">{shopProducts[0].description}</p>
                 <div className="flex items-center gap-6">
-                  <span className="font-['Recursive'] font-heading-recursive text-3xl" style={{ color: shopProducts[0].accentColor }}>£{shopProducts[0].price}</span>
+                  <span className="font-['Manrope'] font-heading-manrope text-3xl" style={{ color: shopProducts[0].accentColor }}>£{shopProducts[0].price}</span>
                   <span className="inline-flex items-center gap-2 text-[#4A3428] group-hover:text-[#E8846F] transition-colors font-['Nunito']">
                     View product <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
                   </span>
@@ -500,8 +500,8 @@ export function HomePage() {
                       <ImageWithFallback src={product.image} alt={product.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
                     <div className="p-4">
-                      <h4 className="font-['Recursive'] font-heading-recursive text-sm text-[#4A3428] truncate">{product.title}</h4>
-                      <p className="font-['Recursive'] font-heading-recursive text-lg" style={{ color: product.accentColor }}>£{product.price}</p>
+                      <h4 className="font-['Manrope'] font-heading-manrope text-sm text-[#4A3428] truncate">{product.title}</h4>
+                      <p className="font-['Manrope'] font-heading-manrope text-lg" style={{ color: product.accentColor }}>£{product.price}</p>
                     </div>
                   </motion.div>
                 </Link>
@@ -517,7 +517,7 @@ export function HomePage() {
       <section className="bg-[#F5EFE8] py-16 overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-6">
           <motion.p
-            className="font-['Recursive'] font-heading-recursive text-lg text-[#6B7554] text-center mb-10"
+            className="font-['Manrope'] font-heading-manrope text-lg text-[#6B7554] text-center mb-10"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -533,7 +533,7 @@ export function HomePage() {
               {[...clients, ...clients].map((client, i) => (
                 <span
                   key={`${client}-${i}`}
-                  className="flex-shrink-0 font-['Recursive'] font-heading-recursive text-xl text-[#4A3428]/30 whitespace-nowrap hover:text-[#4A3428]/60 transition-colors"
+                  className="flex-shrink-0 font-['Manrope'] font-heading-manrope text-xl text-[#4A3428]/30 whitespace-nowrap hover:text-[#4A3428]/60 transition-colors"
                 >
                   {client}
                 </span>
@@ -585,8 +585,8 @@ export function HomePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.15 }}
             >
-              <p className="text-[#5D9B9B] font-['Recursive'] font-heading-recursive text-lg mb-3 uppercase tracking-wider">About Nicola</p>
-              <h2 className="font-['Recursive'] font-heading-recursive text-4xl lg:text-5xl text-[#4A3428] mb-6 leading-[1.15]">
+              <p className="text-[#5D9B9B] font-['Manrope'] font-heading-manrope text-lg mb-3 uppercase tracking-wider">About Nicola</p>
+              <h2 className="font-['Manrope'] font-heading-manrope text-4xl lg:text-5xl text-[#4A3428] mb-6 leading-[1.15]">
                 I draw things on walls and on paper.
               </h2>
               <div className="space-y-4 text-lg text-[#6B7554] leading-relaxed mb-8">
@@ -620,7 +620,7 @@ export function HomePage() {
             transition={{ duration: 0.6 }}
           >
             <Sparkles className="w-10 h-10 text-[#E8846F] mx-auto mb-6" />
-            <h2 className="font-['Recursive'] font-heading-recursive text-4xl lg:text-6xl text-[#4A3428] mb-6 leading-[1.15]">
+            <h2 className="font-['Manrope'] font-heading-manrope text-4xl lg:text-6xl text-[#4A3428] mb-6 leading-[1.15]">
               Let's make something <span className="text-[#E8846F]">brilliant</span> together.
             </h2>
             <p className="text-xl text-[#6B7554] mb-10 max-w-2xl mx-auto leading-relaxed">

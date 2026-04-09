@@ -149,7 +149,7 @@ export function AboutPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="font-['Recursive'] font-heading-recursive text-5xl lg:text-6xl text-[#4A3428] mb-6">
+            <h1 className="font-['Manrope'] font-heading-manrope text-5xl lg:text-6xl text-[#4A3428] mb-6">
               Hello! I'm Nicola.
             </h1>
 
@@ -164,7 +164,7 @@ export function AboutPage() {
         {/* Process Section */}
         <div className="mb-24">
           <motion.h2
-            className="font-['Recursive'] font-heading-recursive text-4xl text-[#4A3428] mb-4 text-center"
+            className="font-['Manrope'] font-heading-manrope text-4xl text-[#4A3428] mb-4 text-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -203,12 +203,12 @@ export function AboutPage() {
                     <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg relative z-10 mx-auto border-4 border-[#FAF8F5]">
                       <span className="text-4xl">{step.icon}</span>
                     </div>
-                    <div className="absolute -top-2 -right-2 w-10 h-10 bg-[#E8846F] rounded-full flex items-center justify-center text-white font-['Recursive'] font-heading-recursive text-sm z-20">
+                    <div className="absolute -top-2 -right-2 w-10 h-10 bg-[#E8846F] rounded-full flex items-center justify-center text-white font-['Manrope'] font-heading-manrope text-sm z-20">
                       {step.number}
                     </div>
                   </div>
 
-                  <h3 className="font-['Recursive'] font-heading-recursive text-2xl text-[#4A3428] mb-3">{step.title}</h3>
+                  <h3 className="font-['Manrope'] font-heading-manrope text-2xl text-[#4A3428] mb-3">{step.title}</h3>
                   <p className="text-[#6B7554] leading-relaxed">{step.description}</p>
                 </motion.div>
               ))}
@@ -223,7 +223,7 @@ export function AboutPage() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <h3 className="font-['Recursive'] font-heading-recursive text-2xl text-[#4A3428] mb-8 text-center">
+          <h3 className="font-['Manrope'] font-heading-manrope text-2xl text-[#4A3428] mb-8 text-center">
             Proud to have worked with
           </h3>
 
@@ -254,7 +254,7 @@ export function AboutPage() {
         >
           <BlobShape color="#D8767D" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 opacity-10" variant={3} />
 
-          <p className="text-2xl text-[#4A3428] font-['Recursive'] font-heading-recursive relative z-10">
+          <p className="text-2xl text-[#4A3428] font-['Manrope'] font-heading-manrope relative z-10">
             Brighton girl. Hastings life. Ten years of London scaffolding.
             <br />
             <span className="text-[#E8846F]">Now making big, bright things by the sea.</span>
