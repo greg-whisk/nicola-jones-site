@@ -348,9 +348,7 @@ export function HomePage() {
         <div className="max-w-[1440px] mx-auto px-6">
           <div className="flex items-center justify-between mb-12">
             <h2 className="font-['Fredoka'] text-4xl text-[#4A3428]">Featured Work</h2>
-            <Link to="/portfolio">
-              <PillButton variant="outline">View all</PillButton>
-            </Link>
+            <PillButton variant="outline" onClick={() => navigate('/portfolio')}>View all</PillButton>
           </div>
 
           <div className="flex gap-6 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory scrollbar-hide">
@@ -449,7 +447,7 @@ export function HomePage() {
         <div className="max-w-[1440px] mx-auto px-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-['Fredoka'] text-4xl text-[#4A3428]">From the Shop</h2>
-            <Link to="/shop"><PillButton variant="outline">Browse all</PillButton></Link>
+            <PillButton variant="outline" onClick={() => navigate('/shop')}>Browse all</PillButton>
           </div>
           <p className="text-lg text-[#6B7554] mb-12 max-w-xl">Prints, tote bags, stickers, and illustrated goodies — shipped with love from Hastings.</p>
 
@@ -600,8 +598,8 @@ export function HomePage() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-4">
-                <Link to="/about"><PillButton variant="accent">Read more about me</PillButton></Link>
-                <Link to="/commissions"><PillButton variant="outline">Work with me</PillButton></Link>
+                <PillButton variant="accent" onClick={() => navigate('/about')}>Read more about me</PillButton>
+                <PillButton variant="outline" onClick={() => navigate('/commissions')}>Work with me</PillButton>
               </div>
             </motion.div>
           </div>
@@ -629,9 +627,9 @@ export function HomePage() {
               Whether it's a 40-foot mural, a children's book, a brand identity, or a set of cheeky greeting cards — I'd love to hear your idea.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/commissions"><PillButton variant="primary">Start a commission</PillButton></Link>
-              <Link to="/shop"><PillButton variant="accent">Visit the shop</PillButton></Link>
-              <Link to="/portfolio"><PillButton variant="outline">Browse the portfolio</PillButton></Link>
+              <PillButton variant="primary" onClick={() => navigate('/commissions')}>Start a commission</PillButton>
+              <PillButton variant="accent" onClick={() => navigate('/shop')}>Visit the shop</PillButton>
+              <PillButton variant="outline" onClick={() => navigate('/portfolio')}>Browse the portfolio</PillButton>
             </div>
           </motion.div>
         </div>
