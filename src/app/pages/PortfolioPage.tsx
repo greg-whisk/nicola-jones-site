@@ -130,7 +130,7 @@ export function PortfolioPage() {
 
           <div className="flex items-end gap-6 flex-wrap">
             <motion.h1
-              className="font-['Manrope'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428]"
+              className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428]"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
             >
@@ -164,7 +164,7 @@ export function PortfolioPage() {
             <motion.button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-3 rounded-full font-['Nunito'] transition-all duration-300 ${
+              className={`px-6 py-3 rounded-full font-['Plus_Jakarta_Sans'] transition-all duration-300 ${
                 selectedCategory === category
                   ? 'bg-[#E8846F] text-white shadow-lg'
                   : 'bg-white text-[#4A3428] hover:bg-[#F5EFE8] border border-[#4A3428]/10'
@@ -191,7 +191,7 @@ export function PortfolioPage() {
               <span className="inline-block bg-white/20 text-white px-4 py-2 rounded-full text-sm mb-4">
                 Featured Project
               </span>
-              <h2 className="font-['Manrope'] font-heading-manrope text-3xl lg:text-4xl text-white mb-4">
+              <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl lg:text-4xl text-white mb-4">
                 {featuredProject.title}
               </h2>
               {featuredProject.description && (
@@ -201,7 +201,7 @@ export function PortfolioPage() {
               )}
               <Link
                 to={`/portfolio/${featuredProject.slug}`}
-                className="inline-block bg-white text-[#5D9B9B] px-8 py-3 rounded-full hover:bg-[#F5EFE8] transition-colors font-['Nunito']"
+                className="inline-block bg-white text-[#5D9B9B] px-8 py-3 rounded-full hover:bg-[#F5EFE8] transition-colors font-['Plus_Jakarta_Sans']"
               >
                 View Case Study
               </Link>
@@ -266,7 +266,7 @@ export function PortfolioPage() {
 
                     <div className="absolute inset-0 bg-gradient-to-t from-[#4A3428]/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                       <span className="text-[#E8846F] text-sm mb-2">{item.category}</span>
-                      <h3 className="font-['Manrope'] font-heading-manrope text-2xl text-white">{item.title}</h3>
+                      <h3 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-2xl text-white">{item.title}</h3>
                     </div>
                   </div>
                   </Link>

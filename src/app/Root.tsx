@@ -7,7 +7,7 @@ export function Root() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF8F5]" style={{ fontFamily: "'Nunito', sans-serif" }}>
+    <div className="min-h-screen flex flex-col bg-[#FAF8F5]" style={{ fontFamily: "'Plus Jakarta Sans', 'Helvetica Neue', sans-serif" }}>
       <Navigation />
       <main className="flex-1">
         <AnimatePresence mode="wait">

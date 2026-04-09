@@ -120,7 +120,7 @@ export function ProductDetailPage() {
   if (!product) {
     return (
       <div className="py-40 text-center">
-        <h1 className="font-['Manrope'] font-heading-manrope text-5xl text-[#4A3428] mb-4">Product not found</h1>
+        <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl text-[#4A3428] mb-4">Product not found</h1>
         <p className="text-xl text-[#6B7554] mb-8">
           Looks like this one sold out — or wandered off. Back to the shop?
         </p>
@@ -137,7 +137,7 @@ export function ProductDetailPage() {
       <div className="max-w-[1440px] mx-auto px-6 pt-8 relative z-20">
         <motion.button
           onClick={() => navigate('/shop')}
-          className="flex items-center gap-2 text-[#6B7554] hover:text-[#E8846F] transition-colors font-['Nunito'] group"
+          className="flex items-center gap-2 text-[#6B7554] hover:text-[#E8846F] transition-colors font-['Plus_Jakarta_Sans'] group"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
         >
@@ -203,18 +203,18 @@ export function ProductDetailPage() {
             {/* Category pill */}
             <div className="mb-5">
               <span
-                className="inline-block text-white px-4 py-1.5 rounded-full text-sm font-['Nunito']"
+                className="inline-block text-white px-4 py-1.5 rounded-full text-sm font-['Plus_Jakarta_Sans']"
                 style={{ backgroundColor: accentColor }}
               >
                 {product.category}
               </span>
             </div>
 
-            <h1 className="font-['Manrope'] font-heading-manrope text-4xl lg:text-5xl text-[#4A3428] mb-4 leading-[1.1]">
+            <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl lg:text-5xl text-[#4A3428] mb-4 leading-[1.1]">
               {product.name}
             </h1>
 
-            <p className="font-['Manrope'] font-heading-manrope text-4xl text-[#4A3428] mb-6">
+            <p className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428] mb-6">
               £{product.price}
             </p>
 
@@ -227,7 +227,7 @@ export function ProductDetailPage() {
             {/* Buy Now */}
             <div className="flex flex-wrap gap-4 items-center">
               <motion.button
-                className="flex items-center gap-3 px-10 py-4 rounded-full font-['Nunito'] text-lg bg-[#E8846F] text-white shadow-lg hover:bg-[#D8767D] transition-colors"
+                className="flex items-center gap-3 px-10 py-4 rounded-full font-['Plus_Jakarta_Sans'] text-lg bg-[#E8846F] text-white shadow-lg hover:bg-[#D8767D] transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
@@ -252,7 +252,7 @@ export function ProductDetailPage() {
       {related.length > 0 && (
         <section className="bg-[#F5EFE8] py-20">
           <div className="max-w-[1440px] mx-auto px-6">
-            <h2 className="font-['Manrope'] font-heading-manrope text-4xl text-[#4A3428] mb-12 text-center">
+            <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428] mb-12 text-center">
               You might also like
             </h2>
 
@@ -276,10 +276,10 @@ export function ProductDetailPage() {
                     </div>
                     <div className="p-5">
                       <span className="text-xs text-[#6B7554] mb-1 block">{item.category}</span>
-                      <h3 className="font-['Manrope'] font-heading-manrope text-lg text-[#4A3428] mb-2 group-hover:text-[#E8846F] transition-colors">
+                      <h3 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-lg text-[#4A3428] mb-2 group-hover:text-[#E8846F] transition-colors">
                         {item.name}
                       </h3>
-                      <span className="font-['Manrope'] font-heading-manrope text-xl text-[#4A3428]">£{item.price}</span>
+                      <span className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-xl text-[#4A3428]">£{item.price}</span>
                     </div>
                   </motion.div>
                 </Link>

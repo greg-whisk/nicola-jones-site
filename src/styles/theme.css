@@ -120,6 +120,7 @@
 }
 
 .font-heading-manrope {
+  font-family: 'Bricolage Grotesque', 'Helvetica Neue', sans-serif !important;
   font-weight: 700;
 }
 
@@ -128,20 +129,21 @@
     @apply border-border outline-ring/50;
   }
 
+  html {
+    font-size: var(--font-size);
+    font-family: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif;
+  }
+
   body {
     @apply bg-background text-foreground;
-    font-family: 'Manrope', 'Helvetica Neue', sans-serif;
-    font-weight: 300;
+    font-family: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
   }
 
   /**
   * Default typography styles for HTML elements (h1-h4, p, label, button, input).
   * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
   */
-
-  html {
-    font-size: var(--font-size);
-  }
 
   h1 {
     font-size: var(--text-2xl);
@@ -173,12 +175,8 @@
     line-height: 1.5;
   }
 
-  html {
-    font-family: 'Manrope', 'Helvetica Neue', sans-serif;
-  }
-
   button, input, select, textarea, a {
-    font-family: 'Manrope', 'Helvetica Neue', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif;
   }
 
   button {

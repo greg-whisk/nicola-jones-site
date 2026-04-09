@@ -28,7 +28,7 @@ export function Navigation() {
             <Link
               key={link.path}
               to={link.path}
-              className={`font-['Manrope'] transition-colors hover:text-[#E8846F] relative ${
+              className={`font-['Plus_Jakarta_Sans'] transition-colors hover:text-[#E8846F] relative ${
                 location.pathname === link.path ? 'text-[#E8846F]' : 'text-[#4A3428]'
               }`}
             >
@@ -68,7 +68,7 @@ export function Navigation() {
                   key={link.path}
                   to={link.path}
                   onClick={() => setMobileOpen(false)}
-                  className={`block py-2 font-['Manrope'] text-lg ${
+                  className={`block py-2 font-['Plus_Jakarta_Sans'] text-lg ${
                     location.pathname === link.path ? 'text-[#E8846F]' : 'text-[#4A3428]'
                   }`}
                 >

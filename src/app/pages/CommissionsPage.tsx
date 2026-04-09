@@ -154,7 +154,7 @@ export function CommissionsPage() {
         {/* Header */}
         <div className="relative mb-20 text-center">
           <motion.h1
-            className="font-['Manrope'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428] mb-6"
+            className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428] mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
           >
@@ -193,7 +193,7 @@ export function CommissionsPage() {
 
         {/* Commission Types */}
         <div className="mb-20">
-          <h2 className="font-['Manrope'] font-heading-manrope text-4xl text-[#4A3428] mb-4 text-center">Commission Types</h2>
+          <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428] mb-4 text-center">Commission Types</h2>
           <p className="text-xl text-[#6B7554] text-center mb-16 max-w-2xl mx-auto">
             Here's a selection of recent commissions across my main areas of work.
           </p>
@@ -221,16 +221,16 @@ export function CommissionsPage() {
                       <ct.icon className="w-7 h-7 text-white" />
                     </div>
                     <span
-                      className="inline-block text-white px-4 py-2 rounded-full text-sm mb-4 font-['Nunito']"
+                      className="inline-block text-white px-4 py-2 rounded-full text-sm mb-4 font-['Plus_Jakarta_Sans']"
                       style={{ backgroundColor: ct.color }}
                     >
                       {ct.label}
                     </span>
-                    <h3 className="font-['Manrope'] font-heading-manrope text-3xl text-[#4A3428] mb-4">{ct.label}</h3>
+                    <h3 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl text-[#4A3428] mb-4">{ct.label}</h3>
                     <p className="text-lg text-[#6B7554] leading-relaxed mb-8">{ct.description}</p>
                     <Link to="/contact">
                       <button
-                        className="text-[#E8846F] hover:text-[#4A3428] transition-colors flex items-center gap-2 font-['Nunito'] group"
+                        className="text-[#E8846F] hover:text-[#4A3428] transition-colors flex items-center gap-2 font-['Plus_Jakarta_Sans'] group"
                         style={{ color: ct.color }}
                       >
                         Commission this type of work
@@ -262,13 +262,13 @@ export function CommissionsPage() {
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                               <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                <span className="text-white text-xs font-['Nunito'] flex items-center gap-1">
+                                <span className="text-white text-xs font-['Plus_Jakarta_Sans'] flex items-center gap-1">
                                   View project <ArrowRight className="w-3 h-3" />
                                 </span>
                               </div>
                             </div>
                             <div className="p-3">
-                              <p className="font-['Manrope'] font-heading-manrope text-base text-[#4A3428] leading-tight">{proj.title}</p>
+                              <p className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-base text-[#4A3428] leading-tight">{proj.title}</p>
                             </div>
                           </motion.div>
                         </Link>
@@ -328,7 +328,7 @@ export function CommissionsPage() {
               </svg>
             </motion.div>
 
-            <h2 className="font-['Manrope'] font-heading-manrope text-4xl lg:text-5xl text-white mb-6">
+            <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl lg:text-5xl text-white mb-6">
               Got a project in mind?
             </h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">

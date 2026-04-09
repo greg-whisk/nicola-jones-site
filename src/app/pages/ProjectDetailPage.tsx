@@ -125,7 +125,7 @@ export function ProjectDetailPage() {
   if (!project) {
     return (
       <div className="py-40 text-center">
-        <h1 className="font-['Manrope'] font-heading-manrope text-5xl text-[#4A3428] mb-4">Project not found</h1>
+        <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl text-[#4A3428] mb-4">Project not found</h1>
         <p className="text-xl text-[#6B7554] mb-8">
           Looks like this project wandered off. Let's find it in the portfolio.
         </p>
@@ -144,7 +144,7 @@ export function ProjectDetailPage() {
         <div className="max-w-[1440px] mx-auto px-6 pt-8 relative z-20">
           <motion.button
             onClick={() => navigate('/portfolio')}
-            className="flex items-center gap-2 text-[#6B7554] hover:text-[#E8846F] transition-colors font-['Nunito'] group"
+            className="flex items-center gap-2 text-[#6B7554] hover:text-[#E8846F] transition-colors font-['Plus_Jakarta_Sans'] group"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
           >
@@ -163,7 +163,7 @@ export function ProjectDetailPage() {
             >
               <div className="flex items-center gap-3 mb-6 flex-wrap">
                 <span
-                  className="inline-block text-white px-4 py-1.5 rounded-full text-sm font-['Nunito']"
+                  className="inline-block text-white px-4 py-1.5 rounded-full text-sm font-['Plus_Jakarta_Sans']"
                   style={{ backgroundColor: project.accentColor }}
                 >
                   {project.category}
@@ -180,7 +180,7 @@ export function ProjectDetailPage() {
                 )}
               </div>
 
-              <h1 className="font-['Manrope'] font-heading-manrope text-5xl lg:text-6xl text-[#4A3428] mb-6 leading-[1.1]">
+              <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-6xl text-[#4A3428] mb-6 leading-[1.1]">
                 {project.title}
               </h1>
 
@@ -244,7 +244,7 @@ export function ProjectDetailPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + i * 0.1 }}
                 >
-                  <div className="font-['Manrope'] font-heading-manrope text-3xl lg:text-4xl text-[#4A3428] mb-1">
+                  <div className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl lg:text-4xl text-[#4A3428] mb-1">
                     {stat.value}
                   </div>
                   <div className="text-sm text-[#6B7554]">{stat.label}</div>
@@ -269,9 +269,9 @@ export function ProjectDetailPage() {
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center text-white" style={{ backgroundColor: project.accentColor }}>
-                      <span className="font-['Manrope'] font-heading-manrope text-sm">01</span>
+                      <span className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-sm">01</span>
                     </div>
-                    <h2 className="font-['Manrope'] font-heading-manrope text-3xl text-[#4A3428]">The Brief</h2>
+                    <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl text-[#4A3428]">The Brief</h2>
                   </div>
                   <p className="text-lg text-[#6B7554] leading-relaxed pl-[52px]">
                     {project.brief}
@@ -283,9 +283,9 @@ export function ProjectDetailPage() {
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center text-white" style={{ backgroundColor: project.accentColor }}>
-                      <span className="font-['Manrope'] font-heading-manrope text-sm">02</span>
+                      <span className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-sm">02</span>
                     </div>
-                    <h2 className="font-['Manrope'] font-heading-manrope text-3xl text-[#4A3428]">The Approach</h2>
+                    <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl text-[#4A3428]">The Approach</h2>
                   </div>
                   <p className="text-lg text-[#6B7554] leading-relaxed pl-[52px]">
                     {project.approach}
@@ -297,9 +297,9 @@ export function ProjectDetailPage() {
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center text-white" style={{ backgroundColor: project.accentColor }}>
-                      <span className="font-['Manrope'] font-heading-manrope text-sm">03</span>
+                      <span className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-sm">03</span>
                     </div>
-                    <h2 className="font-['Manrope'] font-heading-manrope text-3xl text-[#4A3428]">The Outcome</h2>
+                    <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl text-[#4A3428]">The Outcome</h2>
                   </div>
                   <p className="text-lg text-[#6B7554] leading-relaxed pl-[52px]">
                     {project.outcome}
@@ -317,7 +317,7 @@ export function ProjectDetailPage() {
       {project.gallery.length > 0 && (
         <section className="bg-[#F5EFE8] py-20">
           <div className="max-w-[1440px] mx-auto px-6">
-            <h2 className="font-['Manrope'] font-heading-manrope text-4xl text-[#4A3428] mb-12 text-center">
+            <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428] mb-12 text-center">
               Project Gallery
             </h2>
 
@@ -352,7 +352,7 @@ export function ProjectDetailPage() {
                   </motion.div>
 
                   {img.caption && (
-                    <p className="mt-3 text-sm text-[#6B7554] text-center italic font-['Nunito']">
+                    <p className="mt-3 text-sm text-[#6B7554] text-center italic font-['Plus_Jakarta_Sans']">
                       {img.caption}
                     </p>
                   )}
@@ -377,12 +377,12 @@ export function ProjectDetailPage() {
               ))}
             </div>
 
-            <blockquote className="font-['Manrope'] font-heading-manrope text-2xl lg:text-3xl text-[#4A3428] mb-6 leading-relaxed">
+            <blockquote className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-2xl lg:text-3xl text-[#4A3428] mb-6 leading-relaxed">
               "{project.testimonial.quote}"
             </blockquote>
 
             <div className="text-[#6B7554]">
-              <span className="font-['Manrope'] font-heading-manrope text-lg">{project.testimonial.author}</span>
+              <span className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-lg">{project.testimonial.author}</span>
               <br />
               <span className="text-sm">{project.testimonial.role}</span>
             </div>
@@ -408,7 +408,7 @@ export function ProjectDetailPage() {
       {(prevNavProject || nextNavProject) && (
         <section className="py-16 bg-[#F5EFE8]">
           <div className="max-w-[1440px] mx-auto px-6">
-            <h2 className="font-['Manrope'] font-heading-manrope text-4xl text-[#4A3428] mb-10 text-center">More Projects</h2>
+            <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428] mb-10 text-center">More Projects</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {prevNavProject && (
                 <Link to={`/portfolio/${prevNavProject.slug}`}>
@@ -425,17 +425,17 @@ export function ProjectDetailPage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                       <span
-                        className="absolute top-4 left-4 text-white text-xs px-3 py-1 rounded-full font-['Nunito']"
+                        className="absolute top-4 left-4 text-white text-xs px-3 py-1 rounded-full font-['Plus_Jakarta_Sans']"
                         style={{ backgroundColor: prevNavProject.accentColor }}
                       >
                         {prevNavProject.category}
                       </span>
-                      <span className="absolute top-4 right-4 bg-white/80 text-[#6B7554] text-xs px-3 py-1 rounded-full font-['Nunito'] flex items-center gap-1">
+                      <span className="absolute top-4 right-4 bg-white/80 text-[#6B7554] text-xs px-3 py-1 rounded-full font-['Plus_Jakarta_Sans'] flex items-center gap-1">
                         <ArrowLeft className="w-3 h-3" /> Previous
                       </span>
                     </div>
                     <div className="p-6">
-                      <h3 className="font-['Manrope'] font-heading-manrope text-2xl text-[#4A3428] group-hover:text-[#E8846F] transition-colors">
+                      <h3 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-2xl text-[#4A3428] group-hover:text-[#E8846F] transition-colors">
                         {prevNavProject.title}
                       </h3>
                     </div>
@@ -457,17 +457,17 @@ export function ProjectDetailPage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                       <span
-                        className="absolute top-4 left-4 text-white text-xs px-3 py-1 rounded-full font-['Nunito']"
+                        className="absolute top-4 left-4 text-white text-xs px-3 py-1 rounded-full font-['Plus_Jakarta_Sans']"
                         style={{ backgroundColor: nextNavProject.accentColor }}
                       >
                         {nextNavProject.category}
                       </span>
-                      <span className="absolute top-4 right-4 bg-white/80 text-[#6B7554] text-xs px-3 py-1 rounded-full font-['Nunito'] flex items-center gap-1">
+                      <span className="absolute top-4 right-4 bg-white/80 text-[#6B7554] text-xs px-3 py-1 rounded-full font-['Plus_Jakarta_Sans'] flex items-center gap-1">
                         Next <ArrowRight className="w-3 h-3" />
                       </span>
                     </div>
                     <div className="p-6">
-                      <h3 className="font-['Manrope'] font-heading-manrope text-2xl text-[#4A3428] group-hover:text-[#E8846F] transition-colors">
+                      <h3 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-2xl text-[#4A3428] group-hover:text-[#E8846F] transition-colors">
                         {nextNavProject.title}
                       </h3>
                     </div>
@@ -482,7 +482,7 @@ export function ProjectDetailPage() {
       {/* CTA */}
       <section className="py-16">
         <div className="max-w-[1440px] mx-auto px-6 text-center">
-          <h2 className="font-['Manrope'] font-heading-manrope text-3xl text-[#4A3428] mb-4">
+          <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl text-[#4A3428] mb-4">
             Like what you see?
           </h2>
           <p className="text-lg text-[#6B7554] mb-8 max-w-xl mx-auto">
