@@ -185,8 +185,8 @@ export function HomePage() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center">
         {/* Floating decorative blobs */}
-        <BlobShape color="#E8846F" className="absolute top-20 right-0 w-[500px] h-[500px] opacity-[0.07]" variant={1} />
-        <BlobShape color="#5D9B9B" className="absolute bottom-0 left-0 w-[400px] h-[400px] opacity-[0.07]" variant={3} />
+        <BlobShape color="#E8846F" className="absolute top-20 right-0 w-[500px] h-[500px] opacity-[0.07] pointer-events-none" variant={1} />
+        <BlobShape color="#5D9B9B" className="absolute bottom-0 left-0 w-[400px] h-[400px] opacity-[0.07] pointer-events-none" variant={3} />
 
         <div className="max-w-[1440px] mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20 lg:py-0">
           <motion.div
@@ -209,7 +209,7 @@ export function HomePage() {
             <p className="text-xl text-[#6B7554] mb-8 leading-relaxed max-w-xl">
               Brighton-born illustrator and decorative painter, now based in Hastings. Theatre backdrops, community murals, brand illustration — and the occasional very large fish.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="relative z-10 flex flex-wrap gap-4">
               <PillButton variant="primary" onClick={() => navigate('/portfolio')}>
                 See the work <ArrowRight className="inline ml-2 w-5 h-5" />
               </PillButton>
@@ -226,8 +226,8 @@ export function HomePage() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             {/* Blob backgrounds */}
-            <BlobShape color="#E8846F" className="absolute -top-16 -right-16 w-80 h-80 opacity-20" variant={1} />
-            <BlobShape color="#5D9B9B" className="absolute -bottom-8 -left-8 w-56 h-56 opacity-20" variant={2} />
+            <BlobShape color="#E8846F" className="absolute -top-16 -right-16 w-80 h-80 opacity-20 pointer-events-none" variant={1} />
+            <BlobShape color="#5D9B9B" className="absolute -bottom-8 -left-8 w-56 h-56 opacity-20 pointer-events-none" variant={2} />
 
             {/* Main illustration image */}
             <div className="relative z-10 transform rotate-2 hover:rotate-0 transition-transform duration-500 max-w-[85%] mx-auto">
@@ -240,7 +240,7 @@ export function HomePage() {
 
             {/* Breakout character element - overlaps nav area */}
             <motion.div
-              className="absolute -top-12 right-12 z-20 hidden lg:block"
+              className="absolute -top-12 right-12 z-20 hidden lg:block pointer-events-none"
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -256,7 +256,7 @@ export function HomePage() {
 
             {/* Paint splash overlapping */}
             <motion.div
-              className="absolute -bottom-6 -left-6 w-20 h-20 z-20"
+              className="absolute -bottom-6 -left-6 w-20 h-20 z-20 pointer-events-none"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.8, type: "spring" }}
