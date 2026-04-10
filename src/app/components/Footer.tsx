@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { Instagram, Mail, Twitter } from 'lucide-react';
-import { motion } from 'motion/react';
 import { client } from '../../lib/sanity';
 
 interface SocialLink {
@@ -53,25 +52,7 @@ export function Footer() {
 
   return (
     <footer className="relative bg-[#2B2726] text-[#FAF8F5] pt-20 pb-12 overflow-hidden">
-      {/* Character peeking from bottom right */}
-      <motion.div
-        className="absolute bottom-0 right-16 z-10"
-        animate={{ y: [8, 0, 8] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <svg viewBox="0 0 60 50" className="w-16 h-12">
-          <ellipse cx="30" cy="25" rx="28" ry="24" fill="#E8846F" />
-          <circle cx="22" cy="18" r="4" fill="#2B2726" />
-          <circle cx="38" cy="18" r="4" fill="#2B2726" />
-          <circle cx="23" cy="17" r="1.5" fill="#FAF8F5" />
-          <circle cx="39" cy="17" r="1.5" fill="#FAF8F5" />
-          <path d="M20 30 Q30 38 40 30" stroke="#2B2726" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-          <line x1="2" y1="22" x2="-8" y2="10" stroke="#E8846F" strokeWidth="5" strokeLinecap="round" />
-          <line x1="58" y1="22" x2="68" y2="10" stroke="#E8846F" strokeWidth="5" strokeLinecap="round" />
-        </svg>
-      </motion.div>
-
-      <div className="max-w-[1440px] mx-auto px-6 relative z-10">
+<div className="max-w-[1440px] mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           <div>
             <img
@@ -149,7 +130,7 @@ export function Footer() {
             <h4 className="font-['Plus_Jakarta_Sans'] font-heading-manrope mb-4">Newsletter</h4>
             <p className="text-[#D4A99C] text-sm mb-3">Get studio updates, new prints, and behind-the-scenes peeks.</p>
             <form
-              onSubmit={(e) => { e.preventDefault(); setEmail(''); alert('Thanks for subscribing! 🎨'); }}
+              onSubmit={(e) => { e.preventDefault(); setEmail(''); alert('Thanks for subscribing!'); }}
               className="flex gap-2"
             >
               <input

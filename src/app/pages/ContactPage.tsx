@@ -294,7 +294,7 @@ export function ContactPage() {
           <p className="text-lg text-[#6B7554] italic">
             I typically respond within 24-48 hours. If you don't hear from me, check your spam folder—
             <br />
-            sometimes my emails get categorized as "too cheerful." 😊
+            sometimes my emails get categorized as "too cheerful."
           </p>
         </motion.div>
       </div>
