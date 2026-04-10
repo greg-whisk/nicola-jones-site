@@ -238,15 +238,6 @@ export function HomePage() {
               />
             </div>
 
-            {/* Breakout character element - overlaps nav area */}
-            <motion.div
-              className="absolute -top-12 right-4 md:right-12 z-20 pointer-events-none"
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-28 md:w-48 h-auto drop-shadow-lg" />
-            </motion.div>
-
             {/* Paint splash overlapping */}
             <motion.div
               className="absolute -bottom-6 -left-6 w-20 h-20 z-20 pointer-events-none"
@@ -265,14 +256,17 @@ export function HomePage() {
       {/* Pathway Cards */}
       <section className="bg-[#F5EFE8] py-20">
         <div className="max-w-[1440px] mx-auto px-6">
-          <motion.h2
-            className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl lg:text-5xl text-center mb-16 text-[#4A3428]"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Where would you like to go?
-          </motion.h2>
+          <div className="flex items-center justify-center gap-4 mb-16">
+            <motion.h2
+              className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl lg:text-5xl text-center text-[#4A3428]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              Where would you like to go?
+            </motion.h2>
+            <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-28 md:w-48 h-auto pointer-events-none" />
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
             {pathways.map((pathway, index) => (
@@ -340,10 +334,12 @@ export function HomePage() {
       <section className="py-20 relative">
         <div className="max-w-[1440px] mx-auto px-6">
           <div className="flex items-center justify-between mb-12">
-            <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428]">Featured Work</h2>
+            <div className="flex items-center gap-4">
+              <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428]">Featured Work</h2>
+              <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="w-28 md:w-48 h-auto pointer-events-none" />
+            </div>
             <PillButton variant="outline" onClick={() => navigate('/portfolio')}>View all</PillButton>
           </div>
-          <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="absolute top-6 right-0 w-28 md:w-48 h-auto pointer-events-none" />
 
           <div className="flex gap-6 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory scrollbar-hide">
             {featuredWork.map((work, index) => (
@@ -435,7 +431,10 @@ export function HomePage() {
         <BlobShape color="#D8767D" className="absolute top-10 left-0 w-[300px] h-[300px] opacity-[0.06]" variant={2} />
         <div className="max-w-[1440px] mx-auto px-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428]">From the Shop</h2>
+            <div className="flex items-center gap-4">
+              <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428]">From the Shop</h2>
+              <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-32 md:w-56 h-auto pointer-events-none" />
+            </div>
             <PillButton variant="outline" onClick={() => navigate('/shop')}>Browse all</PillButton>
           </div>
           <p className="text-lg text-[#6B7554] mb-12 max-w-xl">Prints, tote bags, stickers, and illustrated goodies — shipped with love from Hastings.</p>
@@ -554,13 +553,6 @@ export function HomePage() {
                   className="w-full h-auto"
                 />
               </div>
-              <motion.div
-                className="absolute -bottom-6 -right-6 z-20 hidden lg:block pointer-events-none"
-                animate={{ rotate: [0, 8, -8, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-32 md:w-56 h-auto drop-shadow-lg" />
-              </motion.div>
             </motion.div>
 
             <motion.div
