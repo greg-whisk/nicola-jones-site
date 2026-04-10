@@ -97,7 +97,7 @@ export function ContactPage() {
               animate={{ rotate: [0, 5, -5, 5, 0] }}
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
             >
-              <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-28 h-auto mx-auto" />
+              <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-32 md:w-56 h-auto mx-auto" />
             </motion.div>
 
             <div className="space-y-8">
@@ -181,7 +181,7 @@ export function ContactPage() {
                   animate={{ x: [0, 10, 0] }}
                   transition={{ duration: 3, repeat: Infinity }}
                 >
-                  <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-16 h-auto" />
+                  <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-20 md:w-32 h-auto" />
                 </motion.div>
               </div>
             </div>

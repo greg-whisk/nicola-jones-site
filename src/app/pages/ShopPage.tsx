@@ -121,7 +121,7 @@ export function ShopPage() {
             animate={{ opacity: 1, rotate: 0 }}
             transition={{ delay: 0.3, type: "spring" }}
           >
-            <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-16 h-auto" />
+            <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-20 md:w-32 h-auto" />
           </motion.div>
         </div>
 
@@ -173,7 +173,7 @@ export function ShopPage() {
             animate={{ rotate: [0, 8, -8, 0] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            <img src="/nicola-jones-wave-loop.png" alt="" aria-hidden="true" className="w-20 h-auto" />
+            <img src="/nicola-jones-wave-loop.png" alt="" aria-hidden="true" className="w-24 md:w-40 h-auto" />
           </motion.div>
         </motion.div>
 

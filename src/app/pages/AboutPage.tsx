@@ -104,7 +104,7 @@ export function AboutPage() {
                 animate={{ rotate: [0, -10, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="w-16 h-auto drop-shadow-lg" />
+                <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="w-20 md:w-32 h-auto drop-shadow-lg" />
               </motion.div>
 
               <motion.div
@@ -112,7 +112,7 @@ export function AboutPage() {
                 animate={{ y: [0, -5, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <img src="/nicola-jones-wave-loop.png" alt="" aria-hidden="true" className="w-20 h-auto drop-shadow-lg" />
+                <img src="/nicola-jones-wave-loop.png" alt="" aria-hidden="true" className="w-24 md:w-40 h-auto drop-shadow-lg" />
               </motion.div>
 
               <motion.div
@@ -120,7 +120,7 @@ export function AboutPage() {
                 animate={{ x: [0, 4, 0] }}
                 transition={{ duration: 2.5, repeat: Infinity }}
               >
-                <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-16 h-auto drop-shadow-lg" />
+                <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-20 md:w-32 h-auto drop-shadow-lg" />
               </motion.div>
             </div>
           </motion.div>

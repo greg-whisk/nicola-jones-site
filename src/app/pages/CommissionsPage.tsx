@@ -176,7 +176,7 @@ export function CommissionsPage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, type: 'spring' }}
           >
-            <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="w-24 h-auto pointer-events-none" />
+            <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="w-28 md:w-48 h-auto pointer-events-none" />
           </motion.div>
         </div>
 
@@ -271,7 +271,7 @@ export function CommissionsPage() {
                         animate={{ y: [0, -5, 0] }}
                         transition={{ duration: 2, repeat: Infinity }}
                       >
-                        <img src="/nicola-jones-mouth-loop.png" alt="" aria-hidden="true" className="w-16 h-auto" />
+                        <img src="/nicola-jones-mouth-loop.png" alt="" aria-hidden="true" className="w-20 md:w-32 h-auto" />
                       </motion.div>
                     )}
                   </div>
@@ -297,7 +297,7 @@ export function CommissionsPage() {
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <img src="/nicola-jones-cherub-b-loop.png" alt="" aria-hidden="true" className="w-32 h-auto" />
+              <img src="/nicola-jones-cherub-b-loop.png" alt="" aria-hidden="true" className="w-40 md:w-64 h-auto" />
             </motion.div>
 
             <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl lg:text-5xl text-white mb-6">

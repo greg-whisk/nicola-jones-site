@@ -143,7 +143,7 @@ export function PortfolioPage() {
               animate={{ rotate: [0, 10, -5, 0] }}
               transition={{ duration: 4, repeat: Infinity }}
             >
-              <img src="/nicola-jones-wave-loop.png" alt="" aria-hidden="true" className="w-20 h-auto" />
+              <img src="/nicola-jones-wave-loop.png" alt="" aria-hidden="true" className="w-24 md:w-40 h-auto" />
             </motion.div>
           </div>
 

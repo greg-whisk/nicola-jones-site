@@ -240,11 +240,11 @@ export function HomePage() {
 
             {/* Breakout character element - overlaps nav area */}
             <motion.div
-              className="absolute -top-12 right-12 z-20 hidden lg:block pointer-events-none"
+              className="absolute -top-12 right-4 md:right-12 z-20 pointer-events-none"
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-24 h-auto drop-shadow-lg" />
+              <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-28 md:w-48 h-auto drop-shadow-lg" />
             </motion.div>
 
             {/* Paint splash overlapping */}
@@ -343,7 +343,7 @@ export function HomePage() {
             <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428]">Featured Work</h2>
             <PillButton variant="outline" onClick={() => navigate('/portfolio')}>View all</PillButton>
           </div>
-          <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="absolute top-6 right-0 w-24 h-auto hidden lg:block pointer-events-none" />
+          <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="absolute top-6 right-0 w-28 md:w-48 h-auto pointer-events-none" />
 
           <div className="flex gap-6 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory scrollbar-hide">
             {featuredWork.map((work, index) => (
@@ -423,7 +423,7 @@ export function HomePage() {
             animate={{ rotate: [0, 5, -5, 0] }}
             transition={{ duration: 4, repeat: Infinity }}
           >
-            <img src="/nicola-jones-mouth-loop.png" alt="" aria-hidden="true" className="w-32 h-auto drop-shadow-lg" />
+            <img src="/nicola-jones-mouth-loop.png" alt="" aria-hidden="true" className="w-40 md:w-64 h-auto drop-shadow-lg" />
           </motion.div>
         </div>
       </section>}
@@ -559,7 +559,7 @@ export function HomePage() {
                 animate={{ rotate: [0, 8, -8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               >
-                <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-28 h-auto drop-shadow-lg" />
+                <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-32 md:w-56 h-auto drop-shadow-lg" />
               </motion.div>
             </motion.div>
 
@@ -603,7 +603,7 @@ export function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <img src="/nicola-jones-cherub-b-loop.png" alt="" aria-hidden="true" className="w-32 h-auto mx-auto mb-6 pointer-events-none" />
+            <img src="/nicola-jones-cherub-b-loop.png" alt="" aria-hidden="true" className="w-40 md:w-64 h-auto mx-auto mb-6 pointer-events-none" />
             <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl lg:text-6xl text-[#4A3428] mb-6 leading-[1.15]">
               Let's make something <span className="text-[#E8846F]">brilliant</span> together.
             </h2>
