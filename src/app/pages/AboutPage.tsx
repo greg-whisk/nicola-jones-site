@@ -100,44 +100,27 @@ export function AboutPage() {
 
               {/* Character peeking around edges */}
               <motion.div
-                className="absolute -top-6 -left-4 z-20"
+                className="absolute -top-6 -left-4 z-20 pointer-events-none"
                 animate={{ rotate: [0, -10, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                <svg viewBox="0 0 40 40" className="w-12 h-12 drop-shadow-lg">
-                  <circle cx="20" cy="20" r="18" fill="#D8767D" />
-                  <circle cx="15" cy="17" r="2.5" fill="#FAF8F5" />
-                  <circle cx="25" cy="17" r="2.5" fill="#FAF8F5" />
-                  <circle cx="15.5" cy="16.5" r="1" fill="#4A3428" />
-                  <circle cx="25.5" cy="16.5" r="1" fill="#4A3428" />
-                  <path d="M14 25 Q20 30 26 25" stroke="#4A3428" strokeWidth="2" fill="none" strokeLinecap="round" />
-                </svg>
+                <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="w-16 h-auto drop-shadow-lg" />
               </motion.div>
 
               <motion.div
-                className="absolute bottom-8 -right-6 z-20"
+                className="absolute bottom-8 -right-6 z-20 pointer-events-none"
                 animate={{ y: [0, -5, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <svg viewBox="0 0 35 35" className="w-10 h-10 drop-shadow-lg">
-                  <circle cx="17.5" cy="17.5" r="16" fill="#E8846F" />
-                  <circle cx="12" cy="14" r="2" fill="#4A3428" />
-                  <circle cx="23" cy="14" r="2" fill="#4A3428" />
-                  <path d="M11 22 Q17.5 27 24 22" stroke="#4A3428" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                </svg>
+                <img src="/nicola-jones-wave-loop.png" alt="" aria-hidden="true" className="w-20 h-auto drop-shadow-lg" />
               </motion.div>
 
               <motion.div
-                className="absolute top-1/2 -right-4 z-20"
+                className="absolute top-1/2 -right-4 z-20 pointer-events-none"
                 animate={{ x: [0, 4, 0] }}
                 transition={{ duration: 2.5, repeat: Infinity }}
               >
-                <svg viewBox="0 0 28 28" className="w-8 h-8 drop-shadow-lg">
-                  <circle cx="14" cy="14" r="13" fill="#5D9B9B" />
-                  <circle cx="10" cy="11" r="1.5" fill="#FAF8F5" />
-                  <circle cx="18" cy="11" r="1.5" fill="#FAF8F5" />
-                  <ellipse cx="14" cy="18" rx="3" ry="2" fill="#FAF8F5" />
-                </svg>
+                <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-16 h-auto drop-shadow-lg" />
               </motion.div>
             </div>
           </motion.div>

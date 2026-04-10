@@ -116,18 +116,12 @@ export function ShopPage() {
 
           {/* Shopping bag character */}
           <motion.div
-            className="relative"
+            className="relative pointer-events-none"
             initial={{ opacity: 0, rotate: -20 }}
             animate={{ opacity: 1, rotate: 0 }}
             transition={{ delay: 0.3, type: "spring" }}
           >
-            <svg viewBox="0 0 60 70" className="w-14 h-16">
-              <rect x="10" y="25" width="40" height="35" rx="6" fill="#E8846F" />
-              <path d="M20 25 Q20 10 30 10 Q40 10 40 25" stroke="#4A3428" strokeWidth="3" fill="none" />
-              <circle cx="24" cy="40" r="3" fill="#4A3428" />
-              <circle cx="36" cy="40" r="3" fill="#4A3428" />
-              <path d="M22 50 Q30 56 38 50" stroke="#4A3428" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-            </svg>
+            <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-16 h-auto" />
           </motion.div>
         </div>
 
@@ -175,16 +169,11 @@ export function ShopPage() {
 
           {/* Character pointing at product */}
           <motion.div
-            className="absolute top-4 right-4 hidden lg:block"
+            className="absolute top-4 right-4 hidden lg:block pointer-events-none"
             animate={{ rotate: [0, 8, -8, 0] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            <svg viewBox="0 0 40 40" className="w-10 h-10">
-              <circle cx="20" cy="20" r="18" fill="#FAF8F5" fillOpacity="0.3" />
-              <circle cx="15" cy="17" r="2" fill="#FAF8F5" />
-              <circle cx="25" cy="17" r="2" fill="#FAF8F5" />
-              <path d="M14 25 Q20 30 26 25" stroke="#FAF8F5" strokeWidth="2" fill="none" strokeLinecap="round" />
-            </svg>
+            <img src="/nicola-jones-wave-loop.png" alt="" aria-hidden="true" className="w-20 h-auto" />
           </motion.div>
         </motion.div>
 

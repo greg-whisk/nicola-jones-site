@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Link, useNavigate } from 'react-router';
-import { ArrowRight, Star, ShoppingBag, Palette, Briefcase, Sparkles } from 'lucide-react';
+import { ArrowRight, Star, ShoppingBag, Palette, Briefcase } from 'lucide-react';
 import { BlobShape } from '../components/BlobShape';
 import { PillButton } from '../components/PillButton';
 import { WavyDivider } from '../components/WavyDivider';
@@ -244,14 +244,7 @@ export function HomePage() {
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <svg viewBox="0 0 60 60" className="w-16 h-16 drop-shadow-lg">
-                <circle cx="30" cy="30" r="28" fill="#D8767D" />
-                <circle cx="22" cy="24" r="4" fill="#4A3428" />
-                <circle cx="38" cy="24" r="4" fill="#4A3428" />
-                <path d="M20 38 Q30 46 40 38" stroke="#4A3428" strokeWidth="3" fill="none" strokeLinecap="round" />
-                <circle cx="23" cy="23" r="1.5" fill="#FAF8F5" />
-                <circle cx="39" cy="23" r="1.5" fill="#FAF8F5" />
-              </svg>
+              <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-24 h-auto drop-shadow-lg" />
             </motion.div>
 
             {/* Paint splash overlapping */}
@@ -344,12 +337,13 @@ export function HomePage() {
       <WavyDivider color="#FAF8F5" flip />
 
       {/* Featured Work Strip */}
-      <section className="py-20">
+      <section className="py-20 relative">
         <div className="max-w-[1440px] mx-auto px-6">
           <div className="flex items-center justify-between mb-12">
             <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428]">Featured Work</h2>
             <PillButton variant="outline" onClick={() => navigate('/portfolio')}>View all</PillButton>
           </div>
+          <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="absolute top-6 right-0 w-24 h-auto hidden lg:block pointer-events-none" />
 
           <div className="flex gap-6 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory scrollbar-hide">
             {featuredWork.map((work, index) => (
@@ -425,16 +419,11 @@ export function HomePage() {
 
           {/* Character reacting */}
           <motion.div
-            className="absolute -right-4 bottom-0 hidden lg:block"
+            className="absolute -right-4 bottom-0 hidden lg:block pointer-events-none"
             animate={{ rotate: [0, 5, -5, 0] }}
             transition={{ duration: 4, repeat: Infinity }}
           >
-            <svg viewBox="0 0 50 50" className="w-14 h-14">
-              <circle cx="25" cy="25" r="23" fill="#5D9B9B" />
-              <circle cx="18" cy="20" r="3" fill="#FAF8F5" />
-              <circle cx="32" cy="20" r="3" fill="#FAF8F5" />
-              <ellipse cx="25" cy="32" rx="6" ry="4" fill="#FAF8F5" />
-            </svg>
+            <img src="/nicola-jones-mouth-loop.png" alt="" aria-hidden="true" className="w-32 h-auto drop-shadow-lg" />
           </motion.div>
         </div>
       </section>}
@@ -566,16 +555,11 @@ export function HomePage() {
                 />
               </div>
               <motion.div
-                className="absolute -bottom-6 -right-6 z-20 hidden lg:block"
+                className="absolute -bottom-6 -right-6 z-20 hidden lg:block pointer-events-none"
                 animate={{ rotate: [0, 8, -8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               >
-                <svg viewBox="0 0 52 52" className="w-16 h-16 drop-shadow-lg">
-                  <circle cx="26" cy="26" r="24" fill="#5D9B9B" />
-                  <circle cx="19" cy="22" r="3.5" fill="#4A3428" />
-                  <circle cx="33" cy="22" r="3.5" fill="#4A3428" />
-                  <path d="M18 33 Q26 40 34 33" stroke="#4A3428" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                </svg>
+                <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-28 h-auto drop-shadow-lg" />
               </motion.div>
             </motion.div>
 
@@ -619,7 +603,7 @@ export function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Sparkles className="w-10 h-10 text-[#E8846F] mx-auto mb-6" />
+            <img src="/nicola-jones-cherub-b-loop.png" alt="" aria-hidden="true" className="w-32 h-auto mx-auto mb-6 pointer-events-none" />
             <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl lg:text-6xl text-[#4A3428] mb-6 leading-[1.15]">
               Let's make something <span className="text-[#E8846F]">brilliant</span> together.
             </h2>

@@ -176,18 +176,7 @@ export function CommissionsPage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, type: 'spring' }}
           >
-            <svg viewBox="0 0 120 60" className="w-32 h-16">
-              <circle cx="25" cy="30" r="22" fill="#E8846F" />
-              <circle cx="18" cy="25" r="3" fill="#4A3428" />
-              <circle cx="32" cy="25" r="3" fill="#4A3428" />
-              <path d="M16 38 Q25 44 34 38" stroke="#4A3428" strokeWidth="2" fill="none" strokeLinecap="round" />
-              <circle cx="95" cy="30" r="22" fill="#5D9B9B" />
-              <circle cx="88" cy="25" r="3" fill="#FAF8F5" />
-              <circle cx="102" cy="25" r="3" fill="#FAF8F5" />
-              <path d="M86 38 Q95 44 104 38" stroke="#FAF8F5" strokeWidth="2" fill="none" strokeLinecap="round" />
-              <path d="M47 35 L73 35" stroke="#4A3428" strokeWidth="4" strokeLinecap="round" />
-              <circle cx="60" cy="28" r="5" fill="#D8767D" />
-            </svg>
+            <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="w-24 h-auto pointer-events-none" />
           </motion.div>
         </div>
 
@@ -278,19 +267,11 @@ export function CommissionsPage() {
                     {/* Walking character between sections */}
                     {index < commissionTypes.length - 1 && (
                       <motion.div
-                        className="absolute -bottom-16 left-1/2 -translate-x-1/2 z-20 hidden lg:block"
+                        className="absolute -bottom-16 left-1/2 -translate-x-1/2 z-20 hidden lg:block pointer-events-none"
                         animate={{ y: [0, -5, 0] }}
                         transition={{ duration: 2, repeat: Infinity }}
                       >
-                        <svg viewBox="0 0 30 40" className="w-8 h-10">
-                          <ellipse cx="15" cy="15" rx="12" ry="14" fill="#D8767D" />
-                          <circle cx="11" cy="12" r="2" fill="#4A3428" />
-                          <circle cx="19" cy="12" r="2" fill="#4A3428" />
-                          <path d="M10 19 Q15 23 20 19" stroke="#4A3428" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                          <line x1="15" y1="29" x2="15" y2="35" stroke="#D8767D" strokeWidth="3" strokeLinecap="round" />
-                          <line x1="10" y1="38" x2="15" y2="35" stroke="#D8767D" strokeWidth="3" strokeLinecap="round" />
-                          <line x1="20" y1="38" x2="15" y2="35" stroke="#D8767D" strokeWidth="3" strokeLinecap="round" />
-                        </svg>
+                        <img src="/nicola-jones-mouth-loop.png" alt="" aria-hidden="true" className="w-16 h-auto" />
                       </motion.div>
                     )}
                   </div>
@@ -312,20 +293,11 @@ export function CommissionsPage() {
 
           <div className="relative z-10">
             <motion.div
-              className="flex justify-center mb-8"
-              animate={{ scale: [1, 1.1, 1] }}
+              className="flex justify-center mb-8 pointer-events-none"
+              animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <svg viewBox="0 0 80 80" className="w-20 h-20">
-                <circle cx="40" cy="40" r="35" fill="#E8846F" />
-                <circle cx="30" cy="34" r="4" fill="#FAF8F5" />
-                <circle cx="50" cy="34" r="4" fill="#FAF8F5" />
-                <circle cx="31" cy="33" r="1.5" fill="#4A3428" />
-                <circle cx="51" cy="33" r="1.5" fill="#4A3428" />
-                <ellipse cx="40" cy="50" rx="8" ry="6" fill="#FAF8F5" />
-                <line x1="5" y1="40" x2="-5" y2="20" stroke="#E8846F" strokeWidth="6" strokeLinecap="round" />
-                <line x1="75" y1="40" x2="85" y2="20" stroke="#E8846F" strokeWidth="6" strokeLinecap="round" />
-              </svg>
+              <img src="/nicola-jones-cherub-b-loop.png" alt="" aria-hidden="true" className="w-32 h-auto" />
             </motion.div>
 
             <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl lg:text-5xl text-white mb-6">

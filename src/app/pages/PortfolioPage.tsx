@@ -139,17 +139,11 @@ export function PortfolioPage() {
 
             {/* Paintbrush character peeking over text */}
             <motion.div
-              className="relative -mb-2"
+              className="relative -mb-2 pointer-events-none"
               animate={{ rotate: [0, 10, -5, 0] }}
               transition={{ duration: 4, repeat: Infinity }}
             >
-              <svg viewBox="0 0 50 70" className="w-10 h-14">
-                <rect x="22" y="30" width="6" height="35" rx="3" fill="#4A3428" />
-                <ellipse cx="25" cy="25" rx="14" ry="18" fill="#E8846F" />
-                <circle cx="20" cy="20" r="3" fill="#4A3428" />
-                <circle cx="30" cy="20" r="3" fill="#4A3428" />
-                <path d="M18 28 Q25 34 32 28" stroke="#4A3428" strokeWidth="2" fill="none" strokeLinecap="round" />
-              </svg>
+              <img src="/nicola-jones-wave-loop.png" alt="" aria-hidden="true" className="w-20 h-auto" />
             </motion.div>
           </div>
 

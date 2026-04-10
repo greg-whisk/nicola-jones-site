@@ -93,18 +93,11 @@ export function ContactPage() {
           >
             {/* Waving character */}
             <motion.div
-              className="mb-12 relative"
-              animate={{ rotate: [0, 10, -10, 10, 0] }}
+              className="mb-12 pointer-events-none"
+              animate={{ rotate: [0, 5, -5, 5, 0] }}
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
             >
-              <BlobShape
-                color="#E8846F"
-                className="w-32 h-32 opacity-30"
-                variant={1}
-              />
-              <div className="absolute inset-0 flex items-center justify-center text-6xl">
-                👋
-              </div>
+              <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-28 h-auto mx-auto" />
             </motion.div>
 
             <div className="space-y-8">
@@ -184,13 +177,11 @@ export function ContactPage() {
               {/* Decorative elements */}
               <div className="pt-8 space-y-4">
                 <motion.div
-                  className="inline-block"
+                  className="inline-block pointer-events-none"
                   animate={{ x: [0, 10, 0] }}
                   transition={{ duration: 3, repeat: Infinity }}
                 >
-                  <div className="w-16 h-16 bg-[#5D9B9B] rounded-full flex items-center justify-center text-3xl">
-                    🎨
-                  </div>
+                  <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-16 h-auto" />
                 </motion.div>
               </div>
             </div>
@@ -285,13 +276,6 @@ export function ContactPage() {
               </PillButton>
             </form>
 
-            {/* Decorative elements around form */}
-            <div className="absolute -top-6 -right-6 w-16 h-16 bg-[#E8846F] rounded-full flex items-center justify-center text-2xl z-0">
-              ✉️
-            </div>
-            <div className="absolute -bottom-6 -left-6 w-12 h-12 bg-[#5D9B9B] rounded-full flex items-center justify-center text-xl z-0">
-              ✨
-            </div>
             <BlobShape
               color="#D8767D"
               className="absolute top-1/2 -right-20 w-32 h-32 opacity-10"
