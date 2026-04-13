@@ -121,7 +121,7 @@ export function ShopPage() {
             animate={{ opacity: 1, rotate: 0 }}
             transition={{ delay: 0.3, type: "spring" }}
           >
-            <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-20 md:w-32 h-auto" />
+            <img src="/nicola-jones-gladioli-guy-loop.png" alt="" aria-hidden="true" className="w-20 md:w-32 h-auto" />
           </motion.div>
         </div>
 
@@ -167,14 +167,7 @@ export function ShopPage() {
             </div>
           </div>
 
-          {/* Character pointing at product */}
-          <motion.div
-            className="absolute top-4 right-4 hidden lg:block pointer-events-none"
-            animate={{ rotate: [0, 8, -8, 0] }}
-            transition={{ duration: 3, repeat: Infinity }}
-          >
-            <img src="/nicola-jones-wave-loop.png" alt="" aria-hidden="true" className="w-24 md:w-40 h-auto" />
-          </motion.div>
+
         </motion.div>
 
         {/* Filter Pills */}
@@ -247,21 +240,7 @@ export function ShopPage() {
 
           <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8">
             {/* Character illustration */}
-            <motion.div
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              <svg viewBox="0 0 80 100" className="w-20 h-24">
-                <ellipse cx="40" cy="45" rx="30" ry="35" fill="#5D9B9B" />
-                <circle cx="30" cy="38" r="4" fill="#FAF8F5" />
-                <circle cx="50" cy="38" r="4" fill="#FAF8F5" />
-                <circle cx="31" cy="37" r="1.5" fill="#4A3428" />
-                <circle cx="51" cy="37" r="1.5" fill="#4A3428" />
-                <path d="M30 55 Q40 65 50 55" stroke="#4A3428" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                <line x1="10" y1="45" x2="2" y2="30" stroke="#5D9B9B" strokeWidth="6" strokeLinecap="round" />
-                <line x1="70" y1="45" x2="78" y2="30" stroke="#5D9B9B" strokeWidth="6" strokeLinecap="round" />
-              </svg>
-            </motion.div>
+            <img src="/nicola-jones-mouth-loop.png" className="w-24 md:w-40 h-auto pointer-events-none" alt="" aria-hidden="true" />
 
             <div className="text-center lg:text-left flex-1">
               <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl lg:text-4xl text-[#4A3428] mb-4">

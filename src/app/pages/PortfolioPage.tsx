@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { motion, AnimatePresence } from 'motion/react';
-import Masonry from 'react-responsive-masonry';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { BlobShape } from '../components/BlobShape';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { client, urlFor } from '../../lib/sanity';
@@ -143,7 +143,7 @@ export function PortfolioPage() {
               animate={{ rotate: [0, 10, -5, 0] }}
               transition={{ duration: 4, repeat: Infinity }}
             >
-              <img src="/nicola-jones-wave-loop.png" alt="" aria-hidden="true" className="w-24 md:w-40 h-auto" />
+              <img src="/nicola-jones-shimmy-loop.png" alt="" aria-hidden="true" className="w-24 md:w-40 h-auto" />
             </motion.div>
           </div>
 
@@ -233,7 +233,8 @@ export function PortfolioPage() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <Masonry columnsCount={3} gutter="1.5rem">
+            <ResponsiveMasonry columnsCountBreakPoints={{ 0: 2, 768: 3, 1024: 4 }}>
+            <Masonry gutter="1.5rem">
               {filteredItems.map((item, index) => (
                 <motion.div
                   key={item.id}
@@ -267,6 +268,7 @@ export function PortfolioPage() {
                 </motion.div>
               ))}
             </Masonry>
+            </ResponsiveMasonry>
           </motion.div>
         </AnimatePresence>
       </div>
