@@ -91,13 +91,18 @@ export function ContactPage() {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            {/* Waving character */}
+            {/* Headshot */}
             <motion.div
-              className="mb-12 pointer-events-none"
-              animate={{ rotate: [0, 5, -5, 5, 0] }}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+              className="mb-8 flex justify-center"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
             >
-              <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-32 md:w-56 h-auto mx-auto" />
+              <img
+                src="/nicola-jones-headshot.webp"
+                alt="Nicola Jones"
+                className="w-40 h-40 md:w-56 md:h-56 rounded-full object-cover object-top shadow-lg border-4 border-white"
+              />
             </motion.div>
 
             <div className="space-y-8">
