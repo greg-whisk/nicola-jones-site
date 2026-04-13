@@ -41,13 +41,23 @@ const pathways = [
   }
 ];
 
-const shopProducts = [
+interface ShopProduct {
+  slug: string;
+  image: string;
+  title: string;
+  description?: string;
+  price: number;
+  category: string;
+  accentColor: string;
+}
+
+const fallbackShopProducts: ShopProduct[] = [
   {
-    slug: 'cheeky-bits-print',
+    slug: 'alexander-park-print',
     image: 'https://cdn.sanity.io/images/fnwcgtif/production/292cd1801a4012ceb14be47972788201fbf0de9b-2500x2500.webp',
-    title: 'Cheeky Bits Print',
-    description: "A bold, playful print bursting with Nicola's signature characterful illustrations. Printed on 300gsm fine art paper, ready to frame and brighten up any room.",
-    price: 28,
+    title: 'Alexander Park Print',
+    description: "A bold, vibrant print bursting with Nicola's signature characterful illustrations. Printed on 300gsm fine art paper, ready to frame and brighten up any room.",
+    price: 35,
     category: 'Prints',
     accentColor: '#E8846F',
   },
@@ -142,6 +152,7 @@ export function HomePage() {
   const navigate = useNavigate();
   const [featuredWork, setFeaturedWork] = useState<FeaturedWork[]>(fallbackFeaturedWork);
   const [testimonial, setTestimonial] = useState<Testimonial>(fallbackTestimonial);
+  const [shopProducts, setShopProducts] = useState<ShopProduct[]>(fallbackShopProducts);
 
   useEffect(() => {
     client
@@ -176,6 +187,45 @@ export function HomePage() {
       .fetch<Testimonial | null>(`*[_type == "testimonial"][0]{ quote, author, role }`)
       .then((data) => {
         if (data && data.quote) setTestimonial(data);
+      })
+      .catch(console.error);
+
+    client
+      .fetch<any[]>(
+        `*[_type == "shopProduct" && inStock != false] | order(_createdAt desc)[0...5] {
+          _id, name, price, category, image, description, "slug": slug.current
+        }`
+      )
+      .then((data) => {
+        if (data && data.length > 0) {
+          const accentColors = ['#E8846F', '#5D9B9B', '#D8767D', '#5D9B9B', '#E8846F'];
+          const mapped: ShopProduct[] = data.map((item, idx) => ({
+            slug: item.slug || fallbackShopProducts[idx % fallbackShopProducts.length].slug,
+            title: item.name,
+            price: item.price ?? 0,
+            category: item.category || '',
+            description: item.description
+              ? (Array.isArray(item.description)
+                  ? item.description.filter((b: any) => b._type === 'block').map((b: any) => (b.children || []).map((c: any) => c.text || '').join('')).join(' ')
+                  : String(item.description))
+              : fallbackShopProducts[idx % fallbackShopProducts.length].description,
+            image: item.image
+              ? urlFor(item.image).width(600).url()
+              : fallbackShopProducts[idx % fallbackShopProducts.length].image,
+            accentColor: accentColors[idx % accentColors.length],
+          }));
+          // Pin Alexander Park Print as featured (index 0) if not already first
+          const alexanderIdx = mapped.findIndex((p) => p.slug === 'alexander-park-print');
+          if (alexanderIdx > 0) {
+            const [alexander] = mapped.splice(alexanderIdx, 1);
+            mapped.unshift(alexander);
+          } else if (alexanderIdx === -1) {
+            // Alexander Park not in Sanity yet — keep fallback featured at index 0
+            mapped.unshift({ ...fallbackShopProducts[0] });
+            mapped.splice(6); // keep to 5 items
+          }
+          setShopProducts(mapped.slice(0, 5));
+        }
       })
       .catch(console.error);
   }, []);

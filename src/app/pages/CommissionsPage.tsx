@@ -264,16 +264,6 @@ export function CommissionsPage() {
                       ))}
                     </div>
 
-                    {/* Walking character between sections */}
-                    {index < commissionTypes.length - 1 && (
-                      <motion.div
-                        className="absolute -bottom-16 left-1/2 -translate-x-1/2 z-20 hidden lg:block pointer-events-none"
-                        animate={{ y: [0, -5, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      >
-                        <img src="/nicola-jones-mouth-loop.png" alt="" aria-hidden="true" className="w-20 md:w-32 h-auto" />
-                      </motion.div>
-                    )}
                   </div>
                 </motion.div>
               );
@@ -283,7 +273,7 @@ export function CommissionsPage() {
 
         {/* CTA Section */}
         <motion.div
-          className="bg-gradient-to-r from-[#6B7554] to-[#4A3428] rounded-3xl p-10 lg:p-16 text-center relative overflow-hidden"
+          className="bg-gradient-to-r from-[#E8846F] to-[#D4725C] rounded-3xl p-10 lg:p-16 text-center relative overflow-hidden"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
