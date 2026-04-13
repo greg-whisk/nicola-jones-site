@@ -209,19 +209,6 @@ export function PortfolioPage() {
             </div>
           </div>
 
-          {/* Character breaking out of frame */}
-          <motion.div
-            className="absolute -bottom-4 right-8 z-20 hidden lg:block"
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <svg viewBox="0 0 40 40" className="w-12 h-12">
-              <circle cx="20" cy="20" r="18" fill="#E8846F" />
-              <circle cx="15" cy="16" r="2.5" fill="#4A3428" />
-              <circle cx="25" cy="16" r="2.5" fill="#4A3428" />
-              <path d="M14 25 Q20 31 26 25" stroke="#4A3428" strokeWidth="2" fill="none" strokeLinecap="round" />
-            </svg>
-          </motion.div>
         </motion.div>
 
         {/* Masonry Gallery */}
