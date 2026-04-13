@@ -158,7 +158,7 @@ export function Footer() {
       </div>
       <img
         src="/nicola-jones-wave-up-loop.png"
-        className="absolute bottom-0 right-4 w-20 md:w-32 h-auto pointer-events-none"
+        className="absolute bottom-[-20px] right-4 md:right-8 w-24 md:w-40 h-auto pointer-events-none"
         alt=""
         aria-hidden="true"
       />
