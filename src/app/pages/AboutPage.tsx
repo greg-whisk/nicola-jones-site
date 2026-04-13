@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 import { motion } from 'motion/react';
 import { BlobShape } from '../components/BlobShape';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
@@ -29,7 +30,14 @@ const fallbackBio = [
 
 const fallbackPhoto = '/photo-placeholder.svg';
 
-const clients = ['Shitfaced Shakespeare', 'Trees for Cities', 'Pinpoint Graphic Design', 'Springtide', 'The Common Good', 'Darling & Edge'];
+const clients = [
+  { name: 'Shitfaced Shakespeare', slug: 'shitfaced-shakespeare' },
+  { name: 'Trees for Cities', slug: 'trees-for-cities' },
+  { name: 'Pinpoint Graphic Design', slug: 'pinpoint-graphic-design' },
+  { name: 'Springtide', slug: 'springtide-branding' },
+  { name: 'The Common Good', slug: 'the-common-good-live-event-illustration' },
+  { name: 'Darling & Edge', slug: 'darling-and-edge' },
+];
 
 function blocksToLines(blocks: any[]): string[] {
   if (!Array.isArray(blocks)) return [];
@@ -211,18 +219,20 @@ export function AboutPage() {
           </h3>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center">
-            {clients.map((clientName, index) => (
+            {clients.map((client, index) => (
               <motion.div
-                key={clientName}
+                key={client.slug}
                 className="text-center"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
               >
-                <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow h-20 flex items-center justify-center">
-                  <span className="text-[#6B7554] font-['Plus_Jakarta_Sans'] text-sm text-center opacity-60">{clientName}</span>
-                </div>
+                <Link to={`/portfolio/${client.slug}`} className="block">
+                  <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow h-20 flex items-center justify-center">
+                    <span className="font-['Plus_Jakarta_Sans'] text-sm text-center text-[#E8846F] hover:underline">{client.name}</span>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>
