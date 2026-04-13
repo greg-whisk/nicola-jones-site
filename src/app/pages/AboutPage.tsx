@@ -95,41 +95,12 @@ export function AboutPage() {
           >
             <div className="relative">
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
-                <ImageWithFallback
-                  src={photo}
-                  alt="Nicola Jones in her studio"
-                  className="w-full h-auto"
-                />
+                <img src="/nicola-jones-headshot.webp" alt="Nicola Jones" className="w-full h-full object-cover object-top" />
               </div>
 
               {/* Hand-drawn style frame doodles */}
               <BlobShape color="#E8846F" className="absolute -top-12 -right-12 w-32 h-32 opacity-30" variant={1} />
               <BlobShape color="#5D9B9B" className="absolute -bottom-8 -left-8 w-24 h-24 opacity-30" variant={2} />
-
-              {/* Character peeking around edges */}
-              <motion.div
-                className="absolute -top-6 -left-4 z-20 pointer-events-none"
-                animate={{ rotate: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="w-20 md:w-32 h-auto drop-shadow-lg" />
-              </motion.div>
-
-              <motion.div
-                className="absolute bottom-8 -right-6 z-20 pointer-events-none"
-                animate={{ y: [0, -5, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <img src="/nicola-jones-wave-loop.png" alt="" aria-hidden="true" className="w-24 md:w-40 h-auto drop-shadow-lg" />
-              </motion.div>
-
-              <motion.div
-                className="absolute top-1/2 -right-4 z-20 pointer-events-none"
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 2.5, repeat: Infinity }}
-              >
-                <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-20 md:w-32 h-auto drop-shadow-lg" />
-              </motion.div>
             </div>
           </motion.div>
 
@@ -140,6 +111,10 @@ export function AboutPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
+            <div className="flex justify-center mb-4">
+              <img src="/nicola-jones-daffs-loop.png" alt="" aria-hidden="true" className="w-24 md:w-36 h-auto" />
+            </div>
+
             <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-6xl text-[#4A3428] mb-6">
               Hello! I'm Nicola.
             </h1>

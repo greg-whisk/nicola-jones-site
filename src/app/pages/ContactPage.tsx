@@ -179,16 +179,6 @@ export function ContactPage() {
                 </div>
               </div>
 
-              {/* Decorative elements */}
-              <div className="pt-8 space-y-4">
-                <motion.div
-                  className="inline-block pointer-events-none"
-                  animate={{ x: [0, 10, 0] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                >
-                  <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-20 md:w-32 h-auto" />
-                </motion.div>
-              </div>
             </div>
 
             {/* Scattered illustration elements */}
