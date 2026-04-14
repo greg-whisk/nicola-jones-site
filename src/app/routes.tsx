@@ -8,6 +8,7 @@ import { ProductDetailPage } from './pages/ProductDetailPage';
 import { CommissionsPage } from './pages/CommissionsPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
+import { CelebratePage } from './pages/CelebratePage';
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
       { path: 'shop', Component: ShopPage },
       { path: 'shop/:slug', Component: ProductDetailPage },
       { path: 'commissions', Component: CommissionsPage },
+      { path: 'celebrate', Component: CelebratePage },
       { path: 'about', Component: AboutPage },
       { path: 'contact', Component: ContactPage },
     ],
