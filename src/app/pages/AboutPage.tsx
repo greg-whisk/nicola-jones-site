@@ -51,12 +51,23 @@ export function AboutPage() {
   const [bio, setBio] = useState<string[]>(fallbackBio);
   const [photo, setPhoto] = useState<string>(fallbackPhoto);
   const [processSteps, setProcessSteps] = useState<ProcessStep[]>(fallbackProcessSteps);
+  const [pageHeading, setPageHeading] = useState('Hello! I\'m Nicola.');
+  const [processSectionHeading, setProcessSectionHeading] = useState('How We\'ll Work Together');
+  const [processIntro, setProcessIntro] = useState('Every project is different, but here\'s the general flow from "hello" to "ta-da!"');
+  const [funFact, setFunFact] = useState('Brighton girl. Hastings life. Ten years of London scaffolding.');
+  const [funFactAccent, setFunFactAccent] = useState('Now making big, bright things by the sea.');
 
   useEffect(() => {
     client
-      .fetch<any>(`*[_type == "aboutContent"][0]{ bio, photo, processSteps }`)
+      .fetch<any>(`*[_type == "aboutContent"][0]{ pageHeading, processSectionHeading, processIntro, funFact, funFactAccent, bio, photo, processSteps }`)
       .then((data) => {
         if (!data) return;
+
+        if (data.pageHeading) setPageHeading(data.pageHeading);
+        if (data.processSectionHeading) setProcessSectionHeading(data.processSectionHeading);
+        if (data.processIntro) setProcessIntro(data.processIntro);
+        if (data.funFact) setFunFact(data.funFact);
+        if (data.funFactAccent) setFunFactAccent(data.funFactAccent);
 
         if (data.bio) {
           const lines = blocksToLines(data.bio);
@@ -106,7 +117,7 @@ export function AboutPage() {
             </div>
 
             <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-6xl text-[#4A3428] mb-6">
-              Hello! I'm Nicola.
+              {pageHeading}
             </h1>
 
             <div className="space-y-4 text-lg text-[#6B7554] leading-relaxed">
@@ -125,10 +136,10 @@ export function AboutPage() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            How We'll Work Together
+            {processSectionHeading}
           </motion.h2>
           <p className="text-xl text-[#6B7554] text-center mb-16 max-w-2xl mx-auto">
-            Every project is different, but here's the general flow from "hello" to "ta-da!"
+            {processIntro}
           </p>
 
           <div className="relative">
@@ -213,9 +224,9 @@ export function AboutPage() {
           <BlobShape color="#D8767D" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 opacity-10" variant={3} />
 
           <p className="text-2xl text-[#4A3428] font-['Plus_Jakarta_Sans'] font-heading-manrope relative z-10">
-            Brighton girl. Hastings life. Ten years of London scaffolding.
+            {funFact}
             <br />
-            <span className="text-[#E8846F]">Now making big, bright things by the sea.</span>
+            <span className="text-[#E8846F]">{funFactAccent}</span>
           </p>
         </motion.div>
       </div>

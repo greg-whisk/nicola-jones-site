@@ -5,6 +5,40 @@ export default defineType({
   title: 'About Content',
   type: 'document',
   fields: [
+    // Page copy
+    defineField({
+      name: 'pageHeading',
+      title: 'Page Heading',
+      type: 'string',
+      description: 'e.g. "Hello! I\'m Nicola."',
+    }),
+    defineField({
+      name: 'processSectionHeading',
+      title: 'Process Section Heading',
+      type: 'string',
+      description: 'e.g. "How We\'ll Work Together"',
+    }),
+    defineField({
+      name: 'processIntro',
+      title: 'Process Section Intro',
+      type: 'text',
+      rows: 2,
+      description: 'e.g. "Every project is different, but here\'s the general flow..."',
+    }),
+    defineField({
+      name: 'funFact',
+      title: 'Fun Fact (main)',
+      type: 'text',
+      rows: 2,
+      description: 'First part of the fun-fact line at the bottom of the page, e.g. "Brighton girl. Hastings life. Ten years of London scaffolding."',
+    }),
+    defineField({
+      name: 'funFactAccent',
+      title: 'Fun Fact (accent)',
+      type: 'string',
+      description: 'Second part shown in coral, e.g. "Now making big, bright things by the sea."',
+    }),
+    // Bio + photo
     defineField({
       name: 'bio',
       title: 'Bio',
