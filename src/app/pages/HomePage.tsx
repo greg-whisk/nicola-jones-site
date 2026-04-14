@@ -268,16 +268,18 @@ export function HomePage() {
               : fallbackShopProducts[idx % fallbackShopProducts.length].image,
             accentColor: accentColors[idx % accentColors.length],
           }));
-          // Pin Alexander Park Print as featured (index 0) if not already first
-          const alexanderIdx = mapped.findIndex((p) => p.slug === 'alexander-park-print');
-          if (alexanderIdx > 0) {
-            const [alexander] = mapped.splice(alexanderIdx, 1);
-            mapped.unshift(alexander);
-          } else if (alexanderIdx === -1) {
-            // Alexander Park not in Sanity yet — keep fallback featured at index 0
-            mapped.unshift({ ...fallbackShopProducts[0] });
-            mapped.splice(6); // keep to 5 items
+          // Pin Alexandra Park or West Hill drawn print as featured (index 0)
+          const PREFERRED_FEATURED_SLUGS = ['alexander-park-print', 'alexandra-park-print', 'west-hill-print'];
+          let featuredIdx = -1;
+          for (const slug of PREFERRED_FEATURED_SLUGS) {
+            featuredIdx = mapped.findIndex((p) => p.slug === slug);
+            if (featuredIdx !== -1) break;
           }
+          if (featuredIdx > 0) {
+            const [featured] = mapped.splice(featuredIdx, 1);
+            mapped.unshift(featured);
+          }
+          // If none of the preferred slugs are found, Sanity's first item stays featured
           setShopProducts(mapped.slice(0, 5));
         }
       })
@@ -569,7 +571,7 @@ export function HomePage() {
                 <div className="flex items-center gap-6">
                   <span className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl" style={{ color: shopProducts[0].accentColor }}>£{shopProducts[0].price}</span>
                   <span className="inline-flex items-center gap-2 text-[#4A3428] group-hover:text-[#E8846F] transition-colors font-['Plus_Jakarta_Sans']">
-                    View product <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                    View →
                   </span>
                 </div>
               </div>
