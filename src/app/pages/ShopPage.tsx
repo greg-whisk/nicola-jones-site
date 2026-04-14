@@ -7,7 +7,7 @@ import { PillButton } from '../components/PillButton';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { client, urlFor } from '../../lib/sanity';
 
-const categories = ['All', 'Prints', 'Original Art', 'Tote Bags', 'Merch'];
+const categories = ['All', 'Prints', 'Original Art', 'Tote Bags', 'Merch', 'Live Painting'];
 
 const categoryLabels: Record<string, string> = {
   prints: 'Prints',
@@ -110,7 +110,7 @@ export function ShopPage() {
 
   const filteredProducts = selectedCategory === 'All'
     ? products
-    : products.filter(product => product.category === selectedCategory);
+    : products.filter(product => categoryLabels[product.category] === selectedCategory);
 
   return (
     <div className="py-20">
