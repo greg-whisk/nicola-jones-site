@@ -537,7 +537,6 @@ export function HomePage() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-4">
               <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428]">From the Shop</h2>
-              <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-32 md:w-56 h-auto pointer-events-none" />
             </div>
             <PillButton variant="outline" onClick={() => navigate('/shop')}>Browse all</PillButton>
           </div>
