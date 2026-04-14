@@ -131,6 +131,9 @@ export function ProductDetailPage() {
           size: data.size || '',
           productDetails: data.productDetails || [],
         });
+        // Clear loading as soon as the product is ready so the layout renders
+        // immediately. Related products continue fetching in the background.
+        setLoading(false);
 
         // Fetch related — same category first, then fallback to newest
         let relatedData: any[] | null = null;
