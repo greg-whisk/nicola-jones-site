@@ -543,6 +543,30 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* The Promise Section */}
+      <section className="py-20" style={{ backgroundColor: '#5D9B9B' }}>
+        <div className="max-w-[800px] mx-auto px-6 text-center">
+          <motion.h2
+            className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl lg:text-4xl text-white mb-6 leading-[1.2]"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            {homepageData.promiseHeading ?? 'Hiring an artist should not involve three emails and a waiting game.'}
+          </motion.h2>
+          <motion.p
+            className="text-xl leading-relaxed"
+            style={{ color: 'rgba(255,255,255,0.85)' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+          >
+            {homepageData.promiseBody ?? "Tell me what you need. I'll respond within 24 hours with a clear quote, a timeline, and a sketch concept. No vague proposals, no chasing, no surprise invoices."}
+          </motion.p>
+        </div>
+      </section>
+
       {/* Featured Work Strip */}
       <section className="py-20 relative">
         <div className="max-w-[1440px] mx-auto px-6">
