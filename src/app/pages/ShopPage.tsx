@@ -7,7 +7,7 @@ import { PillButton } from '../components/PillButton';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { client, urlFor } from '../../lib/sanity';
 
-const categories = ['All', 'Prints', 'Original Art', 'Tote Bags', 'Merch'];
+const categories = ['All', 'Prints', 'Original Art', 'Tote Bags', 'Merch', 'Live Painting'];
 
 interface Product {
   id: string | number;

@@ -34,6 +34,7 @@ export default defineType({
           { title: 'Original Art', value: 'original-art' },
           { title: 'Tote Bags', value: 'tote-bags' },
           { title: 'Merch', value: 'merch' },
+          { title: 'Live Painting', value: 'live-painting' },
         ],
       },
       validation: (Rule) => Rule.required(),
