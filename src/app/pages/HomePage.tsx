@@ -143,9 +143,12 @@ interface Testimonial {
 }
 
 interface HomepageData {
+  heroTagline?: string;
   heroHeadline?: string;
+  heroHeadlineAccent?: string;
   heroSubheading?: string;
   heroImage?: any;
+  pathwaySectionHeading?: string;
   pathwayCard1Title?: string;
   pathwayCard1Description?: string;
   pathwayCard2Title?: string;
@@ -155,6 +158,7 @@ interface HomepageData {
   clientNames?: string[];
   ctaHeadline?: string;
   ctaSubtext?: string;
+  shopSectionIntro?: string;
   featuredWork?: Array<{ _id: string; title: string; category?: string; mainImage?: any; slug: string }>;
 }
 
@@ -175,11 +179,12 @@ export function HomePage() {
     client
       .fetch<HomepageData | null>(
         `*[_type == "homepage"][0]{
-          heroHeadline, heroSubheading, heroImage,
+          heroTagline, heroHeadline, heroHeadlineAccent, heroSubheading, heroImage,
+          pathwaySectionHeading,
           pathwayCard1Title, pathwayCard1Description,
           pathwayCard2Title, pathwayCard2Description,
           pathwayCard3Title, pathwayCard3Description,
-          clientNames, ctaHeadline, ctaSubtext,
+          clientNames, ctaHeadline, ctaSubtext, shopSectionIntro,
           "featuredWork": featuredWork[]->{
             _id, title, category, mainImage, "slug": slug.current
           }
@@ -295,14 +300,14 @@ export function HomePage() {
         <div className="max-w-[1440px] mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20 lg:py-0">
           <div>
             <p className="text-[#E8846F] font-['Plus_Jakarta_Sans'] font-heading-manrope text-lg mb-4 uppercase tracking-wider">
-              Illustrator & Decorative Painter
+              {homepageData.heroTagline || 'Illustrator & Decorative Painter'}
             </p>
             <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-[#4A3428] mb-6">
-              Murals. Theatre. Illustration.<br />
-              <span className="text-[#E8846F]">All drawn with a grin.</span>
+              {homepageData.heroHeadline || 'Murals. Theatre. Illustration.'}<br />
+              <span className="text-[#E8846F]">{homepageData.heroHeadlineAccent || 'All drawn with a grin.'}</span>
             </h1>
             <p className="text-xl text-[#6B7554] mb-8 leading-relaxed max-w-xl">
-              Brighton-born illustrator and decorative painter, now based in Hastings. Theatre backdrops, community murals, brand illustration — and quite a few bums.
+              {homepageData.heroSubheading || 'Brighton-born illustrator and decorative painter, now based in Hastings. Theatre backdrops, community murals, brand illustration — and quite a few bums.'}
             </p>
             <div className="relative z-10 flex flex-wrap gap-4">
               <PillButton variant="primary" onClick={() => navigate('/portfolio')}>
@@ -322,7 +327,7 @@ export function HomePage() {
             {/* Main illustration image */}
             <div className="relative z-10 transform rotate-2 hover:rotate-0 transition-transform duration-500 max-w-[85%] mx-auto">
               <ImageWithFallback
-                src="/nicola-jones-hero.webp"
+                src={homepageData.heroImage ? urlFor(homepageData.heroImage).width(900).url() : '/nicola-jones-hero.webp'}
                 alt="Bold illustration work"
                 className="w-full h-auto rounded-3xl shadow-2xl"
               />
@@ -348,13 +353,17 @@ export function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              Where would you like to go?
+              {homepageData.pathwaySectionHeading || 'Where would you like to go?'}
             </motion.h2>
             <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-28 md:w-48 h-auto pointer-events-none" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-            {pathways.map((pathway, index) => (
+            {pathways.map((pathway, index) => {
+              const cardTitles = [homepageData.pathwayCard1Title, homepageData.pathwayCard2Title, homepageData.pathwayCard3Title];
+              const cardDescs = [homepageData.pathwayCard1Description, homepageData.pathwayCard2Description, homepageData.pathwayCard3Description];
+              const resolved = { ...pathway, title: cardTitles[index] || pathway.title, description: cardDescs[index] || pathway.description };
+              return (
               <motion.div
                 key={pathway.title}
                 initial={{ opacity: 0, y: 60 }}
@@ -396,10 +405,10 @@ export function HomePage() {
                     </div>
 
                     <h3 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-2xl mb-3 text-[#4A3428]">
-                      {pathway.title}
+                      {resolved.title}
                     </h3>
                     <p className="text-[#6B7554] mb-6">
-                      {pathway.description}
+                      {resolved.description}
                     </p>
 
                     <span className="inline-flex items-center text-[#4A3428] group-hover:text-[#E8846F] transition-colors">
@@ -408,7 +417,8 @@ export function HomePage() {
                   </motion.div>
                 </Link>
               </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -521,7 +531,7 @@ export function HomePage() {
             </div>
             <PillButton variant="outline" onClick={() => navigate('/shop')}>Browse all</PillButton>
           </div>
-          <p className="text-lg text-[#6B7554] mb-12 max-w-xl">Prints, tote bags, stickers, and illustrated goodies — shipped with love from Hastings.</p>
+          <p className="text-lg text-[#6B7554] mb-12 max-w-xl">{homepageData.shopSectionIntro || 'Prints, tote bags, stickers, and illustrated goodies — shipped with love from Hastings.'}</p>
 
           <Link to={`/shop/${shopProducts[0].slug}`}>
             <motion.div

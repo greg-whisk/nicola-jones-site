@@ -7,10 +7,22 @@ export default defineType({
   fields: [
     // Hero
     defineField({
+      name: 'heroTagline',
+      title: 'Hero Tagline',
+      type: 'string',
+      description: 'Small label above the headline, e.g. "Illustrator & Decorative Painter"',
+    }),
+    defineField({
       name: 'heroHeadline',
       title: 'Hero Headline',
       type: 'string',
       description: 'Main hero heading, e.g. "Murals. Theatre. Illustration."',
+    }),
+    defineField({
+      name: 'heroHeadlineAccent',
+      title: 'Hero Headline — Accent Line',
+      type: 'string',
+      description: 'Second line shown in coral/orange, e.g. "All drawn with a grin."',
     }),
     defineField({
       name: 'heroSubheading',
@@ -27,6 +39,12 @@ export default defineType({
       description: 'Main illustration shown on the right side of the hero',
     }),
     // Pathway cards
+    defineField({
+      name: 'pathwaySectionHeading',
+      title: 'Pathway Section Heading',
+      type: 'string',
+      description: 'e.g. "Where would you like to go?"',
+    }),
     defineField({
       name: 'pathwayCard1Title',
       title: 'Pathway Card 1 — Title',
@@ -92,6 +110,14 @@ export default defineType({
       title: 'CTA Subtext',
       type: 'text',
       rows: 3,
+    }),
+    // Shop section
+    defineField({
+      name: 'shopSectionIntro',
+      title: 'Shop Section Intro',
+      type: 'text',
+      rows: 2,
+      description: 'Short line beneath "From the Shop" heading, e.g. "Prints, tote bags, stickers…"',
     }),
   ],
   preview: {
