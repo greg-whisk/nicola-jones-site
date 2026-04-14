@@ -7,6 +7,16 @@ import { PillButton } from '../components/PillButton';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { client, urlFor } from '../../lib/sanity';
 
+interface CommissionsPageData {
+  heroHeadline?: string;
+  heroSubtext?: string;
+  typesSectionHeading?: string;
+  typesSectionIntro?: string;
+  commissionTypes?: Array<{ id: string; label?: string; description?: string }>;
+  ctaHeadline?: string;
+  ctaSubtext?: string;
+}
+
 interface CommissionProject {
   slug: string;
   title: string;
@@ -109,6 +119,7 @@ const slugDefaults: Record<string, { title: string; summary: string; image: stri
 const ALL_SLUGS = commissionTypes.flatMap((ct) => ct.slugs);
 
 export function CommissionsPage() {
+  const [pageData, setPageData] = useState<CommissionsPageData>({});
   const [projectData, setProjectData] = useState<Record<string, CommissionProject>>(
     () =>
       Object.fromEntries(
@@ -120,6 +131,18 @@ export function CommissionsPage() {
   );
 
   useEffect(() => {
+    client
+      .fetch<CommissionsPageData | null>(
+        `*[_type == "commissionsPage"][0]{
+          heroHeadline, heroSubtext,
+          typesSectionHeading, typesSectionIntro,
+          commissionTypes[]{ id, label, description },
+          ctaHeadline, ctaSubtext
+        }`
+      )
+      .then((data) => { if (data) setPageData(data); })
+      .catch(console.error);
+
     client
       .fetch<any[]>(
         `*[_type == "portfolioProject" && slug.current in $slugs] {
@@ -154,11 +177,11 @@ export function CommissionsPage() {
         {/* Header */}
         <div className="relative mb-20 text-center">
           <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428] mb-6">
-            Let's Make Something Together
+            {pageData.heroHeadline || 'Let\'s Make Something Together'}
           </h1>
 
           <p className="text-xl text-[#6B7554] max-w-3xl mx-auto mb-8">
-            Whether it's a building-sized mural, a book full of characters, or a brand that needs personality — I'd love to bring your vision to life with bold, playful illustration.
+            {pageData.heroSubtext || 'Whether it\'s a building-sized mural, a book full of characters, or a brand that needs personality — I\'d love to bring your vision to life with bold, playful illustration.'}
           </p>
 
           <div className="flex justify-center gap-4">
@@ -168,13 +191,19 @@ export function CommissionsPage() {
 
         {/* Commission Types */}
         <div className="mb-20">
-          <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428] mb-4 text-center">Commission Types</h2>
+          <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428] mb-4 text-center">{pageData.typesSectionHeading || 'Commission Types'}</h2>
           <p className="text-xl text-[#6B7554] text-center mb-16 max-w-2xl mx-auto">
-            Here's a selection of recent commissions across my main areas of work.
+            {pageData.typesSectionIntro || 'Here\'s a selection of recent commissions across my main areas of work.'}
           </p>
 
           <div className="space-y-24">
             {commissionTypes.map((ct, index) => {
+              const override = pageData.commissionTypes?.find((o) => o.id === ct.id);
+              const resolvedCt = {
+                ...ct,
+                label: override?.label || ct.label,
+                description: override?.description || ct.description,
+              };
               const projects = ct.slugs.map((s) => projectData[s]).filter(Boolean);
               return (
                 <motion.div
@@ -199,10 +228,10 @@ export function CommissionsPage() {
                       className="inline-block text-white px-4 py-2 rounded-full text-sm mb-4 font-['Plus_Jakarta_Sans']"
                       style={{ backgroundColor: ct.color }}
                     >
-                      {ct.label}
+                      {resolvedCt.label}
                     </span>
-                    <h3 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl text-[#4A3428] mb-4">{ct.label}</h3>
-                    <p className="text-lg text-[#6B7554] leading-relaxed mb-8">{ct.description}</p>
+                    <h3 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl text-[#4A3428] mb-4">{resolvedCt.label}</h3>
+                    <p className="text-lg text-[#6B7554] leading-relaxed mb-8">{resolvedCt.description}</p>
                     <Link to="/contact">
                       <button
                         className="text-[#E8846F] hover:text-[#4A3428] transition-colors flex items-center gap-2 font-['Plus_Jakarta_Sans'] group"
@@ -277,10 +306,10 @@ export function CommissionsPage() {
             </motion.div>
 
             <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl lg:text-5xl text-white mb-6">
-              Got a project in mind?
+              {pageData.ctaHeadline || 'Got a project in mind?'}
             </h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Let's chat about your ideas, timelines, and how we can make something brilliant together.
+              {pageData.ctaSubtext || 'Let\'s chat about your ideas, timelines, and how we can make something brilliant together.'}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/contact">
