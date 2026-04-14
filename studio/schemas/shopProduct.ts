@@ -45,10 +45,43 @@ export default defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'gallery',
+      title: 'Gallery',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+    }),
+    defineField({
+      name: 'shortDescription',
+      title: 'Short Description',
+      type: 'text',
+      rows: 2,
+    }),
+    defineField({
       name: 'description',
       title: 'Description',
       type: 'array',
       of: [{ type: 'block' }],
+    }),
+    defineField({
+      name: 'productDetails',
+      title: 'Product Details',
+      type: 'array',
+      of: [{ type: 'block' }],
+    }),
+    defineField({
+      name: 'size',
+      title: 'Size',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'A1 (594 × 841 mm)', value: 'a1' },
+          { title: 'A2 (420 × 594 mm)', value: 'a2' },
+          { title: 'A3 (297 × 420 mm)', value: 'a3' },
+          { title: 'A4 (210 × 297 mm)', value: 'a4' },
+          { title: 'Original', value: 'original' },
+          { title: 'One Size', value: 'one-size' },
+        ],
+      },
     }),
     defineField({
       name: 'inStock',
