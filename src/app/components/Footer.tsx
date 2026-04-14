@@ -12,12 +12,16 @@ interface SiteSettings {
   contactEmail: string;
   socialLinks: SocialLink[];
   footerText: string;
+  tagline: string;
+  location: string;
 }
 
 const fallbackSettings: SiteSettings = {
   contactEmail: 'hello@nicolajones.art',
   socialLinks: [],
   footerText: '',
+  tagline: '',
+  location: '',
 };
 
 const socialIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -34,7 +38,7 @@ export function Footer() {
   useEffect(() => {
     client
       .fetch<SiteSettings | null>(
-        `*[_type == "siteSettings"][0]{ contactEmail, socialLinks, footerText }`
+        `*[_type == "siteSettings"][0]{ contactEmail, socialLinks, footerText, tagline, location }`
       )
       .then((data) => {
         if (data) {
@@ -42,6 +46,8 @@ export function Footer() {
             contactEmail: data.contactEmail || fallbackSettings.contactEmail,
             socialLinks: data.socialLinks || [],
             footerText: data.footerText || '',
+            tagline: data.tagline || '',
+            location: data.location || '',
           });
         }
       })
@@ -62,7 +68,7 @@ export function Footer() {
               style={{ width: '70px', height: '70px', filter: 'brightness(0) invert(1) sepia(0.15)', opacity: 0.88 }}
             />
             <p className="text-[#D4A99C] text-sm leading-relaxed">
-              Bold illustration. Big walls. Tiny tote bags. Everything in between.
+              {settings.tagline || 'Bold illustration. Big walls. Tiny tote bags. Everything in between.'}
             </p>
           </div>
 
@@ -79,7 +85,7 @@ export function Footer() {
           <div>
             <h4 className="font-['Plus_Jakarta_Sans'] font-heading-manrope mb-4">Say Hello</h4>
             <div className="space-y-3">
-              <p className="text-[#D4A99C] text-sm">Hastings, UK</p>
+              <p className="text-[#D4A99C] text-sm">{settings.location || 'Hastings, UK'}</p>
               <a
                 href={`mailto:${settings.contactEmail}`}
                 className="text-[#D4A99C] hover:text-[#E8846F] transition-colors text-sm block"

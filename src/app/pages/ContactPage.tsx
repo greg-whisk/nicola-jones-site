@@ -13,11 +13,19 @@ interface SocialLink {
 interface SiteSettings {
   contactEmail: string;
   socialLinks: SocialLink[];
+  location: string;
+  contactPageHeading: string;
+  contactPageIntro: string;
+  responseTimeNote: string;
 }
 
 const fallbackSettings: SiteSettings = {
   contactEmail: 'hello@nicolajones.art',
   socialLinks: [],
+  location: '',
+  contactPageHeading: '',
+  contactPageIntro: '',
+  responseTimeNote: '',
 };
 
 const socialIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -38,13 +46,17 @@ export function ContactPage() {
   useEffect(() => {
     client
       .fetch<SiteSettings | null>(
-        `*[_type == "siteSettings"][0]{ contactEmail, socialLinks }`
+        `*[_type == "siteSettings"][0]{ contactEmail, socialLinks, location, contactPageHeading, contactPageIntro, responseTimeNote }`
       )
       .then((data) => {
         if (data) {
           setSettings({
             contactEmail: data.contactEmail || fallbackSettings.contactEmail,
             socialLinks: data.socialLinks || [],
+            location: data.location || '',
+            contactPageHeading: data.contactPageHeading || '',
+            contactPageIntro: data.contactPageIntro || '',
+            responseTimeNote: data.responseTimeNote || '',
           });
         }
       })
@@ -72,10 +84,10 @@ export function ContactPage() {
       <div className="max-w-[1440px] mx-auto px-6">
         <div className="text-center mb-16">
           <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-6xl text-[#4A3428] mb-4">
-            Say Hello
+            {settings.contactPageHeading || 'Say Hello'}
           </h1>
           <p className="text-xl text-[#6B7554] max-w-2xl mx-auto">
-            Have a project in mind? A question? Or just want to chat about art? Drop me a line!
+            {settings.contactPageIntro || 'Have a project in mind? A question? Or just want to chat about art? Drop me a line!'}
           </p>
         </div>
 
@@ -114,9 +126,7 @@ export function ContactPage() {
                 <div>
                   <h3 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-xl text-[#4A3428] mb-2">Location</h3>
                   <p className="text-[#6B7554] text-lg">
-                    Hastings, East Sussex
-                    <br />
-                    <span className="text-sm">(Available for projects worldwide)</span>
+                    {settings.location || 'Hastings, East Sussex'}
                   </p>
                 </div>
               </div>
@@ -268,9 +278,7 @@ export function ContactPage() {
           viewport={{ once: true }}
         >
           <p className="text-lg text-[#6B7554] italic">
-            I typically respond within 24-48 hours. If you don't hear from me, check your spam folder—
-            <br />
-            sometimes my emails get categorized as "too cheerful."
+            {settings.responseTimeNote || 'I typically respond within 24-48 hours. If you don\'t hear from me, check your spam folder — sometimes my emails get categorized as "too cheerful."'}
           </p>
         </motion.div>
       </div>

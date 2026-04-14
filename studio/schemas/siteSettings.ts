@@ -38,9 +38,36 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+      description: 'Studio location shown in the footer and contact page, e.g. "Hastings, East Sussex"',
+    }),
+    defineField({
       name: 'footerText',
       title: 'Footer Text',
       type: 'string',
+    }),
+    // Contact page copy
+    defineField({
+      name: 'contactPageHeading',
+      title: 'Contact Page Heading',
+      type: 'string',
+      description: 'e.g. "Say Hello"',
+    }),
+    defineField({
+      name: 'contactPageIntro',
+      title: 'Contact Page Intro',
+      type: 'text',
+      rows: 2,
+      description: 'e.g. "Have a project in mind? A question? Or just want to chat about art? Drop me a line!"',
+    }),
+    defineField({
+      name: 'responseTimeNote',
+      title: 'Response Time Note',
+      type: 'text',
+      rows: 2,
+      description: 'Closing note on the contact page, e.g. "I typically respond within 24-48 hours..."',
     }),
     defineField({
       name: 'logo',
