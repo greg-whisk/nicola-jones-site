@@ -273,7 +273,7 @@ export function CommissionsPage() {
 
         {/* CTA Section */}
         <motion.div
-          className="bg-gradient-to-r from-[#E8846F] to-[#D4725C] rounded-3xl p-10 lg:p-16 text-center relative overflow-hidden"
+          className="bg-gradient-to-br from-[#E8846F] to-[#D4725C] rounded-3xl p-10 lg:p-16 text-center relative overflow-hidden"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -298,7 +298,7 @@ export function CommissionsPage() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/contact">
-                <PillButton variant="primary" className="!bg-[#E8846F] hover:!bg-white hover:!text-[#4A3428]">
+                <PillButton variant="primary" className="!bg-white !text-[#E8846F] hover:!bg-[#E8846F] hover:!text-white">
                   Start a conversation
                 </PillButton>
               </Link>
