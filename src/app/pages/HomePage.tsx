@@ -142,6 +142,13 @@ interface Testimonial {
   role: string;
 }
 
+interface ActionCard {
+  title?: string;
+  description?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+}
+
 interface HomepageData {
   heroTagline?: string;
   heroHeadline?: string;
@@ -160,6 +167,14 @@ interface HomepageData {
   ctaSubtext?: string;
   shopSectionIntro?: string;
   featuredWork?: Array<{ _id: string; title: string; category?: string; mainImage?: any; slug: string }>;
+  actionCardsHeading?: string;
+  actionCard1?: ActionCard;
+  actionCard2?: ActionCard;
+  actionCard3?: ActionCard;
+  promiseHeading?: string;
+  promiseBody?: string;
+  testimonialsHeading?: string;
+  testimonials?: Array<{ quote?: string; author?: string; role?: string }>;
 }
 
 const fallbackTestimonial: Testimonial = {
@@ -167,6 +182,51 @@ const fallbackTestimonial: Testimonial = {
   author: '',
   role: '',
 };
+
+const actionCardDefaults = [
+  {
+    title: 'Celebrate',
+    description: 'Live painting at weddings, parties, and events. Workshops for hens, baby showers, and groups.',
+    ctaLabel: 'Plan an event →',
+    ctaUrl: '/celebrate',
+    color: '#E8846F',
+    bgColor: '#FDF0ED',
+  },
+  {
+    title: 'Commission',
+    description: 'Murals, theatre backdrops, and brand illustration. Big walls and tiny logos welcome.',
+    ctaLabel: 'Start a project →',
+    ctaUrl: '/commissions',
+    color: '#5D9B9B',
+    bgColor: '#EDF5F5',
+  },
+  {
+    title: 'Shop',
+    description: 'Original prints, tote bags, stickers, and illustrated goodies — shipped from Hastings.',
+    ctaLabel: 'Browse the shop →',
+    ctaUrl: '/shop',
+    color: '#D8767D',
+    bgColor: '#F9EDEE',
+  },
+];
+
+const fallbackTestimonials: Testimonial[] = [
+  {
+    quote: "Working with Nicola was an absolute joy. Her work brought our brand to life in ways we hadn't imagined.",
+    author: 'Elise Edge',
+    role: 'Darling and Edge',
+  },
+  {
+    quote: 'Nicola translated our brief into something far better than we could have asked for. Highly recommended.',
+    author: 'Hannah Collisson',
+    role: '',
+  },
+  {
+    quote: 'From first sketch to final install, everything was professional and creative. We\'ll use her again.',
+    author: 'Stacey Norris',
+    role: '',
+  },
+];
 
 export function HomePage() {
   const navigate = useNavigate();
@@ -185,6 +245,13 @@ export function HomePage() {
           pathwayCard2Title, pathwayCard2Description,
           pathwayCard3Title, pathwayCard3Description,
           clientNames, ctaHeadline, ctaSubtext, shopSectionIntro,
+          actionCardsHeading,
+          actionCard1{ title, description, ctaLabel, ctaUrl },
+          actionCard2{ title, description, ctaLabel, ctaUrl },
+          actionCard3{ title, description, ctaLabel, ctaUrl },
+          promiseHeading, promiseBody,
+          testimonialsHeading,
+          testimonials[]{ quote, author, role },
           "featuredWork": featuredWork[]->{
             _id, title, category, mainImage, "slug": slug.current
           }
@@ -424,6 +491,57 @@ export function HomePage() {
       </section>
 
       <WavyDivider color="#FAF8F5" flip />
+
+      {/* Action Cards Section */}
+      <section className="py-20 bg-[#FAF8F5]">
+        <div className="max-w-[1440px] mx-auto px-6">
+          <motion.p
+            className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-center text-lg text-[#E8846F] uppercase tracking-widest mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            {homepageData.actionCardsHeading ?? 'What are you here for?'}
+          </motion.p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {actionCardDefaults.map((card, index) => {
+              const sanityCards = [homepageData.actionCard1, homepageData.actionCard2, homepageData.actionCard3];
+              const s = sanityCards[index];
+              const title = s?.title ?? card.title;
+              const description = s?.description ?? card.description;
+              const ctaLabel = s?.ctaLabel ?? card.ctaLabel;
+              const ctaUrl = s?.ctaUrl ?? card.ctaUrl;
+              return (
+                <motion.div
+                  key={card.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Link to={ctaUrl} className="block h-full">
+                    <div
+                      className="h-full rounded-3xl p-8 flex flex-col gap-4 hover:shadow-xl transition-shadow duration-300"
+                      style={{ backgroundColor: card.bgColor }}
+                    >
+                      <h3 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-2xl text-[#4A3428]">
+                        {title}
+                      </h3>
+                      <p className="text-[#6B7554] flex-1 leading-relaxed">{description}</p>
+                      <span
+                        className="inline-flex items-center font-['Plus_Jakarta_Sans'] font-heading-manrope font-medium"
+                        style={{ color: card.color }}
+                      >
+                        {ctaLabel}
+                      </span>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* Featured Work Strip */}
       <section className="py-20 relative">
