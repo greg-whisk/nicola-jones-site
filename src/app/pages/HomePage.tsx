@@ -142,6 +142,22 @@ interface Testimonial {
   role: string;
 }
 
+interface HomepageData {
+  heroHeadline?: string;
+  heroSubheading?: string;
+  heroImage?: any;
+  pathwayCard1Title?: string;
+  pathwayCard1Description?: string;
+  pathwayCard2Title?: string;
+  pathwayCard2Description?: string;
+  pathwayCard3Title?: string;
+  pathwayCard3Description?: string;
+  clientNames?: string[];
+  ctaHeadline?: string;
+  ctaSubtext?: string;
+  featuredWork?: Array<{ _id: string; title: string; category?: string; mainImage?: any; slug: string }>;
+}
+
 const fallbackTestimonial: Testimonial = {
   quote: '',
   author: '',
@@ -153,8 +169,43 @@ export function HomePage() {
   const [featuredWork, setFeaturedWork] = useState<FeaturedWork[]>(fallbackFeaturedWork);
   const [testimonial, setTestimonial] = useState<Testimonial>(fallbackTestimonial);
   const [shopProducts, setShopProducts] = useState<ShopProduct[]>(fallbackShopProducts);
+  const [homepageData, setHomepageData] = useState<HomepageData>({});
 
   useEffect(() => {
+    client
+      .fetch<HomepageData | null>(
+        `*[_type == "homepage"][0]{
+          heroHeadline, heroSubheading, heroImage,
+          pathwayCard1Title, pathwayCard1Description,
+          pathwayCard2Title, pathwayCard2Description,
+          pathwayCard3Title, pathwayCard3Description,
+          clientNames, ctaHeadline, ctaSubtext,
+          "featuredWork": featuredWork[]->{
+            _id, title, category, mainImage, "slug": slug.current
+          }
+        }`
+      )
+      .then((data) => {
+        if (data) {
+          setHomepageData(data);
+          if (data.featuredWork && data.featuredWork.length > 0) {
+            setFeaturedWork(
+              data.featuredWork.map((item, idx) => ({
+                id: item._id,
+                slug: item.slug,
+                title: item.title,
+                category: item.category || '',
+                image: item.mainImage
+                  ? urlFor(item.mainImage).width(600).url()
+                  : fallbackFeaturedWork[idx % fallbackFeaturedWork.length].image,
+              }))
+            );
+          }
+        }
+      })
+      .catch(console.error);
+
+    // Fallback: load featured work by slug if not set via homepage doc
     client
       .fetch<any[]>(
         `*[_type == "portfolioProject" && slug.current in $slugs]{
@@ -164,21 +215,24 @@ export function HomePage() {
       )
       .then((data) => {
         if (data && data.length > 0) {
-          // Sort by FEATURED_SLUGS order
-          const sorted = FEATURED_SLUGS
-            .map((slug) => data.find((d) => d.slug === slug))
-            .filter(Boolean);
-          setFeaturedWork(
-            sorted.map((item: any, idx: number) => ({
-              id: item._id,
-              slug: item.slug,
-              title: item.title,
-              category: item.category || '',
-              image: item.mainImage
-                ? urlFor(item.mainImage).width(600).url()
-                : fallbackFeaturedWork[idx % fallbackFeaturedWork.length].image,
-            }))
-          );
+          setFeaturedWork((prev) => {
+            // Only apply fallback if homepage doc didn't supply featured work
+            if (prev === fallbackFeaturedWork) {
+              const sorted = FEATURED_SLUGS
+                .map((slug) => data.find((d) => d.slug === slug))
+                .filter(Boolean);
+              return sorted.map((item: any, idx: number) => ({
+                id: item._id,
+                slug: item.slug,
+                title: item.title,
+                category: item.category || '',
+                image: item.mainImage
+                  ? urlFor(item.mainImage).width(600).url()
+                  : fallbackFeaturedWork[idx % fallbackFeaturedWork.length].image,
+              }));
+            }
+            return prev;
+          });
         }
       })
       .catch(console.error);
