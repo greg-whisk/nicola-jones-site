@@ -156,12 +156,6 @@ export function Footer() {
             : '© 2026 Nicola Jones. All rights reserved. Illustrations are bold and so are you for reading this.'}
         </div>
       </div>
-      <img
-        src="/nicola-jones-wave-up-loop.png"
-        className="absolute bottom-[-50px] right-4 md:right-8 w-28 md:w-48 h-auto pointer-events-none rotate-180"
-        alt=""
-        aria-hidden="true"
-      />
     </footer>
   );
 }
