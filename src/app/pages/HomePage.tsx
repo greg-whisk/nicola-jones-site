@@ -246,7 +246,7 @@ export function HomePage() {
 
     client
       .fetch<any[]>(
-        `*[_type == "shopProduct" && inStock != false] | order(_createdAt desc)[0...5] {
+        `*[_type == "shopProduct" && inStock != false] | order(_createdAt desc)[0...20] {
           _id, name, price, category, image, description, "slug": slug.current
         }`
       )
