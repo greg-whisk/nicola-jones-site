@@ -142,25 +142,19 @@ export function ProjectDetailPage() {
       <section className="relative">
         {/* Back button */}
         <div className="max-w-[1440px] mx-auto px-6 pt-8 relative z-20">
-          <motion.button
+          <button
             onClick={() => navigate('/portfolio')}
             className="flex items-center gap-2 text-[#6B7554] hover:text-[#E8846F] transition-colors font-['Plus_Jakarta_Sans'] group"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
             Back to Portfolio
-          </motion.button>
+          </button>
         </div>
 
         <div className="max-w-[1440px] mx-auto px-6 pt-8 pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Text */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
+            <div>
               <div className="flex items-center gap-3 mb-6 flex-wrap">
                 <span
                   className="inline-block text-white px-4 py-1.5 rounded-full text-sm font-['Plus_Jakarta_Sans']"
@@ -189,15 +183,10 @@ export function ProjectDetailPage() {
                   {project.summary}
                 </p>
               )}
-            </motion.div>
+            </div>
 
             {/* Hero Image */}
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, scale: 0.9, rotate: 2 }}
-              animate={{ opacity: 1, scale: 1, rotate: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
+            <div className="relative">
               <BlobShape
                 color={project.accentColor}
                 className="absolute -top-12 -right-12 w-48 h-48 opacity-20"
@@ -226,7 +215,7 @@ export function ProjectDetailPage() {
                   <path d="M15 28 Q22 34 29 28" stroke="#4A3428" strokeWidth="2" fill="none" strokeLinecap="round" />
                 </svg>
               </motion.div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -237,18 +226,15 @@ export function ProjectDetailPage() {
           <div className="max-w-[1440px] mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {project.stats.map((stat, i) => (
-                <motion.div
+                <div
                   key={stat.label}
                   className="text-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
                 >
                   <div className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl lg:text-4xl text-[#4A3428] mb-1">
                     {stat.value}
                   </div>
                   <div className="text-sm text-[#6B7554]">{stat.label}</div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>

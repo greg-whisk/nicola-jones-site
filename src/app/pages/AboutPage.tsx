@@ -87,12 +87,7 @@ export function AboutPage() {
         {/* Two-column intro */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24 items-center">
           {/* Photo with doodles */}
-          <motion.div
-            className="relative order-2 lg:order-1"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <div className="relative order-2 lg:order-1">
             <div className="relative">
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
                 <img src="/nicola-jones-headshot.webp" alt="Nicola Jones" className="w-full h-full object-cover object-top" />
@@ -102,15 +97,10 @@ export function AboutPage() {
               <BlobShape color="#E8846F" className="absolute -top-12 -right-12 w-32 h-32 opacity-30" variant={1} />
               <BlobShape color="#5D9B9B" className="absolute -bottom-8 -left-8 w-24 h-24 opacity-30" variant={2} />
             </div>
-          </motion.div>
+          </div>
 
           {/* Bio */}
-          <motion.div
-            className="order-1 lg:order-2"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <div className="order-1 lg:order-2">
             <div className="flex justify-center mb-4">
               <img src="/nicola-jones-daffs-loop.png" alt="" aria-hidden="true" className="w-24 md:w-36 h-auto" />
             </div>
@@ -124,7 +114,7 @@ export function AboutPage() {
                 <p key={idx}>{paragraph}</p>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Process Section */}

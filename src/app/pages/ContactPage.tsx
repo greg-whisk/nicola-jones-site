@@ -70,40 +70,26 @@ export function ContactPage() {
   return (
     <div className="py-20 min-h-screen">
       <div className="max-w-[1440px] mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-6xl text-[#4A3428] mb-4">
             Say Hello
           </h1>
           <p className="text-xl text-[#6B7554] max-w-2xl mx-auto">
             Have a project in mind? A question? Or just want to chat about art? Drop me a line!
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto relative">
           {/* Left side - Contact info */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
+          <div className="relative">
             {/* Headshot */}
-            <motion.div
-              className="mb-8 flex justify-center"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-            >
+            <div className="mb-8 flex justify-center">
               <img
                 src="/nicola-jones-headshot.webp"
                 alt="Nicola Jones"
                 className="w-40 h-40 md:w-56 md:h-56 rounded-full object-cover object-top shadow-lg border-4 border-white"
               />
-            </motion.div>
+            </div>
 
             <div className="space-y-8">
               <div className="flex items-start gap-4">
@@ -187,15 +173,10 @@ export function ContactPage() {
               className="absolute -bottom-10 -right-10 w-24 h-24 opacity-10"
               variant={2}
             />
-          </motion.div>
+          </div>
 
           {/* Right side - Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
-          >
+          <div className="relative">
             <form onSubmit={handleSubmit} className="bg-white rounded-3xl p-8 shadow-lg relative z-10">
               <div className="mb-6">
                 <label htmlFor="name" className="block text-[#4A3428] mb-2">
@@ -276,7 +257,7 @@ export function ContactPage() {
               className="absolute top-1/2 -right-20 w-32 h-32 opacity-10"
               variant={3}
             />
-          </motion.div>
+          </div>
         </div>
 
         {/* Bottom decorative note */}

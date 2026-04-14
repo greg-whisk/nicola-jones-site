@@ -293,19 +293,10 @@ export function HomePage() {
         <BlobShape color="#5D9B9B" className="absolute bottom-0 left-0 w-[400px] h-[400px] opacity-[0.07] pointer-events-none" variant={3} />
 
         <div className="max-w-[1440px] mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20 lg:py-0">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.p
-              className="text-[#E8846F] font-['Plus_Jakarta_Sans'] font-heading-manrope text-lg mb-4 uppercase tracking-wider"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
+          <div>
+            <p className="text-[#E8846F] font-['Plus_Jakarta_Sans'] font-heading-manrope text-lg mb-4 uppercase tracking-wider">
               Illustrator & Decorative Painter
-            </motion.p>
+            </p>
             <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-[#4A3428] mb-6">
               Murals. Theatre. Illustration.<br />
               <span className="text-[#E8846F]">All drawn with a grin.</span>
@@ -321,14 +312,9 @@ export function HomePage() {
                 Visit the shop
               </PillButton>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <div className="relative">
             {/* Blob backgrounds */}
             <BlobShape color="#E8846F" className="absolute -top-16 -right-16 w-80 h-80 opacity-20 pointer-events-none" variant={1} />
             <BlobShape color="#5D9B9B" className="absolute -bottom-8 -left-8 w-56 h-56 opacity-20 pointer-events-none" variant={2} />
@@ -343,15 +329,10 @@ export function HomePage() {
             </div>
 
             {/* Paint splash overlapping */}
-            <motion.div
-              className="absolute -bottom-6 -left-6 w-20 h-20 z-20 pointer-events-none"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.8, type: "spring" }}
-            >
+            <div className="absolute -bottom-6 -left-6 w-20 h-20 z-20 pointer-events-none">
               <BlobShape color="#5D9B9B" className="w-full h-full" variant={3} />
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 

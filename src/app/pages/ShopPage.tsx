@@ -109,23 +109,14 @@ export function ShopPage() {
       <div className="max-w-[1440px] mx-auto px-6">
         {/* Header */}
         <div className="relative mb-8 flex items-center gap-6 flex-wrap">
-          <motion.h1
-            className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428]"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
+          <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428]">
             The Shop
-          </motion.h1>
+          </h1>
 
           {/* Shopping bag character */}
-          <motion.div
-            className="relative pointer-events-none"
-            initial={{ opacity: 0, rotate: -20 }}
-            animate={{ opacity: 1, rotate: 0 }}
-            transition={{ delay: 0.3, type: "spring" }}
-          >
+          <div className="relative pointer-events-none">
             <img src="/nicola-jones-gladioli-guy-loop.png" alt="" aria-hidden="true" className="w-20 md:w-32 h-auto" />
-          </motion.div>
+          </div>
         </div>
 
         <p className="text-xl text-[#6B7554] max-w-2xl mb-12">
@@ -133,12 +124,7 @@ export function ShopPage() {
         </p>
 
         {/* Featured Product Banner */}
-        <motion.div
-          className="bg-gradient-to-r from-[#D8767D] to-[#E8846F] rounded-3xl p-8 lg:p-12 mb-16 relative overflow-hidden"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="bg-gradient-to-r from-[#D8767D] to-[#E8846F] rounded-3xl p-8 lg:p-12 mb-16 relative overflow-hidden">
           <BlobShape color="rgba(255,255,255,0.15)" className="absolute -bottom-10 -left-10 w-72 h-72" variant={3} />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
@@ -173,7 +159,7 @@ export function ShopPage() {
           </div>
 
 
-        </motion.div>
+        </div>
 
         {/* Filter Pills */}
         <div className="flex flex-wrap gap-3 mb-12 justify-center">
@@ -199,9 +185,6 @@ export function ShopPage() {
           {filteredProducts.map((product, index) => (
             <Link key={product.id} to={`/shop/${product.slug}`}>
               <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
                 className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-[#4A3428]/5 cursor-pointer"
                 whileHover={{ y: -4 }}
               >

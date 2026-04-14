@@ -129,13 +129,9 @@ export function PortfolioPage() {
           <BlobShape color="#E8846F" className="absolute -top-20 -right-20 w-64 h-64 opacity-10" variant={1} />
 
           <div className="flex items-end gap-6 flex-wrap">
-            <motion.h1
-              className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428]"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
+            <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428]">
               The Work
-            </motion.h1>
+            </h1>
 
             {/* Paintbrush character peeking over text */}
             <motion.div
@@ -172,12 +168,7 @@ export function PortfolioPage() {
         </div>
 
         {/* Featured Project Banner */}
-        <motion.div
-          className="bg-gradient-to-r from-[#5D9B9B] to-[#6B7554] rounded-3xl p-8 lg:p-12 mb-16 relative overflow-hidden"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="bg-gradient-to-r from-[#5D9B9B] to-[#6B7554] rounded-3xl p-8 lg:p-12 mb-16 relative overflow-hidden">
           <BlobShape color="rgba(255,255,255,0.1)" className="absolute top-0 right-0 w-96 h-96" variant={2} />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
@@ -209,10 +200,10 @@ export function PortfolioPage() {
             </div>
           </div>
 
-        </motion.div>
+        </div>
 
         {/* Masonry Gallery */}
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={selectedCategory}
             initial={{ opacity: 0 }}
