@@ -23,6 +23,7 @@ interface FeaturedProduct {
   price: number;
   description: string;
   image: string;
+  slug: string;
 }
 
 const fallbackProducts: Product[] = [
@@ -42,6 +43,7 @@ const fallbackFeatured: FeaturedProduct = {
   price: 450,
   description: 'A vibrant original piece bursting with personality. Hand-painted, signed and ready to bring joy to your walls.',
   image: 'https://cdn.sanity.io/images/fnwcgtif/production/f8a9a2b0d7fceff55f37abc7c2ecd1ef19f41f0f-1962x2500.webp',
+  slug: 'bedroom-nudes-original',
 };
 
 function blocksToText(blocks: any[]): string {
@@ -90,6 +92,7 @@ export function ShopPage() {
               image: featured.image
                 ? urlFor(featured.image).width(1200).url()
                 : fallbackFeatured.image,
+              slug: featured.slug || fallbackFeatured.slug,
             });
           }
         }
@@ -160,9 +163,11 @@ export function ShopPage() {
               )}
               <div className="flex items-center gap-4 flex-wrap">
                 <span className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl text-white">£{featuredProduct.price}</span>
-                <PillButton variant="primary" className="bg-white !text-[#D8767D] hover:bg-[#F5EFE8]">
-                  View →
-                </PillButton>
+                <Link to={`/shop/${featuredProduct.slug}`}>
+                  <PillButton variant="primary" className="bg-white !text-[#D8767D] hover:bg-[#F5EFE8]">
+                    View →
+                  </PillButton>
+                </Link>
               </div>
             </div>
           </div>
