@@ -9,6 +9,7 @@ import { CommissionsPage } from './pages/CommissionsPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { CelebratePage } from './pages/CelebratePage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ export const router = createBrowserRouter([
       { path: 'celebrate', Component: CelebratePage },
       { path: 'about', Component: AboutPage },
       { path: 'contact', Component: ContactPage },
+      { path: '*', Component: NotFoundPage },
     ],
   },
 ]);
