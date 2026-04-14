@@ -9,6 +9,14 @@ import { client, urlFor } from '../../lib/sanity';
 
 const categories = ['All', 'Prints', 'Original Art', 'Tote Bags', 'Merch'];
 
+const categoryLabels: Record<string, string> = {
+  prints: 'Prints',
+  'original-art': 'Original Art',
+  'tote-bags': 'Tote Bags',
+  merch: 'Merch',
+  'live-painting': 'Live Painting',
+};
+
 interface Product {
   id: string | number;
   slug: string;
@@ -221,7 +229,7 @@ export function ShopPage() {
                 </div>
 
                 <div className="p-6">
-                  <span className="text-sm text-[#6B7554] mb-2 block">{product.category}</span>
+                  <span className="text-[11px] uppercase tracking-widest text-[#6B7554]/70 mb-1 block">{categoryLabels[product.category] || product.category}</span>
                   <h3 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-xl text-[#4A3428] mb-3 group-hover:text-[#E8846F] transition-colors">{product.name}</h3>
                   <div className="flex items-center justify-between">
                     <span className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-2xl text-[#4A3428]">£{product.price}</span>

@@ -31,6 +31,7 @@ const categoryLabels: Record<string, string> = {
   'original-art': 'Original Art',
   'tote-bags': 'Tote Bags',
   merch: 'Merch',
+  'live-painting': 'Live Painting',
 };
 
 interface ProductDetail {
@@ -493,7 +494,7 @@ export function ProductDetailPage() {
                       />
                     </div>
                     <div className="p-5">
-                      <span className="text-xs text-[#6B7554] mb-1 block">
+                      <span className="text-[11px] uppercase tracking-widest text-[#6B7554]/70 mb-1 block">
                         {categoryLabels[item.category] || item.category}
                       </span>
                       <h3 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-lg text-[#4A3428] mb-2 group-hover:text-[#2C7A7B] transition-colors">
