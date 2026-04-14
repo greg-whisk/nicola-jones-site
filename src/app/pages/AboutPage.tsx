@@ -49,7 +49,7 @@ function blocksToLines(blocks: any[]): string[] {
 
 export function AboutPage() {
   const [bio, setBio] = useState<string[]>(fallbackBio);
-  const [photo, setPhoto] = useState<string>(fallbackPhoto);
+  const [photo, setPhoto] = useState<string>('');
   const [processSteps, setProcessSteps] = useState<ProcessStep[]>(fallbackProcessSteps);
   const [pageHeading, setPageHeading] = useState('Hello! I\'m Nicola.');
   const [processSectionHeading, setProcessSectionHeading] = useState('How We\'ll Work Together');
@@ -81,7 +81,7 @@ export function AboutPage() {
         if (data.processSteps && data.processSteps.length > 0) {
           setProcessSteps(
             data.processSteps.map((step: any, idx: number) => ({
-              number: String(step.stepNumber ?? idx + 1).padStart(2, '0'),
+              number: String(step.step ?? idx + 1).padStart(2, '0'),
               title: step.title || `Step ${idx + 1}`,
               description: step.description || '',
               icon: stepIcons[idx % stepIcons.length],
@@ -101,7 +101,7 @@ export function AboutPage() {
           <div className="relative order-2 lg:order-1">
             <div className="relative">
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
-                <img src="/nicola-jones-headshot.webp" alt="Nicola Jones" className="w-full h-full object-cover object-top" />
+                <img src={photo || '/nicola-jones-headshot.webp'} alt="Nicola Jones" className="w-full h-full object-cover object-top" />
               </div>
 
               {/* Hand-drawn style frame doodles */}
