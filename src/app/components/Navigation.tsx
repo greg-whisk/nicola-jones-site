@@ -8,10 +8,11 @@ export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navLinks = [
-    { path: '/portfolio', label: 'Portfolio' },
+    { path: '/commissions', label: 'Commission' },
+    { path: '/celebrate', label: 'Celebrate' },
     { path: '/shop', label: 'Shop' },
-    { path: '/commissions', label: 'Commissions' },
     { path: '/about', label: 'About' },
+    { path: '/portfolio', label: 'Portfolio' },
     { path: '/contact', label: 'Contact' },
   ];
 

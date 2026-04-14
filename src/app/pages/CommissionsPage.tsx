@@ -153,31 +153,17 @@ export function CommissionsPage() {
       <div className="max-w-[1440px] mx-auto px-6">
         {/* Header */}
         <div className="relative mb-20 text-center">
-          <motion.h1
-            className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428] mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
+          <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428] mb-6">
             Let's Make Something Together
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            className="text-xl text-[#6B7554] max-w-3xl mx-auto mb-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
+          <p className="text-xl text-[#6B7554] max-w-3xl mx-auto mb-8">
             Whether it's a building-sized mural, a book full of characters, or a brand that needs personality — I'd love to bring your vision to life with bold, playful illustration.
-          </motion.p>
+          </p>
 
-          <motion.div
-            className="flex justify-center gap-4"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, type: 'spring' }}
-          >
+          <div className="flex justify-center gap-4">
             <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="w-28 md:w-48 h-auto pointer-events-none" />
-          </motion.div>
+          </div>
         </div>
 
         {/* Commission Types */}

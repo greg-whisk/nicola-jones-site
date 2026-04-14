@@ -10,7 +10,7 @@ export function Root() {
     <div className="min-h-screen flex flex-col bg-[#FAF8F5]" style={{ fontFamily: "'Plus Jakarta Sans', 'Helvetica Neue', sans-serif" }}>
       <Navigation />
       <main className="flex-1">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="popLayout">
           <motion.div
             key={location.pathname}
             initial={{ opacity: 0 }}
