@@ -48,6 +48,7 @@ export function Navigation() {
         {/* Mobile toggle */}
         <button
           className="lg:hidden p-2 text-[#4A3428]"
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
