@@ -97,14 +97,14 @@ const fallbackShopProducts: ShopProduct[] = [
 ];
 
 const clients = [
-  'Firefly Press',
-  'Brighton Festival',
-  'Bloom Coffee Co.',
-  'The Guardian',
-  'Penguin Random House',
-  'Greenpeace',
-  'Shitfaced Shakespeare',
-  'Trees for Cities',
+  { name: 'Firefly Press', logo: null },
+  { name: 'Brighton Festival', logo: null },
+  { name: 'Bloom Coffee Co.', logo: null },
+  { name: 'The Guardian', logo: null },
+  { name: 'Penguin Random House', logo: null },
+  { name: 'Greenpeace', logo: '/logos/logo-greenpeace.png' },
+  { name: 'Shitfaced Shakespeare', logo: '/logos/logo-shitfaced-shakespeare.png' },
+  { name: 'Trees for Cities', logo: '/logos/logo-trees-for-cities.png' },
 ];
 
 const FEATURED_SLUGS = [
@@ -801,14 +801,23 @@ export function HomePage() {
               animate={{ x: ['0%', '-50%'] }}
               transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
             >
-              {[...clients, ...clients].map((client, i) => (
-                <span
-                  key={`${client}-${i}`}
-                  className="flex-shrink-0 font-['Plus_Jakarta_Sans'] font-heading-manrope text-xl text-[#4A3428]/30 whitespace-nowrap hover:text-[#4A3428]/60 transition-colors"
-                >
-                  {client}
-                </span>
-              ))}
+              {[...clients, ...clients].map((client, i) =>
+                client.logo ? (
+                  <img
+                    key={`${client.name}-${i}`}
+                    src={client.logo}
+                    alt={client.name}
+                    className="h-12 md:h-16 w-auto opacity-60 shrink-0 mx-8"
+                  />
+                ) : (
+                  <span
+                    key={`${client.name}-${i}`}
+                    className="flex-shrink-0 font-['Plus_Jakarta_Sans'] font-heading-manrope text-xl text-[#4A3428]/30 whitespace-nowrap hover:text-[#4A3428]/60 transition-colors"
+                  >
+                    {client.name}
+                  </span>
+                )
+              )}
             </motion.div>
           </div>
         </div>
