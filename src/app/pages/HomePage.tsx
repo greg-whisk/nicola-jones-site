@@ -28,7 +28,7 @@ const pathways = [
     bgColor: '#EDF5F5',
     icon: Palette,
     rotation: 2,
-    image: 'https://cdn.sanity.io/images/fnwcgtif/production/3019706bf19f8f899bc740a4d32484ee1fea82e6-1582x792.webp',
+    image: 'https://cdn.sanity.io/images/fnwcgtif/production/1b114a6461acca32e5837f76b3f3ee08b3dd04a3-1600x1600.webp',
   },
   {
     title: 'Browse the Portfolio',
@@ -38,7 +38,7 @@ const pathways = [
     bgColor: '#F9EDEE',
     icon: Briefcase,
     rotation: -2,
-    image: 'https://cdn.sanity.io/images/fnwcgtif/production/b74056942f180fa86437e88ddf45c7482b751290-938x688.webp',
+    image: 'https://cdn.sanity.io/images/fnwcgtif/production/55d849de5f05a4d41f89f95b28899b52e949939d-1600x1600.webp',
   }
 ];
 
@@ -830,7 +830,7 @@ export function HomePage() {
               <BlobShape color="#5D9B9B" className="absolute -top-10 -left-10 w-40 h-40 opacity-20 z-0" variant={2} />
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl" style={{ transform: 'rotate(-2deg)' }}>
                 <ImageWithFallback
-                  src="https://cdn.sanity.io/images/fnwcgtif/production/3019706bf19f8f899bc740a4d32484ee1fea82e6-1582x792.webp"
+                  src="https://cdn.sanity.io/images/fnwcgtif/production/e8beab52bcf307c9274b6de75570fb527e56d8b7-1283x1586.webp"
                   alt="Nicola Jones mural work"
                   className="w-full h-auto"
                 />
