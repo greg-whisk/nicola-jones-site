@@ -94,15 +94,6 @@ export function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto relative">
           {/* Left side - Contact info */}
           <div className="relative">
-            {/* Headshot */}
-            <div className="mb-8 flex justify-center">
-              <img
-                src="/nicola-jones-headshot.webp"
-                alt="Nicola Jones"
-                className="w-40 h-40 md:w-56 md:h-56 rounded-full object-cover object-top shadow-lg border-4 border-white"
-              />
-            </div>
-
             <div className="space-y-8">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-[#E8846F] rounded-full flex items-center justify-center flex-shrink-0">
