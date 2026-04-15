@@ -296,13 +296,13 @@ export function CelebratePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block bg-[#5D9B9B] text-white text-sm font-['Plus_Jakarta_Sans'] px-5 py-2 rounded-full mb-6">
-              {heroEyebrow}
-            </span>
-
             <div className="flex justify-center mb-4">
               <img src="/nicola-jones-daffs-loop.png" alt="" aria-hidden="true" className="w-24 md:w-36 h-auto pointer-events-none" />
             </div>
+
+            <span className="inline-block bg-[#5D9B9B] text-white text-sm font-['Plus_Jakarta_Sans'] px-5 py-2 rounded-full mb-6">
+              {heroEyebrow}
+            </span>
 
             <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428] mb-8 leading-tight">
               {heroHeadline}
