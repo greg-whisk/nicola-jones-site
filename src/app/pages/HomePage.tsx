@@ -97,14 +97,9 @@ const fallbackShopProducts: ShopProduct[] = [
 ];
 
 const clients = [
-  'Firefly Press',
-  'Brighton Festival',
-  'Bloom Coffee Co.',
-  'The Guardian',
-  'Penguin Random House',
-  'Greenpeace',
-  'Shitfaced Shakespeare',
-  'Trees for Cities',
+  { name: 'Greenpeace', logo: '/logos/logo-greenpeace.png' },
+  { name: 'Shitfaced Shakespeare', logo: '/logos/logo-shitfaced-shakespeare.png' },
+  { name: 'Trees for Cities', logo: '/logos/logo-trees-for-cities.png' },
 ];
 
 const FEATURED_SLUGS = [
@@ -598,6 +593,10 @@ export function HomePage() {
           >
             {homepageData.promiseBody ?? "Every service on this site has a clear price and a straightforward process. Choose what you need, book your date and I do the rest. What you see is what you pay: whether that is five hand-painted baubles for £75 or a full day of live drawing at your event."}
           </motion.p>
+          <div className="flex flex-wrap gap-4 justify-center mt-8">
+            <PillButton variant="accent" onClick={() => navigate('/shop')}>Shop</PillButton>
+            <PillButton variant="outline" onClick={() => navigate('/celebrate')}>Live drawing</PillButton>
+          </div>
         </div>
       </section>
 
@@ -801,13 +800,17 @@ export function HomePage() {
               animate={{ x: ['0%', '-50%'] }}
               transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
             >
-              {[...clients, ...clients].map((client, i) => (
-                <span
-                  key={`${client}-${i}`}
-                  className="flex-shrink-0 font-['Plus_Jakarta_Sans'] font-heading-manrope text-xl text-[#4A3428]/30 whitespace-nowrap hover:text-[#4A3428]/60 transition-colors"
+              {[...clients, ...clients].map((c, i) => (
+                <div
+                  key={`${c.name}-${i}`}
+                  className="shrink-0 w-40 md:w-48 h-16 md:h-20 flex items-center justify-center"
                 >
-                  {client}
-                </span>
+                  <img
+                    src={c.logo}
+                    alt={c.name}
+                    className="max-w-full max-h-full w-auto h-auto object-contain opacity-60"
+                  />
+                </div>
               ))}
             </motion.div>
           </div>
