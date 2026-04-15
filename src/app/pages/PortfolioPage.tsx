@@ -132,7 +132,7 @@ export function PortfolioPage() {
 
       <div className="max-w-[1440px] mx-auto px-6">
         {/* Header */}
-        <div className="relative mb-16">
+        <div className="relative mb-16 overflow-hidden">
           <BlobShape color="#E8846F" className="absolute -top-20 -right-20 w-64 h-64 opacity-10" variant={1} />
 
           <div className="flex items-end gap-6 flex-wrap">
