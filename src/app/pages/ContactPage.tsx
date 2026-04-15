@@ -44,6 +44,24 @@ export function ContactPage() {
   const [settings, setSettings] = useState<SiteSettings>(fallbackSettings);
 
   useEffect(() => {
+    const type = new URLSearchParams(window.location.search).get('type');
+    if (type) {
+      const map: Record<string, string> = {
+        mural: 'mural-commission',
+        theatre: 'mural-commission',
+        brand: 'mural-commission',
+        personal: 'mural-commission',
+        celebrate: 'live-drawing',
+        workshop: 'workshop',
+      };
+      const matched = map[type];
+      if (matched) {
+        setFormData((prev) => ({ ...prev, projectType: matched }));
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     client
       .fetch<SiteSettings | null>(
         `*[_type == "siteSettings"][0]{ contactEmail, socialLinks, location, contactPageHeading, contactPageIntro, responseTimeNote }`
@@ -84,10 +102,10 @@ export function ContactPage() {
       <div className="max-w-[1440px] mx-auto px-6">
         <div className="text-center mb-16">
           <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-6xl text-[#4A3428] mb-4">
-            {settings.contactPageHeading || 'Say Hello'}
+            {settings.contactPageHeading || 'Get in touch.'}
           </h1>
           <p className="text-xl text-[#6B7554] max-w-2xl mx-auto">
-            {settings.contactPageIntro || 'Have a project in mind? A question? Or just want to chat about art? Drop me a line!'}
+            {settings.contactPageIntro || 'Whether you have a fully formed brief or just the beginning of an idea, this is the right place to start. I reply within 48 hours: usually sooner.'}
           </p>
         </div>
 
@@ -126,7 +144,7 @@ export function ContactPage() {
                 <div>
                   <h3 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-xl text-[#4A3428] mb-2">Location</h3>
                   <p className="text-[#6B7554] text-lg">
-                    {settings.location || 'Hastings, East Sussex'}
+                    {settings.location || 'Based in Hastings, East Sussex. Working across the UK.'}
                   </p>
                 </div>
               </div>
@@ -222,7 +240,7 @@ export function ContactPage() {
 
               <div className="mb-6">
                 <label htmlFor="projectType" className="block text-[#4A3428] mb-2">
-                  Project Type
+                  What is it about?
                 </label>
                 <select
                   id="projectType"
@@ -232,18 +250,18 @@ export function ContactPage() {
                   required
                   className="w-full px-4 py-3 bg-[#F5EFE8] rounded-2xl border border-[#4A3428]/10 focus:border-[#E8846F] focus:outline-none transition-colors"
                 >
-                  <option value="">Select a project type</option>
-                  <option value="mural">Mural Commission</option>
-                  <option value="theatre">Theatre/Scenic Work</option>
-                  <option value="brand">Brand Illustration</option>
-                  <option value="print">Print Enquiry</option>
-                  <option value="other">Other</option>
+                  <option value="">Select an option</option>
+                  <option value="live-drawing">Live drawing at an event</option>
+                  <option value="workshop">A workshop booking</option>
+                  <option value="mural-commission">A mural or commission</option>
+                  <option value="shop">Something from the shop</option>
+                  <option value="other">Something else</option>
                 </select>
               </div>
 
               <div className="mb-6">
                 <label htmlFor="message" className="block text-[#4A3428] mb-2">
-                  Message
+                  Tell me about it
                 </label>
                 <textarea
                   id="message"
@@ -253,12 +271,12 @@ export function ContactPage() {
                   required
                   rows={6}
                   className="w-full px-4 py-3 bg-[#F5EFE8] rounded-2xl border border-[#4A3428]/10 focus:border-[#E8846F] focus:outline-none transition-colors resize-none"
-                  placeholder="Tell me about your project..."
+                  placeholder="Even half an idea is enough. What are you thinking?"
                 />
               </div>
 
               <PillButton type="submit" variant="accent" className="w-full">
-                Send Message ✨
+                Send it over
               </PillButton>
             </form>
 
@@ -278,7 +296,7 @@ export function ContactPage() {
           viewport={{ once: true }}
         >
           <p className="text-lg text-[#6B7554] italic">
-            {settings.responseTimeNote || 'I typically respond within 24-48 hours. If you don\'t hear from me, check your spam folder — sometimes my emails get categorized as "too cheerful."'}
+            {settings.responseTimeNote || 'I reply within 48 hours. If you are working to a tight deadline, say so in your message and I will prioritise it.'}
           </p>
         </motion.div>
       </div>
