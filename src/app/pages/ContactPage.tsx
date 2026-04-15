@@ -42,6 +42,7 @@ export function ContactPage() {
     projectType: '',
     message: ''
   });
+  const [submitted, setSubmitted] = useState(false);
   const [settings, setSettings] = useState<SiteSettings>(fallbackSettings);
 
   useEffect(() => {
@@ -84,8 +85,13 @@ export function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thanks for reaching out! I\'ll get back to you soon. 🎨');
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ 'form-name': 'contact', ...formData }).toString(),
+    })
+      .then(() => setSubmitted(true))
+      .catch(console.error);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -203,7 +209,16 @@ export function ContactPage() {
 
           {/* Right side - Form */}
           <div className="relative">
-            <form onSubmit={handleSubmit} className="bg-white rounded-3xl p-8 shadow-lg relative z-10">
+            {submitted ? (
+              <div className="bg-white rounded-3xl p-8 shadow-lg relative z-10 flex items-center justify-center min-h-[400px]">
+                <div className="text-center">
+                  <p className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-2xl text-[#4A3428] mb-3">Message sent!</p>
+                  <p className="text-[#6B7554]">Thanks for reaching out. I'll get back to you within 48 hours.</p>
+                </div>
+              </div>
+            ) : (
+            <form name="contact" data-netlify="true" onSubmit={handleSubmit} className="bg-white rounded-3xl p-8 shadow-lg relative z-10">
+              <input type="hidden" name="form-name" value="contact" />
               <div className="mb-6">
                 <label htmlFor="name" className="block text-[#4A3428] mb-2">
                   Name
@@ -277,6 +292,7 @@ export function ContactPage() {
                 Send it over
               </PillButton>
             </form>
+            )}
 
             <BlobShape
               color="#D8767D"

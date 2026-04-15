@@ -33,6 +33,7 @@ const socialIconMap: Record<string, React.ComponentType<{ className?: string }>>
 
 export function Footer() {
   const [email, setEmail] = useState('');
+  const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
   const [settings, setSettings] = useState<SiteSettings>(fallbackSettings);
 
   useEffect(() => {
@@ -135,12 +136,28 @@ export function Footer() {
           <div>
             <h4 className="font-['Plus_Jakarta_Sans'] font-heading-manrope mb-4">Newsletter</h4>
             <p className="text-[#D4A99C] text-sm mb-3">Get studio updates, new prints, and behind-the-scenes peeks.</p>
+            {newsletterSubmitted ? (
+              <p className="text-[#E8846F] text-sm">Thanks for subscribing!</p>
+            ) : (
             <form
-              onSubmit={(e) => { e.preventDefault(); setEmail(''); alert('Thanks for subscribing!'); }}
+              name="newsletter"
+              data-netlify="true"
+              onSubmit={(e) => {
+                e.preventDefault();
+                fetch('/', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  body: new URLSearchParams({ 'form-name': 'newsletter', email }).toString(),
+                })
+                  .then(() => { setEmail(''); setNewsletterSubmitted(true); })
+                  .catch(console.error);
+              }}
               className="flex gap-2"
             >
+              <input type="hidden" name="form-name" value="newsletter" />
               <input
                 type="email"
+                name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
@@ -153,6 +170,7 @@ export function Footer() {
                 Join
               </button>
             </form>
+            )}
           </div>
         </div>
 
