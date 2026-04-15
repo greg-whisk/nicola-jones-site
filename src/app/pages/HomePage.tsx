@@ -97,14 +97,14 @@ const fallbackShopProducts: ShopProduct[] = [
 ];
 
 const clients = [
-  'Hastings Borough Council',
   'Firefly Press',
   'Brighton Festival',
   'Bloom Coffee Co.',
   'The Guardian',
   'Penguin Random House',
-  'National Trust',
-  'Channel 4',
+  'Greenpeace',
+  'Shitfaced Shakespeare',
+  'Trees for Cities',
 ];
 
 const FEATURED_SLUGS = [
@@ -187,23 +187,23 @@ const fallbackTestimonial: Testimonial = {
 const actionCardDefaults = [
   {
     title: 'Celebrate',
-    description: 'Live painting at weddings, parties, and events. Workshops for hens, baby showers, and groups.',
-    ctaLabel: 'Plan an event →',
+    description: 'Live drawing at weddings, corporate events and parties. Workshops for hens, baby showers and groups. Packages from £35pp.',
+    ctaLabel: 'See what\'s on offer →',
     ctaUrl: '/celebrate',
     color: '#E8846F',
     bgColor: '#FDF0ED',
   },
   {
     title: 'Commission',
-    description: 'Murals, theatre backdrops, and brand illustration. Big walls and tiny logos welcome.',
-    ctaLabel: 'Start a project →',
+    description: 'A mural for your wall. An illustration for your brand. A painted piece made specifically for you.',
+    ctaLabel: 'Start a commission →',
     ctaUrl: '/commissions',
     color: '#5D9B9B',
     bgColor: '#EDF5F5',
   },
   {
     title: 'Shop',
-    description: 'Original prints, tote bags, stickers, and illustrated goodies — shipped from Hastings.',
+    description: 'Prints, originals, baubles and painted objects. Made in Hastings and shipped across the UK.',
     ctaLabel: 'Browse the shop →',
     ctaUrl: '/shop',
     color: '#D8767D',
@@ -371,7 +371,11 @@ export function HomePage() {
       addressRegion: 'East Sussex',
       addressCountry: 'GB',
     },
-    sameAs: ['https://www.instagram.com/nicolajones.art'],
+    areaServed: 'GB',
+    sameAs: [
+      'https://www.instagram.com/nicolajonesart',
+      'https://www.linkedin.com/in/nicolajonesart',
+    ],
   };
 
   const orgSchema = {
@@ -401,18 +405,18 @@ export function HomePage() {
         <div className="max-w-[1440px] mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20 lg:py-0">
           <div>
             <p className="text-[#E8846F] font-['Plus_Jakarta_Sans'] font-heading-manrope text-lg mb-4 uppercase tracking-wider">
-              {homepageData.heroTagline || 'Illustrator & Decorative Painter'}
+              {homepageData.heroTagline || 'Muralist. Illustrator. Live Event Artist. Hastings, East Sussex.'}
             </p>
             <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-[#4A3428] mb-6">
-              {homepageData.heroHeadline || 'Murals. Theatre. Illustration.'}<br />
-              <span className="text-[#E8846F]">{homepageData.heroHeadlineAccent || 'All drawn with a grin.'}</span>
+              {homepageData.heroHeadline || 'Art that makes places feel like'}<br />
+              <span className="text-[#E8846F]">{homepageData.heroHeadlineAccent || 'somewhere worth being.'}</span>
             </h1>
             <p className="text-xl text-[#6B7554] mb-8 leading-relaxed max-w-xl">
-              {homepageData.heroSubheading || 'Brighton-born illustrator and decorative painter, now based in Hastings. Theatre backdrops, community murals, brand illustration — and quite a few bums.'}
+              {homepageData.heroSubheading || 'Murals painted by hand. Illustrations made to order. Live drawing at your event. Workshops that actually work. Based in Hastings and working across the UK.'}
             </p>
             <div className="relative z-10 flex flex-wrap gap-4">
-              <PillButton variant="primary" onClick={() => navigate('/portfolio')}>
-                See the work <ArrowRight className="inline ml-2 w-5 h-5" />
+              <PillButton variant="primary" onClick={() => navigate('/celebrate')}>
+                Explore the experiences <ArrowRight className="inline ml-2 w-5 h-5" />
               </PillButton>
               <PillButton variant="accent" onClick={() => navigate('/shop')}>
                 Visit the shop
@@ -596,7 +600,7 @@ export function HomePage() {
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
           >
-            {homepageData.promiseBody ?? "Tell me what you need. I'll respond within 24 hours with a clear quote, a timeline, and a sketch concept. No vague proposals, no chasing, no surprise invoices."}
+            {homepageData.promiseBody ?? "Every service on this site has a clear price and a straightforward process. Choose what you need, book your date and I do the rest. What you see is what you pay: whether that is five hand-painted baubles for £75 or a full day of live drawing at your event."}
           </motion.p>
         </div>
       </section>
@@ -604,13 +608,14 @@ export function HomePage() {
       {/* Featured Work Strip */}
       <section className="py-20 relative">
         <div className="max-w-[1440px] mx-auto px-6">
-          <div className="flex items-center justify-between mb-12">
+          <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-4">
               <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428]">Featured Work</h2>
               <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" loading="lazy" decoding="async" className="w-28 md:w-48 h-auto pointer-events-none" />
             </div>
             <PillButton variant="outline" onClick={() => navigate('/portfolio')}>View all</PillButton>
           </div>
+          <p className="text-lg text-[#6B7554] mb-12 max-w-xl">Murals, theatre sets, editorial illustration and live events. A selection across disciplines.</p>
 
           <div className="flex gap-6 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory scrollbar-hide">
             {featuredWork.map((work, index) => (
@@ -718,7 +723,7 @@ export function HomePage() {
             </div>
             <PillButton variant="outline" onClick={() => navigate('/shop')}>Browse all</PillButton>
           </div>
-          <p className="text-lg text-[#6B7554] mb-12 max-w-xl">{homepageData.shopSectionIntro || 'Prints, tote bags, stickers, and illustrated goodies — shipped with love from Hastings.'}</p>
+          <p className="text-lg text-[#6B7554] mb-12 max-w-xl">{homepageData.shopSectionIntro || 'Original prints, hand-painted objects and illustrated goods. Shipped from Hastings. No two things quite the same.'}</p>
 
           <Link to={`/shop/${shopProducts[0].slug}`}>
             <motion.div
@@ -791,7 +796,7 @@ export function HomePage() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            Trusted by lovely people at
+            Work made for
           </motion.p>
           <div className="relative">
             <motion.div
@@ -844,19 +849,16 @@ export function HomePage() {
             >
               <p className="text-[#5D9B9B] font-['Plus_Jakarta_Sans'] font-heading-manrope text-lg mb-3 uppercase tracking-wider">About Nicola</p>
               <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl lg:text-5xl text-[#4A3428] mb-6 leading-[1.15]">
-                I draw things on walls and on paper.
+                I'm a muralist, illustrator and live event artist based in Hastings.
               </h2>
               <div className="space-y-4 text-lg text-[#6B7554] leading-relaxed mb-8">
                 <p>
-                  I'm Nicola Jones — illustrator, mural painter, and chronic doodler based in Hastings on the beautiful south coast.
-                </p>
-                <p>
-                  My work is bold, colourful, and full of character. I believe illustration should make people smile, tell stories, and bring unexpected joy to everyday spaces.
+                  I've been making things professionally for over a decade: for theatre companies, brands, community spaces and private clients. The work ranges from forty-foot scenic backdrops to A5 ink drawings at someone's wedding. What stays the same is that everything is made by hand, made for a reason and made to last.
                 </p>
               </div>
               <div className="flex flex-wrap gap-4">
-                <PillButton variant="accent" onClick={() => navigate('/about')}>Read more about me</PillButton>
-                <PillButton variant="outline" onClick={() => navigate('/commissions')}>Work with me</PillButton>
+                <PillButton variant="accent" onClick={() => navigate('/about')}>About and portfolio</PillButton>
+                <PillButton variant="outline" onClick={() => navigate('/contact')}>Get in touch</PillButton>
               </div>
             </motion.div>
           </div>
@@ -878,15 +880,15 @@ export function HomePage() {
           >
             <img src="/nicola-jones-cherub-b-loop.png" alt="" aria-hidden="true" loading="lazy" decoding="async" className="w-40 md:w-64 h-auto mx-auto mb-6 pointer-events-none" />
             <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl lg:text-6xl text-[#4A3428] mb-6 leading-[1.15]">
-              Let's make something <span className="text-[#E8846F]">brilliant</span> together.
+              Have a space, an event or an idea that needs an artist?
             </h2>
             <p className="text-xl text-[#6B7554] mb-10 max-w-2xl mx-auto leading-relaxed">
-              Whether it's a 40-foot mural, a children's book, a brand identity, or a set of cheeky greeting cards — I'd love to hear your idea.
+              Whether it's a wall that needs painting, an event that needs capturing or something you haven't quite figured out yet: start here.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <PillButton variant="primary" onClick={() => navigate('/commissions')}>Start a commission</PillButton>
+              <PillButton variant="primary" onClick={() => navigate('/celebrate')}>Book or commission</PillButton>
               <PillButton variant="accent" onClick={() => navigate('/shop')}>Visit the shop</PillButton>
-              <PillButton variant="outline" onClick={() => navigate('/portfolio')}>Browse the portfolio</PillButton>
+              <PillButton variant="outline" onClick={() => navigate('/about')}>See the work</PillButton>
             </div>
           </motion.div>
         </div>
