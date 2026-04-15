@@ -438,10 +438,6 @@ export function HomePage() {
               />
             </div>
 
-            {/* Paint splash overlapping */}
-            <div className="absolute -bottom-6 -left-6 w-20 h-20 z-20 pointer-events-none">
-              <BlobShape color="#5D9B9B" className="w-full h-full" variant={3} />
-            </div>
           </div>
         </div>
       </section>
