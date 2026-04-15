@@ -27,11 +27,15 @@ const sizeLabels: Record<string, string> = {
 };
 
 const categoryLabels: Record<string, string> = {
+  originals: 'Originals',
   prints: 'Prints',
+  gifts: 'Gifts',
+  apparel: 'Apparel',
+  'live-painting': 'Live Painting',
+  // Legacy values — kept so existing product data still renders
   'original-art': 'Original Art',
   'tote-bags': 'Tote Bags',
   merch: 'Merch',
-  'live-painting': 'Live Painting',
 };
 
 interface ProductDetail {
@@ -45,6 +49,11 @@ interface ProductDetail {
   shortDescription: string;
   size: string;
   productDetails: any[];
+  inStock: boolean;
+  fulfillment: string;
+  shippingIncluded: boolean;
+  allowCustomNotes: boolean;
+  customNotesLabel: string;
 }
 
 interface RelatedProduct {
@@ -85,6 +94,7 @@ export function ProductDetailPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [customNotes, setCustomNotes] = useState('');
 
   useEffect(() => {
     if (!slug) return;
@@ -100,7 +110,8 @@ export function ProductDetailPage() {
         const data = await client.fetch<any>(
           `*[_type == "shopProduct" && slug.current == $slug][0]{
             _id, name, price, category, image, gallery,
-            shortDescription, size, productDetails,
+            shortDescription, size, productDetails, inStock,
+            fulfillment, shippingIncluded, allowCustomNotes, customNotesLabel,
             "slug": slug.current
           }`,
           { slug }
@@ -131,6 +142,11 @@ export function ProductDetailPage() {
           shortDescription: data.shortDescription || '',
           size: data.size || '',
           productDetails: data.productDetails || [],
+          inStock: data.inStock !== false,
+          fulfillment: data.fulfillment || '',
+          shippingIncluded: data.shippingIncluded ?? false,
+          allowCustomNotes: data.allowCustomNotes ?? false,
+          customNotesLabel: data.customNotesLabel || 'Customisation notes',
         });
         // Clear loading as soon as the product is ready so the layout renders
         // immediately. Related products continue fetching in the background.
@@ -246,9 +262,31 @@ export function ProductDetailPage() {
     // Stripe integration wired in a separate task
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    ...(product.shortDescription && { description: product.shortDescription }),
+    ...(product.primaryImage && { image: product.primaryImage }),
+    brand: { '@type': 'Brand', name: 'Nicola Jones' },
+    offers: {
+      '@type': 'Offer',
+      price: product.price,
+      priceCurrency: 'GBP',
+      availability: product.inStock
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock',
+    },
+  };
+
   return (
-    <div className="overflow-hidden">
-      {/* Back link */}
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="overflow-hidden">
+        {/* Back link */}
       <div className="max-w-[1200px] mx-auto px-6 pt-8">
         <Link
           to="/shop"
@@ -353,7 +391,27 @@ export function ProductDetailPage() {
               </p>
             )}
 
-            {/* 5. Size pill */}
+            {/* 5. Customisation notes */}
+            {product.allowCustomNotes && (
+              <div className="flex flex-col gap-1">
+                <label className="text-xs uppercase tracking-widest text-[#9E9A8E] font-['Plus_Jakarta_Sans']">
+                  {product.customNotesLabel}
+                </label>
+                <textarea
+                  maxLength={200}
+                  placeholder="Add themes, names, colours, etc."
+                  value={customNotes}
+                  onChange={(e) => setCustomNotes(e.target.value)}
+                  className="w-full rounded-xl border border-[#D5CFC5] bg-[#FAF8F5] focus:border-[#2C7A7B] focus:outline-none px-4 py-3 text-sm font-['Plus_Jakarta_Sans'] text-[#4A3428] resize-none"
+                  rows={3}
+                />
+                <p className="text-xs text-[#9E9A8E] font-['Plus_Jakarta_Sans'] text-right">
+                  {customNotes.length}/200
+                </p>
+              </div>
+            )}
+
+            {/* 6. Size pill */}
             {sizeLabel && (
               <div className="inline-flex flex-col items-start">
                 <span className="text-xs uppercase tracking-widest text-[#9E9A8E] font-['Plus_Jakarta_Sans'] mb-1">
@@ -407,12 +465,20 @@ export function ProductDetailPage() {
               <div className="flex items-start gap-2 pt-4">
                 <Truck className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: TEAL }} />
                 <div>
-                  <p className="text-xs font-['Plus_Jakarta_Sans'] text-[#4A3428] leading-tight">
-                    Free UK shipping
-                  </p>
-                  <p className="text-xs font-['Plus_Jakarta_Sans'] text-[#9E9A8E] leading-tight">
-                    Orders over £25
-                  </p>
+                  {product.shippingIncluded ? (
+                    <p className="text-xs font-['Plus_Jakarta_Sans'] text-[#4A3428] leading-tight">
+                      Free UK shipping included
+                    </p>
+                  ) : (
+                    <>
+                      <p className="text-xs font-['Plus_Jakarta_Sans'] text-[#4A3428] leading-tight">
+                        Free UK shipping
+                      </p>
+                      <p className="text-xs font-['Plus_Jakarta_Sans'] text-[#9E9A8E] leading-tight">
+                        Orders over £25
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
               <div className="flex items-start gap-2 pt-4">
@@ -525,5 +591,6 @@ export function ProductDetailPage() {
 
       <WavyDivider color="#FAF8F5" flip />
     </div>
+    </>
   );
 }

@@ -30,10 +30,15 @@ export default defineType({
       type: 'string',
       options: {
         list: [
+          { title: 'Originals', value: 'originals' },
           { title: 'Prints', value: 'prints' },
-          { title: 'Original Art', value: 'original-art' },
-          { title: 'Tote Bags', value: 'tote-bags' },
-          { title: 'Merch', value: 'merch' },
+          { title: 'Gifts', value: 'gifts' },
+          { title: 'Apparel', value: 'apparel' },
+          { title: 'Live Painting', value: 'live-painting' },
+          // Legacy values — kept so existing product data is not lost
+          { title: 'Original Art (legacy)', value: 'original-art' },
+          { title: 'Tote Bags (legacy)', value: 'tote-bags' },
+          { title: 'Merch (legacy)', value: 'merch' },
         ],
       },
       validation: (Rule) => Rule.required(),
@@ -88,6 +93,39 @@ export default defineType({
       title: 'In Stock',
       type: 'boolean',
       initialValue: true,
+    }),
+    defineField({
+      name: 'fulfillment',
+      title: 'Fulfillment',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Studio (Hastings)', value: 'studio' },
+          { title: 'ThePrintSpace', value: 'theprintspace' },
+          { title: 'Printful', value: 'printful' },
+        ],
+      },
+      description: 'Controls which fulfillment note appears on the product page.',
+    }),
+    defineField({
+      name: 'shippingIncluded',
+      title: 'Free UK Shipping Included',
+      type: 'boolean',
+      description: 'When true, shows "Free UK shipping included" instead of the orders-over-£25 note.',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'allowCustomNotes',
+      title: 'Allow Customisation Notes',
+      type: 'boolean',
+      description: 'When true, the product page shows a customisation notes textarea.',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'customNotesLabel',
+      title: 'Customisation Notes Label',
+      type: 'string',
+      description: 'Label shown above the customisation notes field (e.g. "Customisation notes (themes, names, colours)").',
     }),
   ],
   preview: {

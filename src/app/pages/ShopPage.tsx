@@ -7,14 +7,18 @@ import { PillButton } from '../components/PillButton';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { client, urlFor } from '../../lib/sanity';
 
-const categories = ['All', 'Prints', 'Original Art', 'Tote Bags', 'Merch', 'Live Painting'];
+const categories = ['All', 'Originals', 'Prints', 'Gifts and Apparel'];
 
 const categoryLabels: Record<string, string> = {
+  originals: 'Originals',
   prints: 'Prints',
+  gifts: 'Gifts',
+  apparel: 'Apparel',
+  'live-painting': 'Live Painting',
+  // Legacy values — kept so existing product data still renders
   'original-art': 'Original Art',
   'tote-bags': 'Tote Bags',
   merch: 'Merch',
-  'live-painting': 'Live Painting',
 };
 
 interface Product {
@@ -88,8 +92,8 @@ export function ShopPage() {
           }));
           setProducts(mapped);
 
-          // Use first "Original Art" item as featured, fallback to first item
-          const featured = data.find((p) => p.category === 'Original Art') || data[0];
+          // Use first originals item as featured, fallback to first item
+          const featured = data.find((p) => p.category === 'originals' || p.category === 'original-art') || data[0];
           if (featured) {
             setFeaturedProduct({
               name: featured.name,
@@ -110,6 +114,8 @@ export function ShopPage() {
 
   const filteredProducts = selectedCategory === 'All'
     ? products
+    : selectedCategory === 'Gifts and Apparel'
+    ? products.filter(product => ['gifts', 'apparel'].includes(product.category))
     : products.filter(product => categoryLabels[product.category] === selectedCategory);
 
   return (
@@ -118,7 +124,7 @@ export function ShopPage() {
         {/* Header */}
         <div className="relative mb-8 flex items-center gap-6 flex-wrap">
           <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428]">
-            The Shop
+            From the Studio.
           </h1>
 
           {/* Shopping bag character */}
@@ -128,7 +134,7 @@ export function ShopPage() {
         </div>
 
         <p className="text-xl text-[#6B7554] max-w-2xl mb-12">
-          Bold prints, originals, and the odd tote bag. All drawn by hand (well, mostly), all shipped from Hastings.
+          Original prints, hand-painted plywood pieces, illustrated objects and a small collection of goods. Some things are made to order in Hastings. Some are printed and shipped by my professional lab. Everything is worth having.
         </p>
 
         {/* Featured Product Banner */}
@@ -168,6 +174,11 @@ export function ShopPage() {
 
 
         </div>
+
+        {/* Fulfillment note */}
+        <p className="text-xs text-[#9E9A8E] text-center mb-10 font-['Plus_Jakarta_Sans'] max-w-xl mx-auto">
+          Prints are fulfilled by ThePrintSpace. Originals, baubles and hand-painted objects ship directly from my Hastings studio and may arrive separately.
+        </p>
 
         {/* Filter Pills */}
         <div className="flex flex-wrap gap-3 mb-12 justify-center">
@@ -223,6 +234,45 @@ export function ShopPage() {
             </Link>
           ))}
         </div>
+
+        {/* Trust Note */}
+        <motion.div
+          className="mt-20 pt-12 border-t border-[#4A3428]/10"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-2xl lg:text-3xl text-[#4A3428] mb-4">
+            What you are buying and where it comes from.
+          </h2>
+          <p className="text-base text-[#6B7554] leading-relaxed max-w-2xl">
+            Originals, baubles and hand-painted objects are made by hand in my studio in Hastings and shipped by me personally. Prints are produced and dispatched by ThePrintSpace, my professional print lab. Mugs and t-shirts are printed to order. If anything arrives damaged or is not right, get in touch and I will sort it.
+          </p>
+        </motion.div>
+
+        {/* Closing CTA */}
+        <motion.div
+          className="bg-gradient-to-br from-[#E8846F] to-[#D4725C] rounded-3xl p-10 lg:p-16 text-center relative overflow-hidden mt-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <BlobShape color="rgba(255,255,255,0.1)" className="absolute -top-10 -left-10 w-64 h-64" variant={1} />
+          <BlobShape color="rgba(255,255,255,0.1)" className="absolute -bottom-10 -right-10 w-48 h-48" variant={2} />
+          <div className="relative z-10">
+            <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl lg:text-4xl text-white mb-4">
+              Looking for something specific?
+            </h2>
+            <p className="text-lg text-white/90 mb-8 max-w-xl mx-auto">
+              If you want a print that is not listed, a custom painted object or something made for a particular reason: get in touch.
+            </p>
+            <Link to="/contact">
+              <PillButton variant="primary" className="!bg-white !text-[#E8846F] hover:!bg-[#E8846F] hover:!text-white">
+                Send me a message
+              </PillButton>
+            </Link>
+          </div>
+        </motion.div>
 
         {/* Commission Banner */}
         <motion.div
