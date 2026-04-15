@@ -461,7 +461,7 @@ export function CommissionsPage() {
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <img src="/nicola-jones-cherub-b-loop.png" alt="" aria-hidden="true" className="w-40 md:w-64 h-auto" />
+              <img src="/nicola-jones-cherub-b-loop.png" alt="" aria-hidden="true" loading="lazy" decoding="async" className="w-40 md:w-64 h-auto" />
             </motion.div>
 
             <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl lg:text-5xl text-white mb-6">

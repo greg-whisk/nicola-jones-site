@@ -293,7 +293,7 @@ export function ShopPage() {
 
           <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8">
             {/* Character illustration */}
-            <img src="/nicola-jones-mouth-loop.png" className="w-24 md:w-40 h-auto pointer-events-none" alt="" aria-hidden="true" />
+            <img src="/nicola-jones-mouth-loop.png" className="w-24 md:w-40 h-auto pointer-events-none" alt="" aria-hidden="true" loading="lazy" decoding="async" />
 
             <div className="text-center lg:text-left flex-1">
               <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl lg:text-4xl text-[#4A3428] mb-4">

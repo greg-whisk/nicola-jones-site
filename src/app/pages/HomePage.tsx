@@ -357,6 +357,31 @@ export function HomePage() {
       .catch(console.error);
   }, []);
 
+  const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': 'https://nicolajones.art/#nicola-jones',
+    name: 'Nicola Jones',
+    jobTitle: 'Muralist, Illustrator and Live Event Artist',
+    url: 'https://nicolajones.art',
+    email: 'hello@nicolajones.art',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Hastings',
+      addressRegion: 'East Sussex',
+      addressCountry: 'GB',
+    },
+    sameAs: ['https://www.instagram.com/nicolajones.art'],
+  };
+
+  const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Nicola Jones',
+    url: 'https://nicolajones.art',
+    founder: { '@id': 'https://nicolajones.art/#nicola-jones' },
+  };
+
   return (
     <div className="overflow-hidden">
       <Helmet>
@@ -364,6 +389,8 @@ export function HomePage() {
         <meta name="description" content="Hand-painted murals, theatre backdrops, brand illustration and live event drawing. Based in Hastings, East Sussex. Working across the UK." />
         <link rel="canonical" href="https://nicolajones.art/" />
       </Helmet>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center">
@@ -429,7 +456,7 @@ export function HomePage() {
             >
               {homepageData.pathwaySectionHeading || 'Where would you like to go?'}
             </motion.h2>
-            <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" className="w-28 md:w-48 h-auto pointer-events-none" />
+            <img src="/nicola-jones-cherub-loop.png" alt="" aria-hidden="true" loading="lazy" decoding="async" className="w-28 md:w-48 h-auto pointer-events-none" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
@@ -580,7 +607,7 @@ export function HomePage() {
           <div className="flex items-center justify-between mb-12">
             <div className="flex items-center gap-4">
               <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428]">Featured Work</h2>
-              <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="w-28 md:w-48 h-auto pointer-events-none" />
+              <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" loading="lazy" decoding="async" className="w-28 md:w-48 h-auto pointer-events-none" />
             </div>
             <PillButton variant="outline" onClick={() => navigate('/portfolio')}>View all</PillButton>
           </div>
@@ -849,7 +876,7 @@ export function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <img src="/nicola-jones-cherub-b-loop.png" alt="" aria-hidden="true" className="w-40 md:w-64 h-auto mx-auto mb-6 pointer-events-none" />
+            <img src="/nicola-jones-cherub-b-loop.png" alt="" aria-hidden="true" loading="lazy" decoding="async" className="w-40 md:w-64 h-auto mx-auto mb-6 pointer-events-none" />
             <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl lg:text-6xl text-[#4A3428] mb-6 leading-[1.15]">
               Let's make something <span className="text-[#E8846F]">brilliant</span> together.
             </h2>

@@ -106,6 +106,8 @@ export function ContactPage() {
               <img
                 src="/nicola-jones-headshot.webp"
                 alt="Nicola Jones"
+                loading="lazy"
+                decoding="async"
                 className="w-40 h-40 md:w-56 md:h-56 rounded-full object-cover object-top shadow-lg border-4 border-white"
               />
             </div>
