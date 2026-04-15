@@ -124,7 +124,7 @@ export function ShopPage() {
         {/* Header */}
         <div className="relative mb-8 flex items-center justify-center gap-6 flex-wrap">
           <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428] text-center">
-            From the Studio.
+            From the Studio
           </h1>
 
           {/* Shopping bag character */}
@@ -242,10 +242,10 @@ export function ShopPage() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-2xl lg:text-3xl text-[#4A3428] mb-4">
-            What you are buying and where it comes from.
+          <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-2xl lg:text-3xl text-[#4A3428] mb-4 text-center">
+            What you are buying and where it comes from
           </h2>
-          <p className="text-base text-[#6B7554] leading-relaxed max-w-2xl">
+          <p className="text-base text-[#6B7554] leading-relaxed max-w-2xl mx-auto text-center">
             Originals, baubles and hand-painted objects are made by hand in my studio in Hastings and shipped by me personally. Prints are produced and dispatched by ThePrintSpace, my professional print lab. Mugs and t-shirts are printed to order. If anything arrives damaged or is not right, get in touch and I will sort it.
           </p>
         </motion.div>
