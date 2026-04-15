@@ -119,6 +119,87 @@ export default defineType({
       rows: 2,
       description: 'Short line beneath "From the Shop" heading, e.g. "Prints, tote bags, stickers…"',
     }),
+    // Action Cards
+    defineField({
+      name: 'actionCardsHeading',
+      title: 'Action Cards — Heading (eyebrow)',
+      type: 'string',
+      description: 'e.g. "What are you here for?"',
+    }),
+    defineField({
+      name: 'actionCard1',
+      title: 'Action Card 1 — Celebrate',
+      type: 'object',
+      fields: [
+        { name: 'title', title: 'Title', type: 'string' },
+        { name: 'description', title: 'Description', type: 'text' },
+        { name: 'ctaLabel', title: 'CTA Label', type: 'string' },
+        { name: 'ctaUrl', title: 'CTA URL', type: 'string' },
+      ],
+    }),
+    defineField({
+      name: 'actionCard2',
+      title: 'Action Card 2 — Commission',
+      type: 'object',
+      fields: [
+        { name: 'title', title: 'Title', type: 'string' },
+        { name: 'description', title: 'Description', type: 'text' },
+        { name: 'ctaLabel', title: 'CTA Label', type: 'string' },
+        { name: 'ctaUrl', title: 'CTA URL', type: 'string' },
+      ],
+    }),
+    defineField({
+      name: 'actionCard3',
+      title: 'Action Card 3 — Shop',
+      type: 'object',
+      fields: [
+        { name: 'title', title: 'Title', type: 'string' },
+        { name: 'description', title: 'Description', type: 'text' },
+        { name: 'ctaLabel', title: 'CTA Label', type: 'string' },
+        { name: 'ctaUrl', title: 'CTA URL', type: 'string' },
+      ],
+    }),
+    // The Promise
+    defineField({
+      name: 'promiseHeading',
+      title: 'The Promise — Heading',
+      type: 'string',
+      description: 'e.g. "Hiring an artist should not involve three emails and a waiting game."',
+    }),
+    defineField({
+      name: 'promiseBody',
+      title: 'The Promise — Body',
+      type: 'text',
+      rows: 4,
+      description: 'Short paragraph beneath the promise heading',
+    }),
+    // Testimonials (3-card grid)
+    defineField({
+      name: 'testimonialsHeading',
+      title: 'Testimonials — Heading (eyebrow)',
+      type: 'string',
+      description: 'e.g. "What clients say"',
+    }),
+    defineField({
+      name: 'testimonials',
+      title: 'Testimonials',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'quote', title: 'Quote', type: 'text' },
+            { name: 'author', title: 'Author Name', type: 'string' },
+            { name: 'role', title: 'Role / Company', type: 'string' },
+          ],
+          preview: {
+            select: { title: 'author', subtitle: 'quote' },
+          },
+        },
+      ],
+      description: 'Client testimonials shown as a 3-card grid on the homepage',
+      validation: (Rule) => Rule.max(6),
+    }),
   ],
   preview: {
     prepare() {

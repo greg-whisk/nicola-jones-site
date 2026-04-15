@@ -142,6 +142,13 @@ interface Testimonial {
   role: string;
 }
 
+interface ActionCard {
+  title?: string;
+  description?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+}
+
 interface HomepageData {
   heroTagline?: string;
   heroHeadline?: string;
@@ -160,6 +167,14 @@ interface HomepageData {
   ctaSubtext?: string;
   shopSectionIntro?: string;
   featuredWork?: Array<{ _id: string; title: string; category?: string; mainImage?: any; slug: string }>;
+  actionCardsHeading?: string;
+  actionCard1?: ActionCard;
+  actionCard2?: ActionCard;
+  actionCard3?: ActionCard;
+  promiseHeading?: string;
+  promiseBody?: string;
+  testimonialsHeading?: string;
+  testimonials?: Array<{ quote?: string; author?: string; role?: string }>;
 }
 
 const fallbackTestimonial: Testimonial = {
@@ -167,6 +182,51 @@ const fallbackTestimonial: Testimonial = {
   author: '',
   role: '',
 };
+
+const actionCardDefaults = [
+  {
+    title: 'Celebrate',
+    description: 'Live painting at weddings, parties, and events. Workshops for hens, baby showers, and groups.',
+    ctaLabel: 'Plan an event →',
+    ctaUrl: '/celebrate',
+    color: '#E8846F',
+    bgColor: '#FDF0ED',
+  },
+  {
+    title: 'Commission',
+    description: 'Murals, theatre backdrops, and brand illustration. Big walls and tiny logos welcome.',
+    ctaLabel: 'Start a project →',
+    ctaUrl: '/commissions',
+    color: '#5D9B9B',
+    bgColor: '#EDF5F5',
+  },
+  {
+    title: 'Shop',
+    description: 'Original prints, tote bags, stickers, and illustrated goodies — shipped from Hastings.',
+    ctaLabel: 'Browse the shop →',
+    ctaUrl: '/shop',
+    color: '#D8767D',
+    bgColor: '#F9EDEE',
+  },
+];
+
+const fallbackTestimonials: Testimonial[] = [
+  {
+    quote: "Working with Nicola was an absolute joy. Her work brought our brand to life in ways we hadn't imagined.",
+    author: 'Elise Edge',
+    role: 'Darling and Edge',
+  },
+  {
+    quote: 'Nicola translated our brief into something far better than we could have asked for. Highly recommended.',
+    author: 'Hannah Collisson',
+    role: '',
+  },
+  {
+    quote: 'From first sketch to final install, everything was professional and creative. We\'ll use her again.',
+    author: 'Stacey Norris',
+    role: '',
+  },
+];
 
 export function HomePage() {
   const navigate = useNavigate();
@@ -185,6 +245,13 @@ export function HomePage() {
           pathwayCard2Title, pathwayCard2Description,
           pathwayCard3Title, pathwayCard3Description,
           clientNames, ctaHeadline, ctaSubtext, shopSectionIntro,
+          actionCardsHeading,
+          actionCard1{ title, description, ctaLabel, ctaUrl },
+          actionCard2{ title, description, ctaLabel, ctaUrl },
+          actionCard3{ title, description, ctaLabel, ctaUrl },
+          promiseHeading, promiseBody,
+          testimonialsHeading,
+          testimonials[]{ quote, author, role },
           "featuredWork": featuredWork[]->{
             _id, title, category, mainImage, "slug": slug.current
           }
@@ -425,6 +492,81 @@ export function HomePage() {
 
       <WavyDivider color="#FAF8F5" flip />
 
+      {/* Action Cards Section */}
+      <section className="py-20 bg-[#FAF8F5]">
+        <div className="max-w-[1440px] mx-auto px-6">
+          <motion.p
+            className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-center text-lg text-[#E8846F] uppercase tracking-widest mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            {homepageData.actionCardsHeading ?? 'What are you here for?'}
+          </motion.p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {actionCardDefaults.map((card, index) => {
+              const sanityCards = [homepageData.actionCard1, homepageData.actionCard2, homepageData.actionCard3];
+              const s = sanityCards[index];
+              const title = s?.title ?? card.title;
+              const description = s?.description ?? card.description;
+              const ctaLabel = s?.ctaLabel ?? card.ctaLabel;
+              const ctaUrl = s?.ctaUrl ?? card.ctaUrl;
+              return (
+                <motion.div
+                  key={card.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Link to={ctaUrl} className="block h-full">
+                    <div
+                      className="h-full rounded-3xl p-8 flex flex-col gap-4 hover:shadow-xl transition-shadow duration-300"
+                      style={{ backgroundColor: card.bgColor }}
+                    >
+                      <h3 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-2xl text-[#4A3428]">
+                        {title}
+                      </h3>
+                      <p className="text-[#6B7554] flex-1 leading-relaxed">{description}</p>
+                      <span
+                        className="inline-flex items-center font-['Plus_Jakarta_Sans'] font-heading-manrope font-medium"
+                        style={{ color: card.color }}
+                      >
+                        {ctaLabel}
+                      </span>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* The Promise Section */}
+      <section className="py-20" style={{ backgroundColor: '#5D9B9B' }}>
+        <div className="max-w-[800px] mx-auto px-6 text-center">
+          <motion.h2
+            className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl lg:text-4xl text-white mb-6 leading-[1.2]"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            {homepageData.promiseHeading ?? 'Hiring an artist should not involve three emails and a waiting game.'}
+          </motion.h2>
+          <motion.p
+            className="text-xl leading-relaxed"
+            style={{ color: 'rgba(255,255,255,0.85)' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+          >
+            {homepageData.promiseBody ?? "Tell me what you need. I'll respond within 24 hours with a clear quote, a timeline, and a sketch concept. No vague proposals, no chasing, no surprise invoices."}
+          </motion.p>
+        </div>
+      </section>
+
       {/* Featured Work Strip */}
       <section className="py-20 relative">
         <div className="max-w-[1440px] mx-auto px-6">
@@ -477,47 +619,58 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Testimonial — only rendered when real data is available from Sanity */}
-      {testimonial.quote && <section className="bg-[#F5EFE8] py-20 relative overflow-hidden">
+      {/* Testimonials — 3-card grid */}
+      <section className="bg-[#F5EFE8] py-20 relative overflow-hidden">
         <BlobShape color="#D8767D" className="absolute top-10 left-10 w-48 h-48 opacity-10" variant={3} />
         <BlobShape color="#5D9B9B" className="absolute bottom-10 right-10 w-36 h-36 opacity-10" variant={1} />
 
-        <div className="max-w-[900px] mx-auto px-6 text-center relative z-10">
-          {/* Illustrated speech bubble / stars */}
-          <motion.div
-            className="flex justify-center gap-2 mb-6"
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-          >
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-6 h-6 text-[#E8846F] fill-current" />
-            ))}
-          </motion.div>
-
-          <motion.blockquote
-            className="text-2xl lg:text-3xl text-[#4A3428] mb-6 leading-relaxed"
-            style={{ fontFamily: "'Bricolage Grotesque', 'Helvetica Neue', sans-serif" }}
+        <div className="max-w-[1440px] mx-auto px-6 relative z-10">
+          <motion.h2
+            className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-center text-[#4A3428] mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            "{testimonial.quote}"
-          </motion.blockquote>
-          <cite className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-lg text-[#6B7554] not-italic">
-            — {testimonial.author}{testimonial.role ? `, ${testimonial.role}` : ''}
-          </cite>
+            {homepageData.testimonialsHeading ?? 'What clients say'}
+          </motion.h2>
 
-          {/* Character reacting */}
-          <motion.div
-            className="absolute -right-4 bottom-0 hidden lg:block pointer-events-none"
-            animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 4, repeat: Infinity }}
-          >
-            <img src="/nicola-jones-mouth-loop.png" alt="" aria-hidden="true" className="w-40 md:w-64 h-auto drop-shadow-lg" />
-          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {(homepageData.testimonials && homepageData.testimonials.length > 0
+              ? homepageData.testimonials.slice(0, 3)
+              : fallbackTestimonials
+            ).map((t, index) => (
+              <motion.div
+                key={index}
+                className="bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col gap-4"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-[#E8846F] fill-current" />
+                  ))}
+                </div>
+                <blockquote
+                  className="text-[#4A3428] text-lg leading-relaxed flex-1"
+                  style={{ fontFamily: "'Bricolage Grotesque', 'Helvetica Neue', sans-serif" }}
+                >
+                  "{t.quote}"
+                </blockquote>
+                <div>
+                  <cite className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-[#4A3428] not-italic font-semibold block">
+                    {t.author}
+                  </cite>
+                  {t.role && (
+                    <p className="text-[#6B7554] text-sm">{t.role}</p>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </section>}
+      </section>
 
       <WavyDivider color="#FAF8F5" flip />
 
