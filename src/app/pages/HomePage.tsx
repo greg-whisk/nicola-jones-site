@@ -529,14 +529,14 @@ export function HomePage() {
       {/* Action Cards Section */}
       <section className="py-20 bg-[#FAF8F5]">
         <div className="max-w-[1440px] mx-auto px-6">
-          <motion.p
-            className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-center text-lg text-[#E8846F] uppercase tracking-widest mb-4"
+          <motion.h2
+            className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-center text-[#4A3428] mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             {homepageData.actionCardsHeading ?? 'What are you here for?'}
-          </motion.p>
+          </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {actionCardDefaults.map((card, index) => {
               const sanityCards = [homepageData.actionCard1, homepageData.actionCard2, homepageData.actionCard3];
