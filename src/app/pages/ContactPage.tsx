@@ -21,7 +21,7 @@ interface SiteSettings {
 }
 
 const fallbackSettings: SiteSettings = {
-  contactEmail: 'hello@nicolajones.art',
+  contactEmail: 'nicolajonespaints@gmail.com',
   socialLinks: [],
   location: '',
   contactPageHeading: '',
