@@ -119,10 +119,6 @@ export function AboutPage() {
 
           {/* Bio */}
           <div className="order-1 lg:order-2">
-            <div className="flex justify-center mb-4">
-              <img src="/nicola-jones-daffs-loop.png" alt="" aria-hidden="true" className="w-24 md:w-36 h-auto" />
-            </div>
-
             <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-6xl text-[#4A3428] mb-6">
               {pageHeading}
             </h1>
