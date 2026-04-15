@@ -264,6 +264,10 @@ export function CommissionsPage() {
       <div className="max-w-[1440px] mx-auto px-6">
         {/* Hero */}
         <div className="relative mb-20 text-center">
+          <div className="flex justify-center gap-4 mb-4">
+            <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="w-28 md:w-48 h-auto pointer-events-none" />
+          </div>
+
           <p className="text-sm font-['Plus_Jakarta_Sans'] text-[#6B7554] tracking-widest uppercase mb-4">
             {pageData.heroEyebrow || 'Murals | Scenic Art | Brand Illustration | Personal Commissions'}
           </p>
@@ -284,10 +288,6 @@ export function CommissionsPage() {
             <Link to="/about">
               <PillButton variant="outline">See the work</PillButton>
             </Link>
-          </div>
-
-          <div className="flex justify-center gap-4">
-            <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" className="w-28 md:w-48 h-auto pointer-events-none" />
           </div>
         </div>
 
