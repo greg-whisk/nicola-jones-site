@@ -359,7 +359,7 @@ export function HomePage() {
     name: 'Nicola Jones',
     jobTitle: 'Muralist, Illustrator and Live Event Artist',
     url: 'https://nicolajones.art',
-    email: 'hello@nicolajones.art',
+    email: 'nicolajonespaints@gmail.com',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Hastings',
