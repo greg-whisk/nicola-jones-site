@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import { Mail, MapPin, Instagram, Twitter } from 'lucide-react';
 import { BlobShape } from '../components/BlobShape';
@@ -81,6 +82,12 @@ export function ContactPage() {
 
   return (
     <div className="py-20 min-h-screen">
+      <Helmet>
+        <title>Contact Nicola Jones | Muralist and Illustrator | Hastings</title>
+        <meta name="description" content="Get in touch with Nicola Jones about a mural, illustration commission, live event booking or workshop. Based in Hastings, East Sussex. Replies within 48 hours." />
+        <link rel="canonical" href="https://nicolajones.art/contact" />
+      </Helmet>
+
       <div className="max-w-[1440px] mx-auto px-6">
         <div className="text-center mb-16">
           <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-6xl text-[#4A3428] mb-4">

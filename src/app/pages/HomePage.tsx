@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import { Link, useNavigate } from 'react-router';
 import { ArrowRight, Star, ShoppingBag, Palette, Briefcase } from 'lucide-react';
@@ -358,6 +359,12 @@ export function HomePage() {
 
   return (
     <div className="overflow-hidden">
+      <Helmet>
+        <title>Nicola Jones — Muralist, Illustrator and Live Event Artist</title>
+        <meta name="description" content="Hand-painted murals, theatre backdrops, brand illustration and live event drawing. Based in Hastings, East Sussex. Working across the UK." />
+        <link rel="canonical" href="https://nicolajones.art/" />
+      </Helmet>
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center">
         {/* Floating decorative blobs */}

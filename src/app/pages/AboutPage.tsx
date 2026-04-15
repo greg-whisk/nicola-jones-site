@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router';
 import { motion } from 'motion/react';
 import { BlobShape } from '../components/BlobShape';
@@ -94,6 +95,12 @@ export function AboutPage() {
 
   return (
     <div className="py-20 overflow-hidden">
+      <Helmet>
+        <title>About Nicola Jones | Muralist and Illustrator, Hastings</title>
+        <meta name="description" content="Nicola Jones is a muralist and illustrator based in Hastings, East Sussex. Clients include Penguin Random House, The Guardian, Greenpeace and Brighton Festival." />
+        <link rel="canonical" href="https://nicolajones.art/about" />
+      </Helmet>
+
       <div className="max-w-[1440px] mx-auto px-6">
         {/* Two-column intro */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24 items-center">

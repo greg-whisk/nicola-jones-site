@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
 import { Building2, Palette, Theater, Heart, ArrowRight } from 'lucide-react';
@@ -251,6 +252,12 @@ export function CommissionsPage() {
 
   return (
     <div className="py-20 overflow-hidden">
+      <Helmet>
+        <title>Commission a Mural or Illustration | Nicola Jones | Hastings, East Sussex</title>
+        <meta name="description" content="Commission a hand-painted mural, scenic backdrop, brand illustration or personal portrait from Nicola Jones. Based in Hastings, working across the UK. Clear pricing, straightforward process." />
+        <link rel="canonical" href="https://nicolajones.art/commissions" />
+      </Helmet>
+
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
 

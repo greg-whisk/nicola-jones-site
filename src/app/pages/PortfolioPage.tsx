@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router';
 import { motion, AnimatePresence } from 'motion/react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
@@ -123,6 +124,12 @@ export function PortfolioPage() {
 
   return (
     <div className="py-20">
+      <Helmet>
+        <title>Portfolio | Nicola Jones | Murals, Illustration, Theatre and Brand Work</title>
+        <meta name="description" content="Selected commissions and personal work by Nicola Jones. Murals, scenic art for theatre and live events, brand illustration and editorial." />
+        <link rel="canonical" href="https://nicolajones.art/portfolio" />
+      </Helmet>
+
       <div className="max-w-[1440px] mx-auto px-6">
         {/* Header */}
         <div className="relative mb-16">
