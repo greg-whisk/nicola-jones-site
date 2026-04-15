@@ -300,6 +300,10 @@ export function CelebratePage() {
               {heroEyebrow}
             </span>
 
+            <div className="flex justify-center mb-4">
+              <img src="/nicola-jones-daffs-loop.png" alt="" aria-hidden="true" className="w-24 md:w-36 h-auto pointer-events-none" />
+            </div>
+
             <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428] mb-8 leading-tight">
               {heroHeadline}
             </h1>
