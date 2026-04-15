@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
 import { Building2, Palette, Theater, Heart, ArrowRight } from 'lucide-react';
@@ -251,6 +252,12 @@ export function CommissionsPage() {
 
   return (
     <div className="py-20 overflow-hidden">
+      <Helmet>
+        <title>Commission a Mural or Illustration | Nicola Jones | Hastings, East Sussex</title>
+        <meta name="description" content="Commission a hand-painted mural, scenic backdrop, brand illustration or personal portrait from Nicola Jones. Based in Hastings, working across the UK. Clear pricing, straightforward process." />
+        <link rel="canonical" href="https://nicolajones.art/commissions" />
+      </Helmet>
+
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
 
@@ -454,7 +461,7 @@ export function CommissionsPage() {
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <img src="/nicola-jones-cherub-b-loop.png" alt="" aria-hidden="true" className="w-40 md:w-64 h-auto" />
+              <img src="/nicola-jones-cherub-b-loop.png" alt="" aria-hidden="true" loading="lazy" decoding="async" className="w-40 md:w-64 h-auto" />
             </motion.div>
 
             <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl lg:text-5xl text-white mb-6">

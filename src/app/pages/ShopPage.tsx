@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import { ShoppingBag } from 'lucide-react';
 import { Link } from 'react-router';
@@ -120,6 +121,12 @@ export function ShopPage() {
 
   return (
     <div className="py-20">
+      <Helmet>
+        <title>Shop Original Art, Prints and Illustrated Goods | Nicola Jones</title>
+        <meta name="description" content="Buy original hand-painted art, giclée prints and illustrated objects by Nicola Jones. Made in Hastings, East Sussex. Free UK shipping on originals." />
+        <link rel="canonical" href="https://nicolajones.art/shop" />
+      </Helmet>
+
       <div className="max-w-[1440px] mx-auto px-6">
         {/* Header */}
         <div className="relative mb-8 flex items-center justify-center gap-6 flex-wrap">
@@ -286,7 +293,7 @@ export function ShopPage() {
 
           <div className="relative z-10 flex flex-col items-center justify-center gap-8">
             {/* Character illustration */}
-            <img src="/nicola-jones-mouth-loop.png" className="w-24 md:w-40 h-auto pointer-events-none" alt="" aria-hidden="true" />
+            <img src="/nicola-jones-mouth-loop.png" className="w-24 md:w-40 h-auto pointer-events-none" alt="" aria-hidden="true" loading="lazy" decoding="async" />
 
             <div className="text-center">
               <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl lg:text-4xl text-[#4A3428] mb-4">
