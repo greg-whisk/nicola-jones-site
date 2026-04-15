@@ -122,8 +122,8 @@ export function ShopPage() {
     <div className="py-20">
       <div className="max-w-[1440px] mx-auto px-6">
         {/* Header */}
-        <div className="relative mb-8 flex items-center gap-6 flex-wrap">
-          <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428]">
+        <div className="relative mb-8 flex items-center justify-center gap-6 flex-wrap">
+          <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-5xl lg:text-7xl text-[#4A3428] text-center">
             From the Studio
           </h1>
 
@@ -133,7 +133,7 @@ export function ShopPage() {
           </div>
         </div>
 
-        <p className="text-xl text-[#6B7554] max-w-2xl mb-12">
+        <p className="text-xl text-[#6B7554] max-w-2xl mb-12 text-center mx-auto">
           Original prints, hand-painted plywood pieces, illustrated objects and a small collection of goods. Some things are made to order in Hastings. Some are printed and shipped by my professional lab. Everything is worth having.
         </p>
 
@@ -284,11 +284,11 @@ export function ShopPage() {
           <BlobShape color="#5D9B9B" className="absolute top-0 left-0 w-64 h-64 opacity-10" variant={2} />
           <BlobShape color="#E8846F" className="absolute bottom-0 right-0 w-48 h-48 opacity-10" variant={1} />
 
-          <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8">
+          <div className="relative z-10 flex flex-col items-center justify-center gap-8">
             {/* Character illustration */}
             <img src="/nicola-jones-mouth-loop.png" className="w-24 md:w-40 h-auto pointer-events-none" alt="" aria-hidden="true" />
 
-            <div className="text-center lg:text-left flex-1">
+            <div className="text-center">
               <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-3xl lg:text-4xl text-[#4A3428] mb-4">
                 Want something one-of-a-kind?
               </h2>
