@@ -208,19 +208,19 @@ const actionCardDefaults = [
 
 const fallbackTestimonials: Testimonial[] = [
   {
-    quote: "Working with Nicola was an absolute joy. Her work brought our brand to life in ways we hadn't imagined.",
+    quote: "A phenomenal scenic painter. Nicola's technical skill and natural intuition on our decorative elements is exceptional. She is a truly collaborative creative who brings joy to every set.",
     author: 'Elise Edge',
-    role: 'Darling and Edge',
+    role: 'confounder of Darling and Edge and Art Director for The Estate',
   },
   {
-    quote: 'Nicola translated our brief into something far better than we could have asked for. Highly recommended.',
+    quote: "Nicola's Mermaid workshop offered a relaxing and inspiring space for participants to play and experiment with new techniques. I would definitely recommend Nicola as an artist facilitator.",
     author: 'Hannah Collisson',
-    role: '',
+    role: 'Public Programme Coordinator, Hastings Contemporary',
   },
   {
-    quote: 'From first sketch to final install, everything was professional and creative. We\'ll use her again.',
+    quote: "Nicola's designs for our theatrical backdrops are instantly recognisable and full of personality. Her freehand decorative elements and cheeky details bring delight to the stage",
     author: 'Stacey Norris',
-    role: '',
+    role: 'Cast and Management, Shitfaced Shakespeare',
   },
 ];
 
