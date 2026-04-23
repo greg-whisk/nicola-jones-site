@@ -52,6 +52,13 @@ export default defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'clients',
+      title: 'Clients',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'List of client names shown on the About page',
+    }),
+    defineField({
       name: 'processSteps',
       title: 'Process Steps',
       type: 'array',

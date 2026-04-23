@@ -81,6 +81,24 @@ export default defineType({
       type: 'text',
       rows: 2,
     }),
+    // Pathway card images
+    defineField({
+      name: 'pathwayCards',
+      title: 'Pathway Card Images',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          defineField({ name: 'label', title: 'Label', type: 'string' }),
+          defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true } }),
+          defineField({ name: 'link', title: 'Link URL', type: 'string' }),
+        ],
+        preview: {
+          select: { title: 'label' },
+        },
+      }],
+      description: 'The three "What are you here for?" pathway cards with images',
+    }),
     // Featured work
     defineField({
       name: 'featuredWork',
@@ -158,6 +176,14 @@ export default defineType({
         { name: 'ctaLabel', title: 'CTA Label', type: 'string' },
         { name: 'ctaUrl', title: 'CTA URL', type: 'string' },
       ],
+    }),
+    // About teaser
+    defineField({
+      name: 'aboutTeaserText',
+      title: 'About Teaser Text',
+      type: 'text',
+      rows: 4,
+      description: 'Short bio paragraph shown in the homepage about section',
     }),
     // The Promise
     defineField({

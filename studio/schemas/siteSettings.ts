@@ -70,6 +70,19 @@ export default defineType({
       description: 'Closing note on the contact page, e.g. "I typically respond within 24-48 hours..."',
     }),
     defineField({
+      name: 'newsletterHeading',
+      title: 'Newsletter Heading',
+      type: 'string',
+      description: 'Heading for the footer newsletter signup',
+    }),
+    defineField({
+      name: 'newsletterBody',
+      title: 'Newsletter Body',
+      type: 'text',
+      rows: 2,
+      description: 'Body text for the footer newsletter signup',
+    }),
+    defineField({
       name: 'logo',
       title: 'Logo (SVG)',
       type: 'file',
