@@ -54,6 +54,7 @@ interface ProductDetail {
   shippingIncluded: boolean;
   allowCustomNotes: boolean;
   customNotesLabel: string;
+  creativehubSku: string;
 }
 
 interface RelatedProduct {
@@ -95,6 +96,8 @@ export function ProductDetailPage() {
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const [customNotes, setCustomNotes] = useState('');
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState('');
 
   useEffect(() => {
     if (!slug) return;
@@ -112,6 +115,7 @@ export function ProductDetailPage() {
             _id, name, price, category, image, gallery,
             shortDescription, size, productDetails, inStock,
             fulfillment, shippingIncluded, allowCustomNotes, customNotesLabel,
+            creativehubSku,
             "slug": slug.current
           }`,
           { slug }
@@ -147,6 +151,7 @@ export function ProductDetailPage() {
           shippingIncluded: data.shippingIncluded ?? false,
           allowCustomNotes: data.allowCustomNotes ?? false,
           customNotesLabel: data.customNotesLabel || 'Customisation notes',
+          creativehubSku: data.creativehubSku || '',
         });
         // Clear loading as soon as the product is ready so the layout renders
         // immediately. Related products continue fetching in the background.
@@ -251,15 +256,36 @@ export function ProductDetailPage() {
     );
   }
 
-  function handleBuyNow() {
-    console.log('Buy Now intent:', {
-      product: product!.name,
-      slug: product!.slug,
-      price: product!.price,
-      quantity,
-      total: product!.price * quantity,
-    });
-    // Stripe integration wired in a separate task
+  async function handleBuyNow() {
+    if (!product) return;
+    setCheckoutError('');
+    setCheckoutLoading(true);
+    try {
+      const res = await fetch('/.netlify/functions/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          productId: product.id,
+          productName: product.name,
+          price: product.price,
+          quantity,
+          // Sanity CDN image URL — used in the Stripe Checkout page
+          imageUrl: product.primaryImage,
+          fulfillment: product.fulfillment,
+          creativehubSku: product.creativehubSku,
+        }),
+      });
+      const { url, error } = await res.json();
+      if (!res.ok || !url) {
+        setCheckoutError(error || 'Checkout unavailable — please try again.');
+        return;
+      }
+      window.location.href = url;
+    } catch {
+      setCheckoutError('Something went wrong. Please try again.');
+    } finally {
+      setCheckoutLoading(false);
+    }
   }
 
   const jsonLd = {
@@ -452,13 +478,18 @@ export function ProductDetailPage() {
               {/* Buy Now */}
               <button
                 onClick={handleBuyNow}
-                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-full text-white font-['Plus_Jakarta_Sans'] text-sm transition-opacity hover:opacity-90 active:opacity-80"
+                disabled={checkoutLoading}
+                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-full text-white font-['Plus_Jakarta_Sans'] text-sm transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-60 disabled:cursor-not-allowed"
                 style={{ backgroundColor: TEAL }}
               >
                 <ShoppingCart className="w-4 h-4" />
-                Buy Now — {formatPrice(product.price * quantity)}
+                {checkoutLoading ? 'Redirecting…' : `Buy Now — ${formatPrice(product.price * quantity)}`}
               </button>
             </div>
+
+            {checkoutError && (
+              <p className="text-sm text-red-600 font-['Plus_Jakarta_Sans']">{checkoutError}</p>
+            )}
 
             {/* 7. Trust badges */}
             <div className="flex gap-6 flex-wrap pt-1 border-t border-[#EDE8E0]">

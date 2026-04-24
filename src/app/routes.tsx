@@ -5,6 +5,8 @@ import { PortfolioPage } from './pages/PortfolioPage';
 import { ProjectDetailPage } from './pages/ProjectDetailPage';
 import { ShopPage } from './pages/ShopPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
+import { CheckoutSuccessPage } from './pages/CheckoutSuccessPage';
+import { CheckoutCancelPage } from './pages/CheckoutCancelPage';
 import { CommissionsPage } from './pages/CommissionsPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
@@ -21,6 +23,8 @@ export const router = createBrowserRouter([
       { path: 'portfolio/:slug', Component: ProjectDetailPage },
       { path: 'shop', Component: ShopPage },
       { path: 'shop/:slug', Component: ProductDetailPage },
+      { path: 'checkout/success', Component: CheckoutSuccessPage },
+      { path: 'checkout/cancel', Component: CheckoutCancelPage },
       { path: 'commissions', Component: CommissionsPage },
       { path: 'celebrate', Component: CelebratePage },
       { path: 'about', Component: AboutPage },

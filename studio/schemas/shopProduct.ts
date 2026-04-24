@@ -127,6 +127,12 @@ export default defineType({
       type: 'string',
       description: 'Label shown above the customisation notes field (e.g. "Customisation notes (themes, names, colours)").',
     }),
+    defineField({
+      name: 'creativehubSku',
+      title: 'CreativeHub SKU',
+      type: 'string',
+      description: 'SKU from CreativeHub/ThePrintSpace for fulfilment. Required for products with ThePrintSpace fulfillment.',
+    }),
   ],
   preview: {
     select: { title: 'name', media: 'image', subtitle: 'category' },
