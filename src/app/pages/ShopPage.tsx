@@ -81,16 +81,16 @@ export function ShopPage() {
       )
       .then((data) => {
         if (data && data.length > 0) {
-          const mapped: Product[] = data.map((item, idx) => ({
-            id: item._id,
-            slug: item.slug || fallbackProducts[idx % fallbackProducts.length].slug,
-            name: item.name,
-            price: item.price ?? 0,
-            category: item.category || '',
-            image: item.image
-              ? urlFor(item.image).width(600).url()
-              : fallbackProducts[idx % fallbackProducts.length].image,
-          }));
+          const mapped: Product[] = data
+            .filter((item) => item.slug)
+            .map((item) => ({
+              id: item._id,
+              slug: item.slug,
+              name: item.name,
+              price: item.price ?? 0,
+              category: item.category || '',
+              image: item.image ? urlFor(item.image).width(600).url() : '',
+            }));
           setProducts(mapped);
 
           // Use first originals item as featured, fallback to first item
