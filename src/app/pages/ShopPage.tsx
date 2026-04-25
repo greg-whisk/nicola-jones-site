@@ -45,7 +45,6 @@ const fallbackProducts: Product[] = [
   { id: 3, slug: 'bum-print', name: 'Bum Print', price: 35, category: 'prints', image: '' },
   { id: 4, slug: 'kitchen-table-print', name: 'Kitchen Table Print', price: 30, category: 'prints', image: '' },
   { id: 5, slug: 'legs-print', name: 'Legs Print', price: 35, category: 'prints', image: '' },
-  { id: 6, slug: 'solitude-print', name: 'Solitude Print', price: 30, category: 'prints', image: '' },
   { id: 7, slug: 'west-hill-from-east-hill-print', name: 'West Hill from East Hill Print', price: 30, category: 'prints', image: '' },
   { id: 8, slug: 'toilet-print', name: 'Toilet Print', price: 30, category: 'prints', image: '' },
   { id: 9, slug: 'decorated-balls', name: 'Decorated Balls', price: 75, category: 'gifts', image: '' },
