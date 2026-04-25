@@ -81,10 +81,10 @@ function formatPrice(price: number): string {
 }
 
 const fallbackRelated: RelatedProduct[] = [
-  { id: '1', slug: 'cheeky-bits-print', name: 'Cheeky Bits Print', price: 28, category: 'prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/292cd1801a4012ceb14be47972788201fbf0de9b-2500x2500.webp' },
-  { id: '2', slug: 'bedroom-nudes-original', name: 'Bedroom Nudes Original', price: 450, category: 'original-art', image: 'https://cdn.sanity.io/images/fnwcgtif/production/f8a9a2b0d7fceff55f37abc7c2ecd1ef19f41f0f-1962x2500.webp' },
-  { id: '3', slug: 'illustrated-tote-bag', name: 'Illustrated Tote Bag', price: 18, category: 'tote-bags', image: 'https://cdn.sanity.io/images/fnwcgtif/production/0e2220428fdc8c17d6ca3efb11d455ece1391b39-2500x2500.webp' },
-  { id: '4', slug: 'posters-flyers-print', name: 'Posters & Flyers Print', price: 32, category: 'prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/d83fff21b5459aff10076597afaa0809729a1a3a-1088x1577.webp' },
+  { id: '1', slug: 'legs-print', name: 'Loose Legs Print', price: 35, category: 'prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/abf3d9801d54142b3dccaaa6565f6666b9e6b11d-2442x2500.webp' },
+  { id: '2', slug: 'trainers-original', name: 'Trainers Original', price: 220, category: 'originals', image: 'https://cdn.sanity.io/images/fnwcgtif/production/f8a9a2b0d7fceff55f37abc7c2ecd1ef19f41f0f-1962x2500.webp' },
+  { id: '3', slug: 'decorated-balls', name: 'Decorated Balls', price: 75, category: 'gifts', image: 'https://cdn.sanity.io/images/fnwcgtif/production/0e2220428fdc8c17d6ca3efb11d455ece1391b39-2500x2500.webp' },
+  { id: '4', slug: 'alexander-park-print', name: 'Alexander Park Print', price: 35, category: 'prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/d83fff21b5459aff10076597afaa0809729a1a3a-1088x1577.webp' },
 ];
 
 export function ProductDetailPage() {

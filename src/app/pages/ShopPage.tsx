@@ -40,23 +40,27 @@ interface FeaturedProduct {
 }
 
 const fallbackProducts: Product[] = [
-  { id: 1, slug: 'cheeky-bits-print', name: 'Cheeky Bits Print', price: 28, category: 'Prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/292cd1801a4012ceb14be47972788201fbf0de9b-2500x2500.webp' },
-  { id: 2, slug: 'bedroom-nudes-original', name: 'Bedroom Nudes Original', price: 450, category: 'Original Art', image: 'https://cdn.sanity.io/images/fnwcgtif/production/f8a9a2b0d7fceff55f37abc7c2ecd1ef19f41f0f-1962x2500.webp' },
-  { id: 3, slug: 'illustrated-tote-bag', name: 'Illustrated Tote Bag', price: 18, category: 'Tote Bags', image: 'https://cdn.sanity.io/images/fnwcgtif/production/0e2220428fdc8c17d6ca3efb11d455ece1391b39-2500x2500.webp' },
-  { id: 4, slug: 'posters-flyers-print', name: 'Posters & Flyers Print', price: 32, category: 'Prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/d83fff21b5459aff10076597afaa0809729a1a3a-1088x1577.webp' },
-  { id: 5, slug: 'sketches-pack', name: 'Sketches Pack', price: 8, category: 'Merch', image: 'https://cdn.sanity.io/images/fnwcgtif/production/12a5c46ac21512bf7ff423c7346f5a886c9a45ad-2500x2500.webp' },
-  { id: 6, slug: 'springtide-print', name: 'Springtide Print', price: 35, category: 'Prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/abf3d9801d54142b3dccaaa6565f6666b9e6b11d-2442x2500.webp' },
-  { id: 7, slug: 'mermaids-tote-bag', name: 'Mermaids Tote Bag', price: 22, category: 'Tote Bags', image: 'https://cdn.sanity.io/images/fnwcgtif/production/185033b23580aa12fab8e77751ddf777fc888523-2500x1407.webp' },
-  { id: 8, slug: 'original-illustration', name: 'Original Illustration', price: 380, category: 'Original Art', image: 'https://cdn.sanity.io/images/fnwcgtif/production/bb60ff474e033dca8bf51908e552186fae8b9ad1-1668x2388.webp' },
-  { id: 9, slug: 'pinpoint-print', name: 'Pinpoint Print', price: 15, category: 'Prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/3a34e71f48b9c70618f87f21de9a1e75990ac1cd-2388x1668.webp' },
+  { id: 1, slug: 'alexander-park-print', name: 'Alexander Park Print', price: 35, category: 'prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/d83fff21b5459aff10076597afaa0809729a1a3a-1088x1577.webp' },
+  { id: 2, slug: 'bathroom-print', name: 'Bathroom Print', price: 30, category: 'prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/292cd1801a4012ceb14be47972788201fbf0de9b-2500x2500.webp' },
+  { id: 3, slug: 'bum-print', name: 'Cheeky Bum Print', price: 35, category: 'prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/3a34e71f48b9c70618f87f21de9a1e75990ac1cd-2388x1668.webp' },
+  { id: 4, slug: 'kitchen-table-print', name: 'Kitchen Scene Print', price: 30, category: 'prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/12a5c46ac21512bf7ff423c7346f5a886c9a45ad-2500x2500.webp' },
+  { id: 5, slug: 'legs-print', name: 'Loose Legs Print', price: 35, category: 'prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/abf3d9801d54142b3dccaaa6565f6666b9e6b11d-2442x2500.webp' },
+  { id: 6, slug: 'solitude-print', name: 'Solitude Print', price: 30, category: 'prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/185033b23580aa12fab8e77751ddf777fc888523-2500x1407.webp' },
+  { id: 7, slug: 'west-hill-from-east-hill-print', name: 'West Hill from East Hill Print', price: 30, category: 'prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/abf3d9801d54142b3dccaaa6565f6666b9e6b11d-2442x2500.webp' },
+  { id: 8, slug: 'toilet-print', name: 'Toilet Print', price: 30, category: 'prints', image: 'https://cdn.sanity.io/images/fnwcgtif/production/292cd1801a4012ceb14be47972788201fbf0de9b-2500x2500.webp' },
+  { id: 9, slug: 'decorated-balls', name: 'Decorated Balls', price: 75, category: 'gifts', image: 'https://cdn.sanity.io/images/fnwcgtif/production/0e2220428fdc8c17d6ca3efb11d455ece1391b39-2500x2500.webp' },
+  { id: 10, slug: 'teeth-original', name: 'Teeth Original', price: 150, category: 'original-art', image: 'https://cdn.sanity.io/images/fnwcgtif/production/bb60ff474e033dca8bf51908e552186fae8b9ad1-1668x2388.webp' },
+  { id: 11, slug: 'trainers-original', name: 'Trainers Original', price: 220, category: 'originals', image: 'https://cdn.sanity.io/images/fnwcgtif/production/f8a9a2b0d7fceff55f37abc7c2ecd1ef19f41f0f-1962x2500.webp' },
+  { id: 12, slug: 'tulips-wooden-cutout', name: 'Tulips Wooden Cutout', price: 0, category: 'originals', image: 'https://cdn.sanity.io/images/fnwcgtif/production/f8a9a2b0d7fceff55f37abc7c2ecd1ef19f41f0f-1962x2500.webp' },
+  { id: 13, slug: 'moka-pot-wooden-cutout', name: 'Moka Pot Wooden Cutout', price: 0, category: 'originals', image: 'https://cdn.sanity.io/images/fnwcgtif/production/f8a9a2b0d7fceff55f37abc7c2ecd1ef19f41f0f-1962x2500.webp' },
 ];
 
 const fallbackFeatured: FeaturedProduct = {
-  name: 'Bedroom Nudes Original',
-  price: 450,
+  name: 'Trainers Original',
+  price: 220,
   description: 'A vibrant original piece bursting with personality. Hand-painted, signed and ready to bring joy to your walls.',
   image: 'https://cdn.sanity.io/images/fnwcgtif/production/f8a9a2b0d7fceff55f37abc7c2ecd1ef19f41f0f-1962x2500.webp',
-  slug: 'bedroom-nudes-original',
+  slug: 'trainers-original',
 };
 
 function blocksToText(blocks: any[]): string {
