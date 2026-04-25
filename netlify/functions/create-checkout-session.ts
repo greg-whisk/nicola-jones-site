@@ -32,6 +32,14 @@ export const handler: Handler = async (event) => {
       };
     }
 
+    if (fulfillment === 'theprintspace' && !creativehubSku) {
+      return {
+        statusCode: 400,
+        headers: corsHeaders,
+        body: JSON.stringify({ error: 'Product is missing a print SKU — please contact us.' }),
+      };
+    }
+
     // Netlify sets URL to the primary site URL; fall back for local dev
     const siteUrl = process.env.URL || 'http://localhost:8888';
 
@@ -54,6 +62,7 @@ export const handler: Handler = async (event) => {
       metadata: {
         productId: productId || '',
         fulfillment: fulfillment || 'studio',
+        quantity: String(quantity || 1),
         ...(creativehubSku ? { creativehubSku } : {}),
       },
       success_url: `${siteUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,

@@ -102,7 +102,6 @@ export default defineType({
         list: [
           { title: 'Studio (Hastings)', value: 'studio' },
           { title: 'ThePrintSpace', value: 'theprintspace' },
-          { title: 'Printful', value: 'printful' },
         ],
       },
       description: 'Controls which fulfillment note appears on the product page.',
