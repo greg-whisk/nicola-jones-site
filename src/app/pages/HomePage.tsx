@@ -114,14 +114,14 @@ const FEATURED_SLUGS = [
 ];
 
 const fallbackFeaturedWork = [
-  { id: 'shitfaced-shakespeare', slug: 'shitfaced-shakespeare', image: 'https://cdn.sanity.io/images/fnwcgtif/production/b74056942f180fa86437e88ddf45c7482b751290-938x688.webp', title: 'Shitfaced Shakespeare', category: 'Theatre' },
-  { id: 'trees-for-cities', slug: 'trees-for-cities', image: 'https://cdn.sanity.io/images/fnwcgtif/production/3019706bf19f8f899bc740a4d32484ee1fea82e6-1582x792.webp', title: 'Trees for Cities', category: 'Murals' },
-  { id: 'pinpoint-graphic-design', slug: 'pinpoint-graphic-design', image: 'https://cdn.sanity.io/images/fnwcgtif/production/3a34e71f48b9c70618f87f21de9a1e75990ac1cd-2388x1668.webp', title: 'Pinpoint Graphic Design', category: 'Illustration' },
-  { id: 'springtide-branding', slug: 'springtide-branding', image: 'https://cdn.sanity.io/images/fnwcgtif/production/abf3d9801d54142b3dccaaa6565f6666b9e6b11d-2442x2500.webp', title: 'Springtide Branding', category: 'Branding' },
-  { id: 'the-common-good-live-event', slug: 'the-common-good-live-event', image: 'https://cdn.sanity.io/images/fnwcgtif/production/bb60ff474e033dca8bf51908e552186fae8b9ad1-1668x2388.webp', title: 'The Common Good Live Event', category: 'Live Illustration' },
-  { id: 'darling-and-edge', slug: 'darling-and-edge', image: 'https://cdn.sanity.io/images/fnwcgtif/production/911d4c1b88396c9ca522d0012c4cf58d10dcb74d-1365x1365.webp', title: 'Darling & Edge', category: 'Illustration' },
-  { id: 'mermaids', slug: 'mermaids', image: 'https://cdn.sanity.io/images/fnwcgtif/production/185033b23580aa12fab8e77751ddf777fc888523-2500x1407.webp', title: 'Mermaids', category: 'Illustration' },
-  { id: 'cheeky-bits', slug: 'cheeky-bits', image: 'https://cdn.sanity.io/images/fnwcgtif/production/292cd1801a4012ceb14be47972788201fbf0de9b-2500x2500.webp', title: 'Cheeky Bits', category: 'Personal Work' },
+  { id: 'shitfaced-shakespeare', slug: 'shitfaced-shakespeare', image: 'https://cdn.sanity.io/images/fnwcgtif/production/ce047631d0c8e7c2f1d893f0e9bc25197d3edc73-946x786.webp', title: 'Shitfaced Shakespeare', category: 'Theatre & Events' },
+  { id: 'trees-for-cities', slug: 'trees-for-cities', image: 'https://cdn.sanity.io/images/fnwcgtif/production/01b84bb603d5bd4c7f16d553e14f4eca7c3fb5d3-2500x1501.webp', title: 'Trees For Cities', category: 'Murals' },
+  { id: 'pinpoint-graphic-design', slug: 'pinpoint-graphic-design', image: 'https://cdn.sanity.io/images/fnwcgtif/production/6be6dee8871d9f1bb8a1b46ee0ab5d9ea79dbc62-2500x2254.webp', title: 'Pinpoint Graphic Design', category: 'Illustration' },
+  { id: 'springtide-branding', slug: 'springtide-branding', image: 'https://cdn.sanity.io/images/fnwcgtif/production/4a6e7c7424fd13e5a68dfdf4f2b766b2faafc727-2089x2070.webp', title: 'Springtide Branding', category: 'Illustration' },
+  { id: 'the-common-good-live-event', slug: 'the-common-good-live-event', image: 'https://cdn.sanity.io/images/fnwcgtif/production/f394bbdbedeb7946bb2b474ed6725c5046f55821-2243x2006.webp', title: 'The Common Good - Live Event Illustration', category: 'Illustration' },
+  { id: 'darling-and-edge', slug: 'darling-and-edge', image: 'https://cdn.sanity.io/images/fnwcgtif/production/911d4c1b88396c9ca522d0012c4cf58d10dcb74d-1365x1365.webp', title: 'Darling and Edge', category: 'Theatre & Events' },
+  { id: 'mermaids', slug: 'mermaids', image: 'https://cdn.sanity.io/images/fnwcgtif/production/185033b23580aa12fab8e77751ddf777fc888523-2500x1407.webp', title: 'Mermaids', category: 'Murals' },
+  { id: 'cheeky-bits', slug: 'cheeky-bits', image: 'https://cdn.sanity.io/images/fnwcgtif/production/292cd1801a4012ceb14be47972788201fbf0de9b-2500x2500.webp', title: 'Cheeky Bits', category: 'Illustration' },
 ];
 
 interface FeaturedWork {
