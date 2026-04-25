@@ -58,7 +58,7 @@ export const handler: Handler = async (event) => {
           quantity: quantity || 1,
         },
       ],
-      shipping_address_collection: { allowed_countries: ['GB'] },
+      shipping_address_collection: {},
       metadata: {
         productId: productId || '',
         fulfillment: fulfillment || 'studio',
