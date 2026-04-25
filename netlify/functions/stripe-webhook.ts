@@ -11,7 +11,7 @@ async function submitCreativeHubOrder(session: Stripe.Checkout.Session): Promise
 
   const payload = {
     sku: creativehubSku,
-    quantity: 1,
+    quantity: Number(session.metadata?.quantity) || 1,
     orderId: session.id,
     customerEmail: session.customer_details?.email,
     shippingAddress: {
