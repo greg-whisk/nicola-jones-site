@@ -784,7 +784,7 @@ export function HomePage() {
       <WavyDivider color="#F5EFE8" />
 
       {/* Client Logos */}
-      <section className="bg-[#F5EFE8] py-16 overflow-hidden">
+      <section className="bg-[#F5EFE8] py-16">
         <div className="max-w-[1440px] mx-auto px-6">
           <motion.p
             className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-lg text-[#6B7554] text-center mb-10"
@@ -794,26 +794,26 @@ export function HomePage() {
           >
             Work made for
           </motion.p>
-          <div className="relative">
-            <motion.div
-              className="flex gap-16 items-center"
-              animate={{ x: ['0%', '-50%'] }}
-              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-            >
-              {[...clients, ...clients].map((c, i) => (
-                <div
-                  key={`${c.name}-${i}`}
-                  className="shrink-0 w-40 md:w-48 h-16 md:h-20 flex items-center justify-center"
-                >
-                  <img
-                    src={c.logo}
-                    alt={c.name}
-                    className="max-w-full max-h-full w-auto h-auto object-contain opacity-60"
-                  />
-                </div>
-              ))}
-            </motion.div>
-          </div>
+        </div>
+        <div className="overflow-hidden">
+          <motion.div
+            className="flex items-center"
+            animate={{ x: ['0%', '-33.33%'] }}
+            transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+          >
+            {[...clients, ...clients, ...clients].map((c, i) => (
+              <div
+                key={`${c.name}-${i}`}
+                className="shrink-0 w-[200px] md:w-60 h-20 md:h-[100px] flex items-center justify-center mr-16"
+              >
+                <img
+                  src={c.logo}
+                  alt={c.name}
+                  className="max-w-full max-h-full w-auto h-auto object-contain opacity-60"
+                />
+              </div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
