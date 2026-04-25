@@ -91,6 +91,7 @@ export function PortfolioPage() {
               image: featured.mainImage
                 ? urlFor(featured.mainImage).width(1200).url()
                 : fallbackFeatured.image,
+              slug: featured.slug?.current || fallbackFeatured.slug,
             });
           }
         }

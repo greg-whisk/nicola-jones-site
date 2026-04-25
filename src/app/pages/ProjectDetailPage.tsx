@@ -71,6 +71,7 @@ export function ProjectDetailPage() {
   const [project, setProject] = useState<Project | null>(
     slug ? getProjectBySlug(slug) || null : null
   );
+  const [loading, setLoading] = useState(slug ? !getProjectBySlug(slug) : false);
   const [prevNavProject, setPrevNavProject] = useState<NavProject | null>(toNavProject(staticNeighbours.prev));
   const [nextNavProject, setNextNavProject] = useState<NavProject | null>(toNavProject(staticNeighbours.next));
 
@@ -92,8 +93,12 @@ export function ProjectDetailPage() {
       .then((data) => {
         const mapped = mapSanityToProject(data);
         if (mapped && mapped.title) setProject(mapped);
+        setLoading(false);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
 
     // Fetch all projects for prev/next navigation
     client
@@ -121,6 +126,14 @@ export function ProjectDetailPage() {
       })
       .catch(console.error);
   }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="py-40 text-center">
+        <p className="text-[#6B7554] font-['Plus_Jakarta_Sans']">Loading…</p>
+      </div>
+    );
+  }
 
   if (!project) {
     return (
