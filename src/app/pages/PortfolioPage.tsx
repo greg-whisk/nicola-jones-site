@@ -32,20 +32,29 @@ interface FeaturedProject {
 }
 
 const fallbackItems: PortfolioItem[] = [
-  { id: 1, category: 'Murals', image: 'https://cdn.sanity.io/images/fnwcgtif/production/3019706bf19f8f899bc740a4d32484ee1fea82e6-1582x792.webp', title: 'Trees For Cities', slug: 'trees-for-cities' },
-  { id: 2, category: 'Theatre & Events', image: 'https://cdn.sanity.io/images/fnwcgtif/production/b74056942f180fa86437e88ddf45c7482b751290-938x688.webp', title: 'Shitfaced Shakespeare', slug: 'shitfaced-shakespeare' },
+  { id: 1, category: 'Murals', image: 'https://cdn.sanity.io/images/fnwcgtif/production/01b84bb603d5bd4c7f16d553e14f4eca7c3fb5d3-2500x1501.webp', title: 'Trees For Cities', slug: 'trees-for-cities' },
+  { id: 2, category: 'Theatre & Events', image: 'https://cdn.sanity.io/images/fnwcgtif/production/ce047631d0c8e7c2f1d893f0e9bc25197d3edc73-946x786.webp', title: 'Shitfaced Shakespeare', slug: 'shitfaced-shakespeare' },
   { id: 3, category: 'Murals', image: 'https://cdn.sanity.io/images/fnwcgtif/production/c1924c5cafe4c88202daf3d5a78a5903b6e31c39-2500x1875.webp', title: 'Greenpeace Glastonbury', slug: 'greenpeace-glastonbury' },
-  { id: 4, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/3a34e71f48b9c70618f87f21de9a1e75990ac1cd-2388x1668.webp', title: 'Pinpoint Graphic Design', slug: 'pinpoint-graphic-design' },
-  { id: 5, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/911d4c1b88396c9ca522d0012c4cf58d10dcb74d-1365x1365.webp', title: 'Darling & Edge', slug: 'darling-and-edge' },
-  { id: 6, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/abf3d9801d54142b3dccaaa6565f6666b9e6b11d-2442x2500.webp', title: 'Springtide Branding', slug: 'springtide-branding' },
-  { id: 7, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/185033b23580aa12fab8e77751ddf777fc888523-2500x1407.webp', title: 'Mermaids', slug: 'mermaids' },
-  { id: 8, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/292cd1801a4012ceb14be47972788201fbf0de9b-2500x2500.webp', title: 'Cheeky Bits', slug: 'cheeky-bits' },
+  { id: 4, category: 'Theatre & Events', image: 'https://cdn.sanity.io/images/fnwcgtif/production/911d4c1b88396c9ca522d0012c4cf58d10dcb74d-1365x1365.webp', title: 'Darling and Edge', slug: 'darling-and-edge' },
+  { id: 5, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/6be6dee8871d9f1bb8a1b46ee0ab5d9ea79dbc62-2500x2254.webp', title: 'Pinpoint Graphic Design', slug: 'pinpoint-graphic-design' },
+  { id: 6, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/4a6e7c7424fd13e5a68dfdf4f2b766b2faafc727-2089x2070.webp', title: 'Springtide Branding', slug: 'springtide-branding' },
+  { id: 7, category: 'Murals', image: 'https://cdn.sanity.io/images/fnwcgtif/production/185033b23580aa12fab8e77751ddf777fc888523-2500x1407.webp', title: 'Mermaids', slug: 'mermaids' },
+  { id: 8, category: 'Murals', image: 'https://cdn.sanity.io/images/fnwcgtif/production/f8a9a2b0d7fceff55f37abc7c2ecd1ef19f41f0f-1962x2500.webp', title: 'Bedroom Nudes', slug: 'bedroom-nudes' },
+  { id: 9, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/fe2326415fc79c550e4d9ff8af69a8f3aa88686d-2500x2500.webp', title: 'Just Add Hair', slug: 'just-add-hair' },
+  { id: 10, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/f4bb1f8175f426ef513cf518c55d2be5d8dc9241-1767x2500.webp', title: 'Posters and Flyers', slug: 'posters-and-flyers' },
+  { id: 11, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/7983343715a49f3e83c60c5397334d50bac5094e-1875x2500.webp', title: 'Commissions', slug: 'commissions' },
+  { id: 12, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/292cd1801a4012ceb14be47972788201fbf0de9b-2500x2500.webp', title: 'Cheeky Bits', slug: 'cheeky-bits' },
+  { id: 13, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/12a5c46ac21512bf7ff423c7346f5a886c9a45ad-2500x2500.webp', title: 'Sketches and Intimate Works', slug: 'sketches-and-intimate-works' },
+  { id: 14, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/f394bbdbedeb7946bb2b474ed6725c5046f55821-2243x2006.webp', title: 'The Common Good - Live Event Illustration', slug: 'the-common-good-live-event' },
+  { id: 15, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/5345b2ac8d2084272a57b24910d9ebc7f9a36a96-954x960.webp', title: 'The Common Good - Promotional Illustration', slug: 'the-common-good-promotional' },
+  { id: 16, category: 'Illustration', image: '', title: "What's New? Album Artwork - Jessie Fultome", slug: 'whats-new-album-artwork-jessie-fultome' },
+  { id: 17, category: 'Murals', image: '', title: "Ian's Bathroom", slug: 'ians-bathroom' },
 ];
 
 const fallbackFeatured: FeaturedProject = {
   title: 'Shitfaced Shakespeare',
   description: 'Theatrical set design and scenic painting for the hit comedy show Shitfaced Shakespeare.',
-  image: 'https://cdn.sanity.io/images/fnwcgtif/production/b74056942f180fa86437e88ddf45c7482b751290-938x688.webp',
+  image: 'https://cdn.sanity.io/images/fnwcgtif/production/ce047631d0c8e7c2f1d893f0e9bc25197d3edc73-946x786.webp',
   slug: 'shitfaced-shakespeare',
 };
 
