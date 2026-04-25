@@ -47,8 +47,6 @@ const fallbackItems: PortfolioItem[] = [
   { id: 13, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/12a5c46ac21512bf7ff423c7346f5a886c9a45ad-2500x2500.webp', title: 'Sketches and Intimate Works', slug: 'sketches-and-intimate-works' },
   { id: 14, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/f394bbdbedeb7946bb2b474ed6725c5046f55821-2243x2006.webp', title: 'The Common Good - Live Event Illustration', slug: 'the-common-good-live-event' },
   { id: 15, category: 'Illustration', image: 'https://cdn.sanity.io/images/fnwcgtif/production/5345b2ac8d2084272a57b24910d9ebc7f9a36a96-954x960.webp', title: 'The Common Good - Promotional Illustration', slug: 'the-common-good-promotional' },
-  { id: 16, category: 'Illustration', image: '', title: "What's New? Album Artwork - Jessie Fultome", slug: 'whats-new-album-artwork-jessie-fultome' },
-  { id: 17, category: 'Murals', image: '', title: "Ian's Bathroom", slug: 'ians-bathroom' },
 ];
 
 const fallbackFeatured: FeaturedProject = {
