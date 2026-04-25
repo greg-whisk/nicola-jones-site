@@ -606,9 +606,9 @@ export function HomePage() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-4">
               <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428]">Featured Work</h2>
-              <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" loading="lazy" decoding="async" className="w-28 md:w-48 h-auto pointer-events-none" />
+              <img src="/nicola-jones-dancer-loop.png" alt="" aria-hidden="true" loading="lazy" decoding="async" className="w-16 sm:w-28 md:w-48 h-auto pointer-events-none" />
             </div>
-            <PillButton variant="outline" onClick={() => navigate('/portfolio')}>View all</PillButton>
+            <PillButton variant="outline" onClick={() => navigate('/portfolio')} className="!px-4 !py-2 md:!px-8 md:!py-3 shrink-0">View all</PillButton>
           </div>
           <p className="text-lg text-[#6B7554] mb-12 max-w-xl">Murals, theatre sets, editorial illustration and live events. A selection across disciplines.</p>
 
@@ -715,9 +715,9 @@ export function HomePage() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-4">
               <h2 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-4xl text-[#4A3428]">From the Shop</h2>
-              <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-32 md:w-56 h-auto pointer-events-none" />
+              <img src="/nicola-jones-flowers-loop.png" alt="" aria-hidden="true" className="w-16 sm:w-32 md:w-56 h-auto pointer-events-none" />
             </div>
-            <PillButton variant="outline" onClick={() => navigate('/shop')}>Browse all</PillButton>
+            <PillButton variant="outline" onClick={() => navigate('/shop')} className="!px-4 !py-2 md:!px-8 md:!py-3 shrink-0">Browse all</PillButton>
           </div>
           <p className="text-lg text-[#6B7554] mb-12 max-w-xl">{homepageData.shopSectionIntro || 'Original prints, hand-painted objects and illustrated goods. Shipped from Hastings. No two things quite the same.'}</p>
 
