@@ -93,9 +93,11 @@ export function ShopPage() {
             }));
           setProducts(mapped);
 
-          // Use first originals item as featured, fallback to first item
-          const featured = data.find((p) => p.category === 'originals' || p.category === 'original-art') || data[0];
-          if (featured) {
+          // Use first originals item (with a slug) as featured, fallback to first item with a slug
+          const featured =
+            data.find((p) => (p.category === 'originals' || p.category === 'original-art') && p.slug) ||
+            data.find((p) => p.slug);
+          if (featured && featured.slug) {
             setFeaturedProduct({
               name: featured.name,
               price: featured.price ?? 0,
@@ -105,7 +107,7 @@ export function ShopPage() {
               image: featured.image
                 ? urlFor(featured.image).width(1200).url()
                 : fallbackFeatured.image,
-              slug: featured.slug || fallbackFeatured.slug,
+              slug: featured.slug,
             });
           }
         }

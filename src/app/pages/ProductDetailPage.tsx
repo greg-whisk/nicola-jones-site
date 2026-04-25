@@ -128,12 +128,24 @@ export function ProductDetailPage() {
           return;
         }
 
-        const primaryImage = data.image
-          ? urlFor(data.image).width(1200).url()
-          : '';
-        const gallery: string[] = Array.isArray(data.gallery)
-          ? data.gallery.map((img: any) => urlFor(img).width(1200).url())
-          : [];
+        let primaryImage = '';
+        try {
+          primaryImage = data.image && data.image.asset
+            ? urlFor(data.image).width(1200).url()
+            : '';
+        } catch {
+          // malformed image reference — leave blank
+        }
+        let gallery: string[] = [];
+        try {
+          gallery = Array.isArray(data.gallery)
+            ? data.gallery
+                .filter((img: any) => img && img.asset)
+                .map((img: any) => urlFor(img).width(1200).url())
+            : [];
+        } catch {
+          // ignore gallery URL errors
+        }
 
         setProduct({
           id: data._id,
