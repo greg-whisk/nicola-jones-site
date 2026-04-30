@@ -118,11 +118,13 @@ export function ShopPage() {
       .catch(console.error);
   }, []);
 
+  const productsWithoutFeatured = products.filter(product => product.slug !== featuredProduct.slug);
+
   const filteredProducts = selectedCategory === 'All'
-    ? products
+    ? productsWithoutFeatured
     : selectedCategory === 'Gifts and Apparel'
-    ? products.filter(product => ['gifts', 'apparel'].includes(product.category))
-    : products.filter(product => categoryLabels[product.category] === selectedCategory);
+    ? productsWithoutFeatured.filter(product => ['gifts', 'apparel'].includes(product.category))
+    : productsWithoutFeatured.filter(product => categoryLabels[product.category] === selectedCategory);
 
   return (
     <div className="py-20">
