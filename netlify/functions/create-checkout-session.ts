@@ -40,8 +40,8 @@ export const handler: Handler = async (event) => {
       };
     }
 
-    // Netlify sets URL to the primary site URL; fall back for local dev
-    const siteUrl = process.env.URL || 'http://localhost:8888';
+    // Prefer SITE_URL (custom domain) over Netlify's auto-set URL; fall back for local dev
+    const siteUrl = process.env.SITE_URL || process.env.URL || 'http://localhost:8888';
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
