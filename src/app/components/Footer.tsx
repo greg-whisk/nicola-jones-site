@@ -178,6 +178,18 @@ export function Footer() {
           {settings.footerText
             ? settings.footerText
             : '© 2026 Nicola Jones. All rights reserved. Illustrations are bold and so are you for reading this.'}
+          <div className="mt-2 text-xs text-[#9A8378]">
+            Website by{' '}
+            <a
+              href="https://whisk.digital"
+              target="_blank"
+              rel="noopener"
+              title="Web design and development by Whisk Digital"
+              className="hover:text-[#E8846F] transition-colors underline-offset-2 hover:underline"
+            >
+              Whisk Digital
+            </a>
+          </div>
         </div>
       </div>
     </footer>
