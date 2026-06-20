@@ -1,6 +1,8 @@
 [build]
   # trigger deploy
-  command = "npm install --legacy-peer-deps && npm run build"
+  # `npx puppeteer browsers install chrome` guarantees the headless Chrome
+  # binary is present before the postbuild prerender step (SEO stopgap) runs.
+  command = "npm install --legacy-peer-deps && npx puppeteer browsers install chrome && npm run build"
   publish = "dist"
 
 [build.environment]
