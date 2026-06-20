@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
-import { Instagram, Mail, Twitter } from 'lucide-react';
+import { Instagram, Mail } from 'lucide-react';
 import { client } from '../../lib/sanity';
 
 interface SocialLink {
@@ -26,8 +26,6 @@ const fallbackSettings: SiteSettings = {
 
 const socialIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   instagram: Instagram,
-  twitter: Twitter,
-  x: Twitter,
   email: Mail,
 };
 
@@ -118,13 +116,18 @@ export function Footer() {
                   })
                 ) : (
                   <>
-                    <a href="#" className="w-8 h-8 bg-[#E8846F] rounded-full flex items-center justify-center hover:bg-[#5D9B9B] transition-colors">
+                    <a
+                      href="https://www.instagram.com/nicolajonespaints"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 bg-[#E8846F] rounded-full flex items-center justify-center hover:bg-[#5D9B9B] transition-colors"
+                    >
                       <Instagram className="w-4 h-4" />
                     </a>
-                    <a href="#" className="w-8 h-8 bg-[#E8846F] rounded-full flex items-center justify-center hover:bg-[#5D9B9B] transition-colors">
-                      <Twitter className="w-4 h-4" />
-                    </a>
-                    <a href="#" className="w-8 h-8 bg-[#E8846F] rounded-full flex items-center justify-center hover:bg-[#5D9B9B] transition-colors">
+                    <a
+                      href="mailto:nicolajonespaints@gmail.com"
+                      className="w-8 h-8 bg-[#E8846F] rounded-full flex items-center justify-center hover:bg-[#5D9B9B] transition-colors"
+                    >
                       <Mail className="w-4 h-4" />
                     </a>
                   </>
