@@ -98,7 +98,7 @@ export function AboutPage() {
       <Helmet>
         <title>About Nicola Jones | Muralist and Illustrator, Hastings</title>
         <meta name="description" content="Nicola Jones is a muralist and illustrator based in Hastings, East Sussex. Clients include Penguin Random House, The Guardian, Greenpeace and Brighton Festival." />
-        <link rel="canonical" href="https://nicolajones.art/about" />
+        <link rel="canonical" href="https://nicolajonespaints.com/about" />
       </Helmet>
 
       <div className="max-w-[1440px] mx-auto px-6">

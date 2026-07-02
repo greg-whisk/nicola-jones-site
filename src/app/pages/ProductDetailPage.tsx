@@ -321,7 +321,7 @@ export function ProductDetailPage() {
   const metaDescription =
     product.shortDescription ||
     `${product.name} — original art and prints by Nicola Jones, muralist and illustrator based in Hastings.`;
-  const canonicalUrl = `https://nicolajones.art/shop/${product.slug}`;
+  const canonicalUrl = `https://nicolajonespaints.com/shop/${product.slug}`;
 
   return (
     <>

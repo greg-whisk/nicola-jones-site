@@ -175,7 +175,7 @@ const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'Mural and Illustration Commissions',
-  provider: { '@id': 'https://nicolajones.art/#nicola-jones' },
+  provider: { '@id': 'https://nicolajonespaints.com/#nicola-jones' },
   areaServed: 'GB',
   serviceType: ['Mural Painting', 'Scenic Art', 'Brand Illustration', 'Portrait Commission'],
 };
@@ -255,7 +255,7 @@ export function CommissionsPage() {
       <Helmet>
         <title>Commission a Mural or Illustration | Nicola Jones | Hastings, East Sussex</title>
         <meta name="description" content="Commission a hand-painted mural, scenic backdrop, brand illustration or personal portrait from Nicola Jones. Based in Hastings, working across the UK. Clear pricing, straightforward process." />
-        <link rel="canonical" href="https://nicolajones.art/commissions" />
+        <link rel="canonical" href="https://nicolajonespaints.com/commissions" />
       </Helmet>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />

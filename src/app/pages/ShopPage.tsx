@@ -131,7 +131,7 @@ export function ShopPage() {
       <Helmet>
         <title>Shop Original Art, Prints and Illustrated Goods | Nicola Jones</title>
         <meta name="description" content="Buy original hand-painted art, giclée prints and illustrated objects by Nicola Jones. Made in Hastings, East Sussex. Free UK shipping on originals." />
-        <link rel="canonical" href="https://nicolajones.art/shop" />
+        <link rel="canonical" href="https://nicolajonespaints.com/shop" />
       </Helmet>
 
       <div className="max-w-[1440px] mx-auto px-6">

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /studio
 
-Sitemap: https://nicolajones.art/sitemap.xml
+Sitemap: https://nicolajonespaints.com/sitemap.xml

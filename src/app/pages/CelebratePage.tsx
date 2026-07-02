@@ -152,7 +152,7 @@ const SERVICE_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'Live Event Illustration',
-  provider: { '@id': 'https://nicolajones.art/#nicola-jones' },
+  provider: { '@id': 'https://nicolajonespaints.com/#nicola-jones' },
   areaServed: 'GB',
   offers: [
     {
@@ -263,7 +263,7 @@ export function CelebratePage() {
       <Helmet>
         <title>Live Event Illustration and Art Workshops | Nicola Jones | Hastings</title>
         <meta name="description" content="Live drawing at weddings, parties and corporate events across the UK. Art workshops for hen parties and baby showers. Packages from £450. Based in Hastings, East Sussex." />
-        <link rel="canonical" href="https://nicolajones.art/celebrate" />
+        <link rel="canonical" href="https://nicolajonespaints.com/celebrate" />
       </Helmet>
 
       {/* JSON-LD structured data */}

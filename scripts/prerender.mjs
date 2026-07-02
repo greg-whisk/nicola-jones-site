@@ -110,7 +110,7 @@ function outputPathFor(route) {
 
 // Canonical origin used in the generated sitemap. Must match the <link
 // rel="canonical"> tags rendered by the pages (react-helmet-async).
-const SITE_ORIGIN = 'https://nicolajones.art';
+const SITE_ORIGIN = 'https://nicolajonespaints.com';
 
 // Per-route sitemap hints. Detail pages (/shop/*, /portfolio/*) fall back to a
 // sensible default. Keep in sync with public/sitemap.xml priorities.

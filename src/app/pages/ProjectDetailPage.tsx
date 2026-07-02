@@ -153,7 +153,7 @@ export function ProjectDetailPage() {
   const metaDescription =
     project.summary ||
     `${project.title} — a ${project.category.toLowerCase()} project by Nicola Jones, muralist and illustrator based in Hastings.`;
-  const canonicalUrl = `https://nicolajones.art/portfolio/${project.slug}`;
+  const canonicalUrl = `https://nicolajonespaints.com/portfolio/${project.slug}`;
 
   return (
     <div className="overflow-hidden">

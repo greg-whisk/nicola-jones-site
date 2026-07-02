@@ -355,10 +355,10 @@ export function HomePage() {
   const personSchema = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    '@id': 'https://nicolajones.art/#nicola-jones',
+    '@id': 'https://nicolajonespaints.com/#nicola-jones',
     name: 'Nicola Jones',
     jobTitle: 'Muralist, Illustrator and Live Event Artist',
-    url: 'https://nicolajones.art',
+    url: 'https://nicolajonespaints.com',
     email: 'nicolajonespaints@gmail.com',
     address: {
       '@type': 'PostalAddress',
@@ -377,8 +377,8 @@ export function HomePage() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Nicola Jones',
-    url: 'https://nicolajones.art',
-    founder: { '@id': 'https://nicolajones.art/#nicola-jones' },
+    url: 'https://nicolajonespaints.com',
+    founder: { '@id': 'https://nicolajonespaints.com/#nicola-jones' },
   };
 
   return (
@@ -386,7 +386,7 @@ export function HomePage() {
       <Helmet>
         <title>Nicola Jones — Muralist, Illustrator and Live Event Artist</title>
         <meta name="description" content="Hand-painted murals, theatre backdrops, brand illustration and live event drawing. Based in Hastings, East Sussex. Working across the UK." />
-        <link rel="canonical" href="https://nicolajones.art/" />
+        <link rel="canonical" href="https://nicolajonespaints.com/" />
       </Helmet>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />

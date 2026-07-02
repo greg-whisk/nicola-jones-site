@@ -109,7 +109,7 @@ export function ContactPage() {
       <Helmet>
         <title>Contact Nicola Jones | Muralist and Illustrator | Hastings</title>
         <meta name="description" content="Get in touch with Nicola Jones about a mural, illustration commission, live event booking or workshop. Based in Hastings, East Sussex. Replies within 48 hours." />
-        <link rel="canonical" href="https://nicolajones.art/contact" />
+        <link rel="canonical" href="https://nicolajonespaints.com/contact" />
       </Helmet>
 
       <div className="max-w-[1440px] mx-auto px-6">

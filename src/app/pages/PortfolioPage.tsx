@@ -135,7 +135,7 @@ export function PortfolioPage() {
       <Helmet>
         <title>Portfolio | Nicola Jones | Murals, Illustration, Theatre and Brand Work</title>
         <meta name="description" content="Selected commissions and personal work by Nicola Jones. Murals, scenic art for theatre and live events, brand illustration and editorial." />
-        <link rel="canonical" href="https://nicolajones.art/portfolio" />
+        <link rel="canonical" href="https://nicolajonespaints.com/portfolio" />
       </Helmet>
 
       <div className="max-w-[1440px] mx-auto px-6">
