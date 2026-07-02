@@ -29,7 +29,7 @@ const fallbackBio = [
   "She digitally generates illustrations for graphic designers, producing fast-paced, versatile work for print and screen. From brand campaigns to editorial, the work is always bold, always warm, and always full of character.",
 ];
 
-const fallbackPhoto = '/photo-placeholder.svg';
+const fallbackPhoto = '/nicola-jones-headshot.webp';
 
 const clients = [
   { name: 'Shitfaced Shakespeare', slug: 'shitfaced-shakespeare' },
@@ -108,7 +108,7 @@ export function AboutPage() {
           <div className="relative order-2 lg:order-1">
             <div className="relative">
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
-                <img src={photo || '/nicola-jones-headshot.webp'} alt="Nicola Jones" className="w-full h-full object-cover object-top" />
+                <img src={photo || fallbackPhoto} alt="Nicola Jones" className="w-full h-full object-cover object-top" />
               </div>
 
               {/* Hand-drawn style frame doodles */}

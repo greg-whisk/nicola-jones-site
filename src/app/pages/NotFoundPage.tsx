@@ -1,8 +1,13 @@
 import { Link } from 'react-router';
+import { Helmet } from 'react-helmet-async';
 
 export function NotFoundPage() {
   return (
     <div className="py-32 flex flex-col items-center justify-center text-center max-w-[1440px] mx-auto px-6">
+      <Helmet>
+        <title>Page not found | Nicola Jones</title>
+        <meta name="robots" content="noindex" />
+      </Helmet>
       <h1 className="font-['Plus_Jakarta_Sans'] font-heading-manrope text-6xl lg:text-8xl text-[#4A3428] mb-6">
         Page not found
       </h1>

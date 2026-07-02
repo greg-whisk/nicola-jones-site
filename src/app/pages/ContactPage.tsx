@@ -181,16 +181,20 @@ export function ContactPage() {
                   ) : (
                     <>
                       <a
-                        href="#"
+                        href="https://www.instagram.com/nicolajonespaints"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram"
                         className="w-12 h-12 bg-[#D8767D] rounded-full flex items-center justify-center hover:bg-[#E8846F] transition-colors"
                       >
                         <Instagram className="w-6 h-6 text-white" />
                       </a>
                       <a
-                        href="#"
+                        href="mailto:nicolajonespaints@gmail.com"
+                        aria-label="Email"
                         className="w-12 h-12 bg-[#D8767D] rounded-full flex items-center justify-center hover:bg-[#E8846F] transition-colors"
                       >
-                        <Twitter className="w-6 h-6 text-white" />
+                        <Mail className="w-6 h-6 text-white" />
                       </a>
                     </>
                   )}

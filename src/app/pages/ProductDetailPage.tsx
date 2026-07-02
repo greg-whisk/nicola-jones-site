@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import {
   ArrowLeft,
@@ -317,8 +318,27 @@ export function ProductDetailPage() {
     },
   };
 
+  const metaDescription =
+    product.shortDescription ||
+    `${product.name} — original art and prints by Nicola Jones, muralist and illustrator based in Hastings.`;
+  const canonicalUrl = `https://nicolajones.art/shop/${product.slug}`;
+
   return (
     <>
+      <Helmet>
+        <title>{`${product.name} | Nicola Jones`}</title>
+        <meta name="description" content={metaDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:type" content="product" />
+        <meta property="og:title" content={`${product.name} | Nicola Jones`} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:url" content={canonicalUrl} />
+        {product.primaryImage && <meta property="og:image" content={product.primaryImage} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${product.name} | Nicola Jones`} />
+        <meta name="twitter:description" content={metaDescription} />
+        {product.primaryImage && <meta name="twitter:image" content={product.primaryImage} />}
+      </Helmet>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -108,16 +108,64 @@ function outputPathFor(route) {
   return path.join(DIST, route.replace(/^\//, ''), 'index.html');
 }
 
+// Canonical origin used in the generated sitemap. Must match the <link
+// rel="canonical"> tags rendered by the pages (react-helmet-async).
+const SITE_ORIGIN = 'https://nicolajones.art';
+
+// Per-route sitemap hints. Detail pages (/shop/*, /portfolio/*) fall back to a
+// sensible default. Keep in sync with public/sitemap.xml priorities.
+function sitemapMetaFor(route) {
+  const table = {
+    '/': { changefreq: 'monthly', priority: '1.0' },
+    '/shop': { changefreq: 'weekly', priority: '0.9' },
+    '/portfolio': { changefreq: 'weekly', priority: '0.9' },
+    '/commissions': { changefreq: 'monthly', priority: '0.8' },
+    '/celebrate': { changefreq: 'monthly', priority: '0.8' },
+    '/about': { changefreq: 'monthly', priority: '0.7' },
+    '/contact': { changefreq: 'monthly', priority: '0.7' },
+  };
+  if (table[route]) return table[route];
+  if (route.startsWith('/shop/')) return { changefreq: 'weekly', priority: '0.7' };
+  if (route.startsWith('/portfolio/')) return { changefreq: 'monthly', priority: '0.6' };
+  return { changefreq: 'monthly', priority: '0.5' };
+}
+
+// Build a sitemap.xml from the successfully prerendered routes and write it to
+// dist/. This supersedes the hand-maintained public/sitemap.xml so newly added
+// products and portfolio projects are picked up automatically at build time.
+async function writeSitemap(routes) {
+  const urls = [...routes]
+    .sort()
+    .map((route) => {
+      const { changefreq, priority } = sitemapMetaFor(route);
+      const loc = `${SITE_ORIGIN}${route === '/' ? '/' : route}`;
+      return [
+        '  <url>',
+        `    <loc>${loc}</loc>`,
+        `    <changefreq>${changefreq}</changefreq>`,
+        `    <priority>${priority}</priority>`,
+        '  </url>',
+      ].join('\n');
+    })
+    .join('\n');
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+  await writeFile(path.join(DIST, 'sitemap.xml'), xml, 'utf-8');
+}
+
 function isInternalRoute(href) {
   if (!href) return false;
   if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return false;
-  let pathname;
+  let url;
   try {
-    pathname = new URL(href, ORIGIN).pathname;
+    url = new URL(href, ORIGIN);
   } catch {
     return false;
   }
-  if (EXCLUDE.some((re) => re.test(pathname))) return false;
+  // Only same-origin links are internal routes. External absolute URLs
+  // (e.g. https://instagram.com/…) must not be crawled or added to the sitemap.
+  if (url.origin !== ORIGIN) return false;
+  if (EXCLUDE.some((re) => re.test(url.pathname))) return false;
   return true;
 }
 
@@ -136,6 +184,14 @@ async function renderRoute(browser, route) {
     );
 
     // Give async Sanity fetches + Helmet head updates a moment to settle.
+    //
+    // NOTE: Sanity data queries (XHR to apicdn.sanity.io) are blocked by CORS
+    // when prerendering from the localhost origin, so dynamic detail pages
+    // (/shop/:slug, /portfolio/:slug) currently prerender their fallback/loading
+    // state rather than live content. The per-page <Helmet> SEO tags still apply
+    // client-side and for JS-executing crawlers (e.g. Googlebot). Fully
+    // prerendering that content requires whitelisting the build origin in the
+    // Sanity CORS settings or fetching via a token-authenticated server-side call.
     await new Promise((r) => setTimeout(r, 600));
 
     const html = await page.content();
@@ -192,6 +248,16 @@ async function main() {
   }
 
   console.log(`\nPrerendered ${rendered.length} route(s).`);
+
+  // Generate sitemap.xml from every route we successfully rendered (includes
+  // crawled /shop/* and /portfolio/* detail pages).
+  try {
+    await writeSitemap(rendered);
+    console.log(`  ✓ sitemap.xml (${rendered.length} url(s))`);
+  } catch (err) {
+    console.warn(`  ✗ sitemap.xml — ${err.message}`);
+  }
+
   if (failed.length) {
     console.error(`Failed ${failed.length} route(s): ${failed.join(', ')}`);
     process.exit(1);

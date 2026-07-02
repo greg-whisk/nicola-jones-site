@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight, Star, Calendar, User } from 'lucide-react';
 import { getProjectBySlug, getProjectNeighbours, type Project } from '../data/projects';
@@ -149,8 +150,27 @@ export function ProjectDetailPage() {
     );
   }
 
+  const metaDescription =
+    project.summary ||
+    `${project.title} — a ${project.category.toLowerCase()} project by Nicola Jones, muralist and illustrator based in Hastings.`;
+  const canonicalUrl = `https://nicolajones.art/portfolio/${project.slug}`;
+
   return (
     <div className="overflow-hidden">
+      <Helmet>
+        <title>{`${project.title} | Nicola Jones`}</title>
+        <meta name="description" content={metaDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={`${project.title} | Nicola Jones`} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:url" content={canonicalUrl} />
+        {project.heroImage && <meta property="og:image" content={project.heroImage} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${project.title} | Nicola Jones`} />
+        <meta name="twitter:description" content={metaDescription} />
+        {project.heroImage && <meta name="twitter:image" content={project.heroImage} />}
+      </Helmet>
       {/* Hero */}
       <section className="relative">
         {/* Back button */}
