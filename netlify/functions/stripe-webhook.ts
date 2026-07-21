@@ -103,6 +103,43 @@ async function sendOrderEmails(session: Stripe.Checkout.Session): Promise<void> 
   }
 }
 
+// Best-effort warning to Nicola when automated fulfilment fails. Never throws.
+async function sendFulfilmentFailedEmail(
+  session: Stripe.Checkout.Session,
+  err: unknown
+): Promise<void> {
+  if (!resend) {
+    console.warn('RESEND_API_KEY not set — skipping fulfilment failure email');
+    return;
+  }
+
+  const customerName = session.customer_details?.name || session.shipping_details?.name || 'a customer';
+  const customerEmail = session.customer_details?.email;
+  const notificationEmail = process.env.NOTIFICATION_EMAIL || 'nicolajonespaints@gmail.com';
+  const fromEmail =
+    process.env.RESEND_FROM_EMAIL || 'Nicola Jones <noreply@nicolajonespaints.com>';
+  const errorMessage = err instanceof Error ? err.message : String(err);
+
+  try {
+    await resend.emails.send({
+      from: fromEmail,
+      to: notificationEmail,
+      subject: `Action needed: order ${session.id} needs manual fulfilment`,
+      text: [
+        `The automated print fulfilment via ThePrintSpace failed for this order. Please process it manually.`,
+        ``,
+        `Customer: ${customerName}`,
+        `Email: ${customerEmail || 'not provided'}`,
+        `Order ID: ${session.id}`,
+        ``,
+        `Error: ${errorMessage}`,
+      ].join('\n'),
+    });
+  } catch (emailErr) {
+    console.error('Failed to send fulfilment failure email to Nicola:', emailErr);
+  }
+}
+
 async function submitCreativeHubOrder(session: Stripe.Checkout.Session): Promise<void> {
   const { creativehubSku } = session.metadata || {};
   const shipping = session.shipping_details;
@@ -180,6 +217,7 @@ export const handler: Handler = async (event) => {
           `FULFILMENT FAILED — process manually via ThePrintSpace. session=${session.id} customer=${session.customer_details?.email}`,
           err
         );
+        await sendFulfilmentFailedEmail(session, err);
       }
     } else {
       // studio / handmade — Nicola ships manually
